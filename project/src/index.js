@@ -9,11 +9,9 @@ const Movie = {
 };
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App
-      title={Movie.title}
-      genre={Movie.genre}
-      releaseDate={Movie.releaseDate}
-    />
-  </React.StrictMode>,
+  <App
+    title={Movie.title}
+    genre={Movie.genre}
+    releaseDate={Movie.releaseDate}
+  />,
   document.getElementById('root'));
