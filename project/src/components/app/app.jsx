@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {AppRoute} from '../../const.js';
+import {AppRoute} from '../../consts.js';
 import MainPage from '../main-page/main-page.jsx';
 import Login from '../login/login.jsx';
 import Film from '../movie/movie.jsx';

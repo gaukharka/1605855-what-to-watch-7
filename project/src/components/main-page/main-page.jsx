@@ -11,7 +11,7 @@ function MainPage(props) {
   const {title, genre, releaseDate} = props;
 
   return (
-    <React.Fragment>
+    <>
       <div className="visually-hidden">
         {/* <!-- inject:svg --> */}
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -113,7 +113,7 @@ function MainPage(props) {
 
         <Footer />
       </div>
-    </React.Fragment>
+    </>
   );
 }
 

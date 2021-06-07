@@ -3,7 +3,7 @@ import React from 'react-dom';
 function MoviePageInList() {
 
   return (
-    <React.Fragment>
+    <>
       <div className="film-rating">
         <div className="film-rating__score">8,9</div>
         <p className="film-rating__meta">
@@ -21,7 +21,7 @@ function MoviePageInList() {
 
         <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 
