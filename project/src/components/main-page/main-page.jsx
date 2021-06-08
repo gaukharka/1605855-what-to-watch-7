@@ -7,8 +7,9 @@ import Footer from '../footer/footer.jsx';
 import Filter from '../filters/filters.jsx';
 
 function MainPage(props) {
-
-  const {title, genre, releaseDate} = props;
+  const {movies} = props;
+  const [movie] = movies;
+  const {name, genre, released, posterImage} = movie;
 
   return (
     <>
@@ -72,14 +73,14 @@ function MainPage(props) {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseDate}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -105,7 +106,7 @@ function MainPage(props) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Filter />
-          <MovieCard />
+          <MovieCard movies={movies}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -118,9 +119,14 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    posterImage: PropTypes.node.isRequired,
+    previewImage: PropTypes.node.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default MainPage;

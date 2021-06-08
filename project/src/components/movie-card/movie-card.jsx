@@ -1,19 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function MovieCard() {
+function MovieCard(props) {
+  const {movies} = props;
+  const {id, name, previewImage} = movies;
 
   return (
     <div className="catalog__films-list">
-      <article className="small-film-card catalog__films-card">
-        <div className="small-film-card__image">
-          <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-        </div>
-        <h3 className="small-film-card__title">
-          <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-        </h3>
-      </article>
+      {movies.map(() => (
+        <article key={id} className="small-film-card catalog__films-card">
+          <div className="small-film-card__image">
+            <img src={previewImage} alt={name} width="280" height="175" />
+          </div>
+          <h3 className="small-film-card__title">
+            <a className="small-film-card__link" href="film-page.html">{name}</a>
+          </h3>
+        </article>))}
     </div>
   );
 }
+
+MovieCard.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    previewImage: PropTypes.node.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
+};
 
 export default MovieCard;
