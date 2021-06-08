@@ -1,6 +1,7 @@
 import React from 'react-dom';
+import PropTypes from 'prop-types';
 
-function MoviePageInList() {
+function MoviePageInList(props) {
 
   return (
     <>
@@ -24,5 +25,13 @@ function MoviePageInList() {
     </>
   );
 }
+
+MoviePageInList.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    previewImage: PropTypes.node.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
+};
 
 export default MoviePageInList;

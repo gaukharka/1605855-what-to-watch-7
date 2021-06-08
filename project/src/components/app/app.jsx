@@ -31,7 +31,9 @@ function App(props) {
           />
         </Route>
         <Route exact path={AppRoute.MYLIST}>
-          <MyList />
+          <MyList
+            movies={movies}
+          />
         </Route>
         <Route exact path={AppRoute.REVIEW}>
           <Review

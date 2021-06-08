@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function MovieCard(props) {
-  const {movies} = props;
+  const {movies}=props;
 
   return (
     <div className="catalog__films-list">

@@ -1,10 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Logo from '../logo/logo.jsx';
 import Footer from '../footer/footer.jsx';
-// import {MovieCard} from '../movie-card/movie-card.js';
+import MovieCard from '../movie-card/movie-card.jsx';
 
-function MyList() {
+function MyList(props) {
+  const {movies}=props;
 
   return (
     <div className="user-page">
@@ -27,12 +29,22 @@ function MyList() {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-        {/* <MovieCard /> */}
+        <MovieCard movies={movies}/>
       </section>
       <Footer />
     </div>
   );
 }
+
+MyList.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    posterImage: PropTypes.node.isRequired,
+    previewImage: PropTypes.node.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+  })).isRequired,
+};
 
 export default MyList;
