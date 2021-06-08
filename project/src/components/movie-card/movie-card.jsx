@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 
 function MovieCard(props) {
   const {movies} = props;
-  const {id, name, previewImage} = movies;
 
   return (
     <div className="catalog__films-list">
-      {movies.map(() => (
-        <article key={id} className="small-film-card catalog__films-card">
+      {movies.map((item, idx) => (
+        <article key={item.idx} className="small-film-card catalog__films-card">
           <div className="small-film-card__image">
-            <img src={previewImage} alt={name} width="280" height="175" />
+            <img src={item.previewImage} alt={item.name} width="280" height="175" />
           </div>
           <h3 className="small-film-card__title">
-            <a className="small-film-card__link" href="film-page.html">{name}</a>
+            <a className="small-film-card__link" href="film-page.html">{item.name}</a>
           </h3>
         </article>))}
     </div>

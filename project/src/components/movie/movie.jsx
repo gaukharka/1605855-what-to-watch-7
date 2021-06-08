@@ -1,9 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Logo from '../logo/logo.jsx';
 // import MoviePageInList from './movie-page-in-list.jsx';
+import MoviePageReviews from './movie-page-reviews.jsx';
 
-function Movie() {
+function Movie(props) {
+  const {reviews} = props;
 
   return (
     <section className="film-card film-card--full">
@@ -76,12 +79,25 @@ function Movie() {
                 </li>
               </ul>
             </nav>
-            {/* <MoviePageInList /> */}
+            <MoviePageReviews reviews={reviews}/>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+Movie.propTypes={
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    user: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })).isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+  })).isRequired,
+};
 
 export default Movie;

@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 import {AppRoute} from '../../consts.js';
 import MainPage from '../main-page/main-page.jsx';
 import Login from '../login/login.jsx';
-import Film from '../movie/movie.jsx';
+import Movie from '../movie/movie.jsx';
 import MyList from '../my-list/my-list.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import Review from '../review/review.jsx';
 import Player from '../player/player.jsx';
 
 function App(props) {
-
   const {movies, reviews} = props;
 
   return (
@@ -26,8 +25,9 @@ function App(props) {
           <Login />
         </Route>
         <Route exact path={AppRoute.FILM}>
-          <Film
+          <Movie
             movies={movies}
+            reviews={reviews}
           />
         </Route>
         <Route exact path={AppRoute.MYLIST}>
