@@ -3,7 +3,7 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {AppRoute} from '../../consts.js';
 import MainPage from '../main-page/main-page.jsx';
-import Login from '../login/login.jsx';
+import Login from '../user-block/login.jsx';
 import Movie from '../movie/movie.jsx';
 import MyList from '../my-list/my-list.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';

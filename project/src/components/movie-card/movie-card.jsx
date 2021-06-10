@@ -12,14 +12,16 @@ function MovieCard(props) {
       {movies.map((item) => (
         <article key={item.id} className="small-film-card catalog__films-card">
           <div className="small-film-card__image">
-            <img
-              src={item.previewImage}
-              alt={item.name} width="280"
-              height="175"
-              onMouseOver={() => {
-                // setActiveMovieCard(item.previewVideoLink);
-              }}
-            />
+            <Link to="/films/:id">
+              <img
+                src={item.previewImage}
+                alt={item.name} width="280"
+                height="175"
+                onMouseOver={() => {
+                  // setActiveMovieCard(item.previewVideoLink);
+                }}
+              />
+            </Link>
           </div>
           <h3 className="small-film-card__title">
             <Link to="/films/:id" className="small-film-card__link">{item.name}</Link>

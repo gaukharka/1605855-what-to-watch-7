@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import Logo from '../logo/logo.jsx';
 import MoviePageInList from './movie-page-in-list.jsx';
 // import MoviePageDetails from './movie-page-details.jsx';
@@ -45,7 +46,7 @@ function Movie(props) {
                 </svg>
                 <span>My list</span>
               </button>
-              <a href="add-review.html" className="btn film-card__button">Add review</a>
+              <Link href="/films/:id/review" className="btn film-card__button">Add review</Link>
             </div>
           </div>
         </div>
