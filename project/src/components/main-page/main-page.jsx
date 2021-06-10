@@ -1,10 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import Logo from '../logo/logo.jsx';
 import Footer from '../footer/footer.jsx';
 import Filter from '../filters/filters.jsx';
+import SignOut from '../user-block/signout.jsx';
 
 function MainPage(props) {
   const {movies} = props;
@@ -58,16 +58,7 @@ function MainPage(props) {
 
         <header className="page-header film-card__head">
           <Logo/>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to="/" className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <SignOut/>
         </header>
 
         <div className="film-card__wrap">

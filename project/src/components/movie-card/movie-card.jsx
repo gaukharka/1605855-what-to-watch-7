@@ -1,18 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 function MovieCard(props) {
+  // const [activeMovieCard, setActiveMovieCard]=useState();
   const {movies}=props;
+
 
   return (
     <div className="catalog__films-list">
-      {movies.map((item, idx) => (
-        <article key={item.idx} className="small-film-card catalog__films-card">
+      {movies.map((item) => (
+        <article key={item.id} className="small-film-card catalog__films-card">
           <div className="small-film-card__image">
-            <img src={item.previewImage} alt={item.name} width="280" height="175" />
+            <img
+              src={item.previewImage}
+              alt={item.name} width="280"
+              height="175"
+              onMouseOver={() => {
+                // setActiveMovieCard(item.previewVideoLink);
+              }}
+            />
           </div>
           <h3 className="small-film-card__title">
-            <a className="small-film-card__link" href="film-page.html">{item.name}</a>
+            <Link to="/films/:id" className="small-film-card__link">{item.name}</Link>
           </h3>
         </article>))}
     </div>

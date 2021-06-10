@@ -11,7 +11,8 @@ import Review from '../review/review.jsx';
 import Player from '../player/player.jsx';
 
 function App(props) {
-  const {movies, reviews} = props;
+  const {movies, reviews}=props;
+  const [movie]=movies;
 
   return (
     <BrowserRouter>
@@ -26,7 +27,7 @@ function App(props) {
         </Route>
         <Route exact path={AppRoute.FILM}>
           <Movie
-            movies={movies}
+            movie={movie}
             reviews={reviews}
           />
         </Route>
@@ -65,7 +66,7 @@ App.propTypes = {
     rating: PropTypes.number.isRequired,
     scoresCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.string.isRequired,
+    starring: PropTypes.array.isRequired,
     runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,

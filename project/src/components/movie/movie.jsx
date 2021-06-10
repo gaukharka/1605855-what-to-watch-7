@@ -1,12 +1,14 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Logo from '../logo/logo.jsx';
-// import MoviePageInList from './movie-page-in-list.jsx';
-import MoviePageReviews from './movie-page-reviews.jsx';
+import MoviePageInList from './movie-page-in-list.jsx';
+// import MoviePageDetails from './movie-page-details.jsx';
+// import MoviePageReviews from './movie-page-reviews.jsx';
+import SignOut from '../user-block/signout.jsx';
 
 function Movie(props) {
-  const {reviews} = props;
+  const {movie}=props;
+  const {name, genre, released}=movie;
 
   return (
     <section className="film-card film-card--full">
@@ -19,25 +21,15 @@ function Movie(props) {
 
         <header className="page-header film-card__head">
           <Logo />
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to="/" className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <SignOut />
         </header>
 
         <div className="film-card__wrap">
           <div className="film-card__desc">
-            <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="film-card__title">{name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">Drama</span>
-              <span className="film-card__year">2014</span>
+              <span className="film-card__genre">{genre}</span>
+              <span className="film-card__year">{released}</span>
             </p>
 
             <div className="film-card__buttons">
@@ -79,7 +71,9 @@ function Movie(props) {
                 </li>
               </ul>
             </nav>
-            <MoviePageReviews reviews={reviews}/>
+            {/* <MoviePageReviews reviews={reviews}/> */}
+            <MoviePageInList movie={movie}/>
+            {/* <MoviePageDetails movie={movie}/> */}
           </div>
         </div>
       </div>
@@ -88,16 +82,35 @@ function Movie(props) {
 }
 
 Movie.propTypes={
-  reviews: PropTypes.arrayOf(PropTypes.shape({
+  movie: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    user: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    })).isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.node.isRequired,
+    previewImage: PropTypes.node.isRequired,
+    backgroundImage: PropTypes.node.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    videoLink: PropTypes.node.isRequired,
+    previewVideoLink: PropTypes.node.isRequired,
+    description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.array.isRequired,
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
   })).isRequired,
+  // reviews: PropTypes.arrayOf(PropTypes.shape({
+  //   id: PropTypes.number.isRequired,
+  //   user: PropTypes.arrayOf(PropTypes.shape({
+  //     id: PropTypes.number.isRequired,
+  //     name: PropTypes.string.isRequired,
+  //   })).isRequired,
+  //   rating: PropTypes.number.isRequired,
+  //   comment: PropTypes.string.isRequired,
+  //   date: PropTypes.number.isRequired,
+  // })).isRequired,
 };
 
 export default Movie;
