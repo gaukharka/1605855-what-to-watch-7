@@ -98,6 +98,7 @@ function MainPage(props) {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Filter />
           <MovieCard movies={movies}/>
+          {/* {movies.map((item) => <MovieCard key={item.id} movie={movie} />)} */}
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>

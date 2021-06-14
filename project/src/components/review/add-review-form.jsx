@@ -1,17 +1,6 @@
 import React, {useState} from 'react';
 
-const ratings=[
-  {value: 10, checked: false},
-  {value: 9, checked: false},
-  {value: 8, checked: false},
-  {value: 7, checked: false},
-  {value: 6, checked: false},
-  {value: 5, checked: false},
-  {value: 4, checked: false},
-  {value: 3, checked: false},
-  {value: 2, checked: false},
-  {value: 1, checked: false},
-];
+const ratings=[10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
 function AddReviewForm() {
   const [userReview, setUserReview]=useState({
@@ -19,10 +8,10 @@ function AddReviewForm() {
     comment: '',
   });
 
-  const [checkedRating, setCheckedRating]=useState(ratings);
+  const [checkedRating, setCheckedRating] = useState([false, false, false, false, false, false, false, false, false, false]);
 
   function handleCommentInput(evt){
-    const comment=evt.target.value;
+    const comment = evt.target.value;
     setUserReview({...userReview, comment: comment});
   }
 
@@ -38,36 +27,35 @@ function AddReviewForm() {
       >
         <div className="rating">
           <div className="rating__stars">
-            {ratings.map((item, id) => (
-              <>
+            {ratings.map((item, idx) => (
+              <React.Fragment key={item+1}>
                 <input
-                  key={item.id}
                   className="rating__input"
-                  id={`star-${item.value}`}
+                  id={`star-${item}`}
                   type="radio"
                   name="rating"
-                  value={item.value}
-                  checked={ratings[id].checked}
+                  value={item}
+                  checked={checkedRating[idx]}
                   onChange={({target}) => {
-                    const checked=target.checked;
-                    setCheckedRating([...checkedRating.slice(0, id), checked, checkedRating.slice(id+1)]);
+                    const value=target.checked;
+                    setCheckedRating([...checkedRating.slice(0, idx), value, ...checkedRating.slice(idx+1)]);
                   }}
                 />
                 <label
-                  key={item.id}
                   className="rating__label"
-                  htmlFor={`star-${item.value}`}
+                  htmlFor={`star-${item}`}
                 >
-                    Rating {item.value}
+                  Rating {item}
                 </label>
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>
         <div className="add-review__text">
           <textarea
             className="add-review__textarea"
-            name="review-text" id="review-text"
+            name="review-text"
+            id="review-text"
             placeholder="Review text"
             value={userReview.comment}
             onChange={handleCommentInput}

@@ -7,7 +7,9 @@ function MoviePageReviews(props) {
 
   return (
     <div className="film-card__reviews film-card__row">
-      <MoviePageReview reviews={reviews}/>
+      <MoviePageReview
+        reviews={reviews}
+      />
     </div>
   );
 }
@@ -15,13 +17,13 @@ function MoviePageReviews(props) {
 MoviePageReviews.propTypes={
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    user: PropTypes.arrayOf(PropTypes.shape({
+    user: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-    })).isRequired,
+    }).isRequired,
     rating: PropTypes.number.isRequired,
     comment: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
   })).isRequired,
 };
 

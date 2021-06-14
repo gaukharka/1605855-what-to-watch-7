@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {AppRoute} from '../../consts.js';
 import MainPage from '../main-page/main-page.jsx';
 import Login from '../user-block/login.jsx';
-import Movie from '../movie/movie.jsx';
+import Movie from '../movie/movie-page.jsx';
 import MyList from '../my-list/my-list.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import Review from '../review/review.jsx';
@@ -12,7 +12,6 @@ import Player from '../player/player.jsx';
 
 function App(props) {
   const {movies, reviews}=props;
-  const [movie]=movies;
 
   return (
     <BrowserRouter>
@@ -27,7 +26,7 @@ function App(props) {
         </Route>
         <Route exact path={AppRoute.FILM}>
           <Movie
-            movie={movie}
+            movies={movies}
             reviews={reviews}
           />
         </Route>
@@ -38,11 +37,13 @@ function App(props) {
         </Route>
         <Route exact path={AppRoute.REVIEW}>
           <Review
-            reviews={reviews}
+            movies={movies}
           />
         </Route>
         <Route exact path={AppRoute.PLAYER}>
-          <Player />
+          <Player
+            movies={movies}
+          />
         </Route>
         <Route>
           <NotFoundScreen />
@@ -74,13 +75,13 @@ App.propTypes = {
   })).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    user: PropTypes.arrayOf(PropTypes.shape({
+    user: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-    })).isRequired,
+    }).isRequired,
     rating: PropTypes.number.isRequired,
     comment: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
   })).isRequired,
 };
 

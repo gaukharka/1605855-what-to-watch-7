@@ -1,21 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import Logo from '../logo/logo.jsx';
-import MoviePageInList from './movie-page-in-list.jsx';
+// import MoviePageInList from './movie-page-in-list.jsx';
 // import MoviePageDetails from './movie-page-details.jsx';
-// import MoviePageReviews from './movie-page-reviews.jsx';
+import MoviePageReviews from './movie-page-reviews.jsx';
 import SignOut from '../user-block/signout.jsx';
+import PlayButton from '../buttons/button-play.jsx';
+import MyListButton from '../buttons/button-my-list.jsx';
 
 function Movie(props) {
-  const {movie}=props;
-  const {name, genre, released}=movie;
+  const {movies, reviews}=props;
+  const params=useParams();
+  const [currentMovie]=movies.filter((item) => item.id===+params.id);
+  const {id, name, previewImage, genre, released, backgroundImage}=currentMovie;
 
   return (
     <section className="film-card film-card--full">
       <div className="film-card__hero">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -34,19 +38,9 @@ function Movie(props) {
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
-              <button className="btn btn--list film-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
-              <Link href="/films/:id/review" className="btn film-card__button">Add review</Link>
+              <PlayButton />
+              <MyListButton />
+              <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
             </div>
           </div>
         </div>
@@ -55,7 +49,7 @@ function Movie(props) {
       <div className="film-card__wrap film-card__translate-top">
         <div className="film-card__info">
           <div className="film-card__poster film-card__poster--big">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+            <img src={previewImage} alt={name} width="218" height="327" />
           </div>
 
           <div className="film-card__desc">
@@ -72,9 +66,9 @@ function Movie(props) {
                 </li>
               </ul>
             </nav>
-            {/* <MoviePageReviews reviews={reviews}/> */}
-            <MoviePageInList movie={movie}/>
-            {/* <MoviePageDetails movie={movie}/> */}
+            {/* <MoviePageInList movie={currentMovie}/> */}
+            {/* <MoviePageDetails movie={currentMovie}/> */}
+            <MoviePageReviews reviews={reviews}/>
           </div>
         </div>
       </div>
@@ -83,7 +77,7 @@ function Movie(props) {
 }
 
 Movie.propTypes={
-  movie: PropTypes.arrayOf(PropTypes.shape({
+  movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.node.isRequired,
@@ -102,16 +96,16 @@ Movie.propTypes={
     released: PropTypes.number.isRequired,
     isFavorite: PropTypes.bool.isRequired,
   })).isRequired,
-  // reviews: PropTypes.arrayOf(PropTypes.shape({
-  //   id: PropTypes.number.isRequired,
-  //   user: PropTypes.arrayOf(PropTypes.shape({
-  //     id: PropTypes.number.isRequired,
-  //     name: PropTypes.string.isRequired,
-  //   })).isRequired,
-  //   rating: PropTypes.number.isRequired,
-  //   comment: PropTypes.string.isRequired,
-  //   date: PropTypes.number.isRequired,
-  // })).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default Movie;

@@ -17,7 +17,9 @@ function MyList(props) {
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <MovieCard movies={movies}/>
+        <MovieCard
+          movies={movies}
+        />
       </section>
       <Footer />
     </div>
