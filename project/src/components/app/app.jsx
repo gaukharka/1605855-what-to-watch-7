@@ -1,43 +1,49 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {AppRoute} from '../../const.js';
+import {AppRoute} from '../../consts.js';
 import MainPage from '../main-page/main-page.jsx';
-import Login from '../login/login.jsx';
-import Film from '../movie/movie.jsx';
+import Login from '../user-block/login.jsx';
+import Movie from '../movie/movie-page.jsx';
 import MyList from '../my-list/my-list.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import Review from '../review/review.jsx';
 import Player from '../player/player.jsx';
 
 function App(props) {
-
-  const {title, genre, releaseDate} = props;
+  const {movies, reviews}=props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
           <MainPage
-            title={title}
-            genre={genre}
-            releaseDate={releaseDate}
+            movies={movies}
           />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <Login />
         </Route>
         <Route exact path={AppRoute.FILM}>
-          <Film />
+          <Movie
+            movies={movies}
+            reviews={reviews}
+          />
         </Route>
         <Route exact path={AppRoute.MYLIST}>
-          <MyList />
+          <MyList
+            movies={movies}
+          />
         </Route>
         <Route exact path={AppRoute.REVIEW}>
-          <Review />
+          <Review
+            movies={movies}
+          />
         </Route>
         <Route exact path={AppRoute.PLAYER}>
-          <Player />
+          <Player
+            movies={movies}
+          />
         </Route>
         <Route>
           <NotFoundScreen />
@@ -48,9 +54,35 @@ function App(props) {
 }
 
 App.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.node.isRequired,
+    previewImage: PropTypes.node.isRequired,
+    backgroundImage: PropTypes.node.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    videoLink: PropTypes.node.isRequired,
+    previewVideoLink: PropTypes.node.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoresCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.array.isRequired,
+    runTime: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+  })).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default App;

@@ -1,19 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-function MovieCard() {
+function MovieCard(props) {
+  const {movies}=props;
+  movies.shift();
+
+  const [, setActiveMovie]=useState();
+
 
   return (
     <div className="catalog__films-list">
-      <article className="small-film-card catalog__films-card">
-        <div className="small-film-card__image">
-          <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-        </div>
-        <h3 className="small-film-card__title">
-          <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-        </h3>
-      </article>
+      {movies.map((item) => (
+        <article
+          key={item.id}
+          className="small-film-card catalog__films-card"
+          onMouseOver={(target) => setActiveMovie(target.id)}
+        >
+          <div className="small-film-card__image">
+            <Link to={`/films/${item.id}`}>
+              <img
+                src={item.previewImage}
+                alt={item.name} width="280"
+                height="175"
+              />
+            </Link>
+          </div>
+          <h3 className="small-film-card__title">
+            <Link
+              to={`/films/${item.id}`}
+              className="small-film-card__link"
+            >
+              {item.name}
+            </Link>
+          </h3>
+        </article>))}
     </div>
   );
 }
+
+MovieCard.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    previewImage: PropTypes.node.isRequired,
+    name: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.node.isRequired,
+  })).isRequired,
+};
 
 export default MovieCard;

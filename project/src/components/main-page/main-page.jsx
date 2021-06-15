@@ -1,17 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import Logo from '../logo/logo.jsx';
 import Footer from '../footer/footer.jsx';
 import Filter from '../filters/filters.jsx';
+import SignOut from '../user-block/signout.jsx';
 
 function MainPage(props) {
-
-  const {title, genre, releaseDate} = props;
+  const {movies} = props;
+  const [movie] = movies;
+  const {name, genre, released, posterImage} = movie;
 
   return (
-    <React.Fragment>
+    <>
       <div className="visually-hidden">
         {/* <!-- inject:svg --> */}
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -57,29 +58,20 @@ function MainPage(props) {
 
         <header className="page-header film-card__head">
           <Logo/>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to="/" className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <SignOut/>
         </header>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseDate}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -105,7 +97,8 @@ function MainPage(props) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Filter />
-          <MovieCard />
+          <MovieCard movies={movies}/>
+          {/* {movies.map((item) => <MovieCard key={item.id} movie={movie} />)} */}
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -113,14 +106,19 @@ function MainPage(props) {
 
         <Footer />
       </div>
-    </React.Fragment>
+    </>
   );
 }
 
 MainPage.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    posterImage: PropTypes.node.isRequired,
+    previewImage: PropTypes.node.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default MainPage;

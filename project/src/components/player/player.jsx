@@ -1,6 +1,8 @@
 import React from 'react';
+// import PropTypes from 'prop-types';
 
-function Player() {
+function Player(props) {
+  // const {movies}=props;
 
   return (
     <div className="player">
@@ -37,5 +39,11 @@ function Player() {
     </div>
   );
 }
+
+// Player.propTypes={
+//   movies: PropTypes.arrayOf(PropTypes.shape({
+//     videoLink: PropTypes.node.isRequired,
+//   })).isRequired,
+// };
 
 export default Player;
