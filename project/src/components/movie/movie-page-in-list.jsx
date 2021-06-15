@@ -1,4 +1,4 @@
-import React from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 function MoviePageInList(props) {
@@ -18,17 +18,13 @@ function MoviePageInList(props) {
         </p>
       </div>
       <div className="film-card__text">
-        <p>{description}</p>
+        <p>Description</p>
         <p>{description}</p>
         <p className="film-card__director">
-          <strong>Director:
-            {director}
-          </strong>
+          <strong>Director: {director}</strong>
         </p>
         <p className="film-card__starring">
-          <strong>Starring:
-            {starring.reduce((prev, curr) => [prev, ', ', curr])}
-          </strong>
+          <strong>Starring: {starring.reduce((prev, curr) => [prev, ', ', curr])}</strong>
         </p>
       </div>
     </>
