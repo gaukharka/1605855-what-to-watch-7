@@ -7,6 +7,7 @@ import SignOut from '../user-block/signout.jsx';
 
 function MyList(props) {
   const {movies}=props;
+  const filteredMovies = movies.filter((item) => item.isFavorite);
 
   return (
     <div className="user-page">
@@ -17,9 +18,15 @@ function MyList(props) {
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <MovieCard
-          movies={movies}
-        />
+        {filteredMovies.map((item) => (
+          <MovieCard
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            previewImage={item.previewImage}
+            videoLink={item.videoLink}
+          />
+        ))}
       </section>
       <Footer />
     </div>
@@ -27,14 +34,12 @@ function MyList(props) {
 }
 
 MyList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    posterImage: PropTypes.node.isRequired,
-    previewImage: PropTypes.node.isRequired,
-    name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-  })).isRequired,
+  movies: PropTypes.array.isRequired,
+  // movies: PropTypes.arrayOf(PropTypes.shape({
+  // id: PropTypes.number.isRequired,
+  // previewImage: PropTypes.node.isRequired,
+  // name: PropTypes.string.isRequired,
+  // })).isRequired,
 };
 
 export default MyList;

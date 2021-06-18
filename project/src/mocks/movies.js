@@ -35,7 +35,7 @@ const movies = [
     runTime: 120,
     genre: 'Comedy',
     released: 2014,
-    isFavorite: false,
+    isFavorite: true,
   },
   {
     id: 3,

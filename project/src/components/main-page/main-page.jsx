@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MovieCard from '../movie-card/movie-card.jsx';
+import MovieList from '../movie-list/movie-list.jsx';
 import Logo from '../logo/logo.jsx';
 import Footer from '../footer/footer.jsx';
 import Filter from '../filters/filters.jsx';
@@ -97,13 +97,11 @@ function MainPage(props) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Filter />
-          <MovieCard movies={movies}/>
-          {/* {movies.map((item) => <MovieCard key={item.id} movie={movie} />)} */}
+          <MovieList movies={movies}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
         </section>
-
         <Footer />
       </div>
     </>
@@ -113,8 +111,8 @@ function MainPage(props) {
 MainPage.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    posterImage: PropTypes.node.isRequired,
-    previewImage: PropTypes.node.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
