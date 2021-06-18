@@ -10,6 +10,8 @@ function MainPage(props) {
   const {movies} = props;
   const [movie] = movies;
   const {name, genre, released, posterImage} = movie;
+  const filteredMovies = movies.filter((item) => item.id !== movie.id);
+
 
   return (
     <>
@@ -97,7 +99,7 @@ function MainPage(props) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Filter />
-          <MovieList movies={movies}/>
+          <MovieList movies={filteredMovies}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
