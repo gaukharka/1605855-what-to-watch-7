@@ -48,7 +48,7 @@ function Review(props) {
 Review.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    previewImage: PropTypes.node.isRequired,
+    previewImage: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   })).isRequired,
 };

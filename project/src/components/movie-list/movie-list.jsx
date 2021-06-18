@@ -4,18 +4,20 @@ import MovieCard from '../movie-card/movie-card.jsx';
 
 function MovieList(props) {
   const {movies} = props;
-  const [, setActiveMovie]=useState(null);
+  const [activeMovie, setActiveMovie] = useState();
 
   return (
     <div className="catalog__films-list">
       {movies.map((item) => (
         <MovieCard
           key={item.id}
+          id={item.id}
           name={item.name}
           previewImage={item.previewImage}
-          id={item.id}
-          videoLink={item.videoLink}
+          previewVideo={item.previewVideo}
+          isActive={item === activeMovie}
           onMouseOver={() => setActiveMovie(item)}
+          onMouseOut={() => setActiveMovie(null)}
         />
       ))}
     </div>
@@ -27,7 +29,7 @@ MovieList.propTypes = {
     id: PropTypes.number.isRequired,
     previewImage: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
+    previewVideo: PropTypes.string.isRequired,
   })).isRequired,
 };
 

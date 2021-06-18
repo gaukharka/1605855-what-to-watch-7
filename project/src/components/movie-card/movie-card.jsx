@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import VideoPreview from '../player/video-preview.jsx';
 
 function MovieCard(props) {
-  const {id, previewImage, name, onMouseOver} = props;
+  const {id, name, previewImage, previewVideo, onMouseOver, onMouseOut,  isActive} = props;
 
   return(
-    <article className="small-film-card catalog__films-card" onMouseOver={onMouseOver}>
-      <div className="small-film-card__image">
-        <Link to={`/films/${id}`}>
-          <img
-            src={previewImage}
-            alt={name} width="280"
-            height="175"
-          />
-        </Link>
-      </div>
+    <article
+      className="small-film-card catalog__films-card"
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
+    >
+      <VideoPreview
+        previewImage={previewImage}
+        previewVideo={previewVideo}
+        isActive={isActive}
+      />
       <h3 className="small-film-card__title">
         <Link
           to={`/films/${id}`}
@@ -28,9 +29,12 @@ function MovieCard(props) {
 
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
-  previewImage: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  previewImage: PropTypes.string.isRequired,
+  previewVideo: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
   onMouseOver: PropTypes.func.isRequired,
+  onMouseOut: PropTypes.func.isRequired,
 };
 
 export default MovieCard;

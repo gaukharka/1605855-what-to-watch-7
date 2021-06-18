@@ -62,7 +62,7 @@ App.propTypes = {
     backgroundImage: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
     videoLink: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
+    previewVideo: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     scoresCount: PropTypes.number.isRequired,
