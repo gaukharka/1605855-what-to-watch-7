@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
 
-function MoviePageReview(props) {
+function Review(props) {
   const {reviews}=props;
 
   return (
@@ -36,7 +36,7 @@ function MoviePageReview(props) {
     </div>);
 }
 
-MoviePageReview.propTypes={
+Review.propTypes={
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     user: PropTypes.shape({
@@ -49,4 +49,4 @@ MoviePageReview.propTypes={
   })).isRequired,
 };
 
-export default MoviePageReview;
+export default Review;

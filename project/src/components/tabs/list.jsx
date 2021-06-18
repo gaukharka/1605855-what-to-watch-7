@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function MoviePageInList(props) {
+function List(props) {
   const {rating, scoresCount, description, director, starring}=props.movie;
 
   return (
@@ -31,7 +31,7 @@ function MoviePageInList(props) {
   );
 }
 
-MoviePageInList.propTypes = {
+List.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
@@ -42,4 +42,4 @@ MoviePageInList.propTypes = {
   }).isRequired,
 };
 
-export default MoviePageInList;
+export default List;

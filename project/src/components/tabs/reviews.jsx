@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MoviePageReview from './movie-page-review';
+import Review from './review.jsx';
 
-function MoviePageReviews(props) {
+function Reviews(props) {
   const {reviews} = props;
 
   return (
     <div className="film-card__reviews film-card__row">
-      <MoviePageReview
+      <Review
         reviews={reviews}
       />
     </div>
   );
 }
 
-MoviePageReviews.propTypes={
+Reviews.propTypes={
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     user: PropTypes.shape({
@@ -27,4 +27,4 @@ MoviePageReviews.propTypes={
   })).isRequired,
 };
 
-export default MoviePageReviews;
+export default Reviews;

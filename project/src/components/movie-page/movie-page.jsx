@@ -5,13 +5,13 @@ import Logo from '../logo/logo.jsx';
 import SignOut from '../user-block/signout.jsx';
 import PlayButton from '../buttons/button-play.jsx';
 import MyListButton from '../buttons/button-my-list.jsx';
-import NavLink from './movie-page-nav-links.jsx';
+import TabLinks from '../tabs/tabs.jsx';
 
 function Movie(props) {
-  const {movies, reviews}=props;
-  const params=useParams();
-  const [currentMovie]=movies.filter((item) => item.id===+params.id);
-  const {id, name, previewImage, genre, released, backgroundImage}=currentMovie;
+  const {movies, reviews} = props;
+  const params = useParams();
+  const [currentMovie] = movies.filter((item) => item.id === +params.id);
+  const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
 
   return (
     <section className="film-card film-card--full">
@@ -53,7 +53,7 @@ function Movie(props) {
           <div className="film-card__poster film-card__poster--big">
             <img src={previewImage} alt={name} width="218" height="327" />
           </div>
-          <NavLink
+          <TabLinks
             currentMovie={currentMovie}
             reviews={reviews}
           />
