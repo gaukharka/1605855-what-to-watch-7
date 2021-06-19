@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {AppRoute} from '../../consts.js';
 import MainPage from '../main-page/main-page.jsx';
 import Login from '../user-block/login.jsx';
-import Movie from '../movie/movie-page.jsx';
+import Movie from '../movie-page/movie-page.jsx';
 import MyList from '../my-list/my-list.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import Review from '../review/review.jsx';
@@ -57,12 +57,12 @@ App.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    posterImage: PropTypes.node.isRequired,
-    previewImage: PropTypes.node.isRequired,
-    backgroundImage: PropTypes.node.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-    videoLink: PropTypes.node.isRequired,
-    previewVideoLink: PropTypes.node.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideo: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     scoresCount: PropTypes.number.isRequired,

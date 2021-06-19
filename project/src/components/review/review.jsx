@@ -6,10 +6,10 @@ import AddReviewForm from './add-review-form.jsx';
 import SignOut from '../user-block/signout.jsx';
 
 function Review(props) {
-  const {movies}=props;
-  const params=useParams();
-  const [currentMovie]=movies.filter((item) => item.id===+params.id);
-  const {id, name, previewImage}=currentMovie;
+  const {movies} = props;
+  const params = useParams();
+  const [currentMovie] = movies.filter((item) => item.id === +params.id);
+  const {id, name, previewImage} = currentMovie;
 
 
   return (
@@ -18,9 +18,7 @@ function Review(props) {
         <div className="film-card__bg">
           <img src={previewImage} alt={name} />
         </div>
-
         <h1 className="visually-hidden">WTW</h1>
-
         <header className="page-header">
           <Logo />
           <nav className="breadcrumbs">
@@ -48,7 +46,7 @@ function Review(props) {
 Review.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    previewImage: PropTypes.node.isRequired,
+    previewImage: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   })).isRequired,
 };

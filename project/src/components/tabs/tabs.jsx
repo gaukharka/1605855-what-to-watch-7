@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import MoviePageInList from './movie-page-in-list.jsx';
-import MoviePageDetails from './movie-page-details.jsx';
-import MoviePageReviews from './movie-page-reviews.jsx';
+import List from './list.jsx';
+import Details from './details.jsx';
+import Reviews from './reviews.jsx';
 
-function NavLinks(props){
+function Tabs(props){
   const {currentMovie, reviews} = props;
   const [activeNav, setActiveNav] = useState(1);
 
@@ -48,16 +48,16 @@ function NavLinks(props){
           </li>
         </ul>
       </nav>
-      {activeNav === 1 ? <MoviePageInList movie={currentMovie}/> : ''}
-      {activeNav === 2 ? <MoviePageDetails movie={currentMovie}/> : ''}
-      {activeNav === 3 ? <MoviePageReviews reviews={reviews}/> : ''}
+      {activeNav === 1 ? <List movie={currentMovie}/> : ''}
+      {activeNav === 2 ? <Details movie={currentMovie}/> : ''}
+      {activeNav === 3 ? <Reviews reviews={reviews}/> : ''}
     </div>
   );
 }
 
-NavLinks.propTypes = {
+Tabs.propTypes = {
   currentMovie: PropTypes.object.isRequired,
   reviews: PropTypes.array.isRequired,
 };
 
-export default NavLinks;
+export default Tabs;
