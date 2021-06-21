@@ -12,11 +12,18 @@ function MovieCard(props) {
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
     >
-      <VideoPreview
-        previewImage={previewImage}
-        previewVideo={previewVideo}
-        isActive={isActive}
-      />
+      {isActive ?
+        <VideoPreview
+          previewImage={previewImage}
+          previewVideo={previewVideo}
+          isActive={isActive}
+        /> :
+        <img
+          src={previewImage}
+          alt={name}
+          width="280"
+          height="175"
+        />}
       <h3 className="small-film-card__title">
         <Link
           to={`/films/${id}`}
