@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../consts';
 
 function SignOut() {
 
@@ -11,7 +12,7 @@ function SignOut() {
         </div>
       </li>
       <li className="user-block__item">
-        <Link to="/" className="user-block__link">Sign out</Link>
+        <Link to={AppRoute.ROOT} className="user-block__link">Sign out</Link>
       </li>
     </ul>);
 }

@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
-import MovieList from '../movie-list/movie-list.jsx';
-import Logo from '../logo/logo.jsx';
-import Footer from '../footer/footer.jsx';
-import Genres from '../genre-list/genre-list.jsx';
-import SignOut from '../user-block/signout.jsx';
+import MainMovieList from '../movie-list/main-movie-list';
+import Logo from '../logo/logo';
+import Footer from '../footer/footer';
+import Genres from '../genre-list/genre-list';
+import SignOut from '../user-block/signout';
+import PlayButton from '../buttons/button-play.jsx';
+import MyListButton from '../buttons/button-my-list.jsx';
 
 function MainPage(props) {
   const {movies} = props;
@@ -76,18 +78,8 @@ function MainPage(props) {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <PlayButton id={promoMovie.id}/>
+                <MyListButton />
               </div>
             </div>
           </div>
@@ -98,7 +90,7 @@ function MainPage(props) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Genres />
-          <MovieList />
+          <MainMovieList />
         </section>
         <Footer />
       </div>

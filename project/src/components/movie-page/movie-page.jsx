@@ -41,7 +41,7 @@ function Movie(props) {
               </p>
 
               <div className="film-card__buttons">
-                <PlayButton />
+                <PlayButton id={currentMovie.id}/>
                 <MyListButton />
                 <Link
                   to={`/films/${id}/review`}

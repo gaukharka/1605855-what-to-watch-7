@@ -9,7 +9,7 @@ function Footer(props) {
 
   return (
     <footer className="page-footer">
-      <Logo reset={reset} />
+      <Logo reset={reset} isFooter/>
       <div className="copyright">
         <p>© 2019 What to watch Ltd.</p>
       </div>

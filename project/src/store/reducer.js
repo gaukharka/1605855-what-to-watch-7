@@ -12,9 +12,6 @@ const initialState = {
 };
 
 export const reducer = (state = initialState, action) => {
-  /* eslint-disable no-console */
-  console.log(action);
-  console.log(state.movies);
   switch (action.type) {
     case ActionType.CHANGE_GENRE:
       return {
