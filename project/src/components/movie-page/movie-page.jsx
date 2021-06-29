@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link, useParams} from 'react-router-dom';
+import {moviePropTypes} from '../../prop-types/movie-prop-types';
+import {reviewPropTypes} from '../../prop-types/review-prop-types';
 import Logo from '../logo/logo.jsx';
 import SignOut from '../user-block/signout.jsx';
 import PlayButton from '../buttons/button-play.jsx';
@@ -72,35 +74,8 @@ function Movie(props) {
 }
 
 Movie.propTypes={
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    previewVideo: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.array.isRequired,
-    runTime: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  })).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })).isRequired,
+  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
+  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
 export default Movie;

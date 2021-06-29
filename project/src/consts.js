@@ -6,3 +6,5 @@ export const AppRoute = {
   REVIEW: '/films/:id/review',
   PLAYER: '/player/:id',
 };
+
+export const INITIAL_GENRE = 'All genres';

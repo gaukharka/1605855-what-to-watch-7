@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import MovieList from '../movie-list/movie-list.jsx';
 import Logo from '../logo/logo.jsx';
 import Footer from '../footer/footer.jsx';
-import Filter from '../filters/filters.jsx';
+import Genres from '../genre-list/genre-list.jsx';
 import SignOut from '../user-block/signout.jsx';
 
 function MainPage(props) {
   const {movies} = props;
-  const [movie] = movies;
-  const {name, genre, released, posterImage} = movie;
-  const filteredMovies = movies.filter((item) => item.id !== movie.id);
-
+  const promoMovie = movies.find((movie) => movie.isPromo);
+  const {name, genre, released, posterImage} = promoMovie;
 
   return (
     <>
@@ -98,8 +97,8 @@ function MainPage(props) {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <Filter />
-          <MovieList movies={filteredMovies}/>
+          <Genres />
+          <MovieList movies={movies}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -111,14 +110,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-  })).isRequired,
+  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
 export default MainPage;

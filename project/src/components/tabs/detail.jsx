@@ -13,7 +13,7 @@ function Detail(props) {
 }
 
 Detail.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.any.isRequired,
   title: PropTypes.string.isRequired,
 };
 

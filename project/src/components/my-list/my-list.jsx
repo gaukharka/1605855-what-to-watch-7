@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import Logo from '../logo/logo.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
@@ -26,7 +27,7 @@ function MyList(props) {
 }
 
 MyList.propTypes = {
-  movies: PropTypes.array.isRequired,
+  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
 export default MyList;

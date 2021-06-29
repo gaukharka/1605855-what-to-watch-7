@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import Logo from '../logo/logo.jsx';
 import AddReviewForm from './add-review-form.jsx';
 import SignOut from '../user-block/signout.jsx';
@@ -44,11 +45,7 @@ function Review(props) {
 }
 
 Review.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  })).isRequired,
+  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
 export default Review;

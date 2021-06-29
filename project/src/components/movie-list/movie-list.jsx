@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {moviePropTypes} from '../../prop-types/movie-prop-types';
+import {connect} from 'react-redux';
 import MovieCard from '../movie-card/movie-card.jsx';
 
 function MovieList(props) {
@@ -25,12 +27,12 @@ function MovieList(props) {
 }
 
 MovieList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    previewVideo: PropTypes.string.isRequired,
-  })).isRequired,
+  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-export default MovieList;
+const mapStateToProps = (state) => ({
+  movies: state.filteredMovies,
+});
+
+export {MovieList};
+export default connect(mapStateToProps, null)(MovieList);

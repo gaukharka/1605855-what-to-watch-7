@@ -17,6 +17,7 @@ const movies = [
     genre: 'Comedy',
     released: 2014,
     isFavorite: false,
+    isPromo: true,
   },
   {
     id: 2,
@@ -33,9 +34,10 @@ const movies = [
     director: 'Wes Andreson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'Saoirse Ronan'],
     runTime: 120,
-    genre: 'Adventure',
+    genre: 'Sci-fi',
     released: 2014,
     isFavorite: false,
+    isPromo: false,
   },
   {
     id: 3,
@@ -52,9 +54,10 @@ const movies = [
     director: 'Bryan Singer',
     starring: ['Rami Malek', 'Lucy Boynton', 'Gwilym Lee'],
     runTime: 99,
-    genre: 'Comedy',
+    genre: 'Crime',
     released: 2014,
     isFavorite: true,
+    isPromo: false,
   },
   {
     id: 4,
@@ -71,9 +74,10 @@ const movies = [
     director: 'Wes Andreson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'Saoirse Ronan'],
     runTime: 99,
-    genre: 'Adventure',
+    genre: 'Kids&family',
     released: 2014,
     isFavorite: true,
+    isPromo: false,
   },
   {
     id: 5,
@@ -93,6 +97,7 @@ const movies = [
     genre: 'Drama',
     released: 2014,
     isFavorite: false,
+    isPromo: false,
   },
   {
     id: 6,
@@ -109,9 +114,10 @@ const movies = [
     director: 'Wes Andreson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'Saoirse Ronan'],
     runTime: 80,
-    genre: 'Drama',
+    genre: 'Romance',
     released: 2014,
     isFavorite: false,
+    isPromo: false,
   },
   {
     id: 7,
@@ -131,6 +137,7 @@ const movies = [
     genre: 'Adventure',
     released: 2014,
     isFavorite: false,
+    isPromo: false,
   },
   {
     id: 8,
@@ -147,9 +154,10 @@ const movies = [
     director: 'Wes Andreson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law'],
     runTime: 99,
-    genre: 'Fantasy',
+    genre: 'Thrillers',
     released: 2014,
     isFavorite: false,
+    isPromo: false,
   },
 ];
 
