@@ -1,18 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import Logo from '../logo/logo';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import { ActionCreator } from '../../store/action';
 
-function Footer() {
+function Footer(props) {
+  const {reset} = props;
 
   return (
     <footer className="page-footer">
-      <div className="logo">
-        <Link to="/" className="logo__link logo__link--light">
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </Link>
-      </div>
-
+      <Logo reset={reset} />
       <div className="copyright">
         <p>© 2019 What to watch Ltd.</p>
       </div>
@@ -20,4 +17,15 @@ function Footer() {
   );
 }
 
-export default Footer;
+Footer.propTypes = {
+  reset: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  reset() {
+    dispatch(ActionCreator.reset());
+  },
+});
+
+export {Footer};
+export default connect(null, mapDispatchToProps)(Footer);

@@ -8,3 +8,5 @@ export const AppRoute = {
 };
 
 export const INITIAL_GENRE = 'All genres';
+
+export const MAX_MOVIES_SHOWN = 8;

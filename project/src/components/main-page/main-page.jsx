@@ -58,7 +58,7 @@ function MainPage(props) {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <Logo/>
+          <Logo />
           <SignOut/>
         </header>
 
@@ -98,10 +98,7 @@ function MainPage(props) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Genres />
-          <MovieList movies={movies}/>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <MovieList />
         </section>
         <Footer />
       </div>

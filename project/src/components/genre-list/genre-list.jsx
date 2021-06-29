@@ -8,9 +8,9 @@ import { ActionCreator } from '../../store/action';
 
 function GenreList(props) {
   const {movies, genre, onGenreChange} = props;
-  const genres = [...new Set([INITIAL_GENRE, ...movies.map((movie) => movie.genre)])];
   /* eslint-disable no-console */
-  console.log(genres);
+  console.log(onGenreChange);
+  const genres = [...new Set([INITIAL_GENRE, ...movies.map((movie) => movie.genre)])];
 
   return (
     <ul className="catalog__genres-list">
