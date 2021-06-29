@@ -2,7 +2,8 @@ export const ActionType = {
   CHANGE_GENRE: 'films/changeGenre',
   GET_MOVIES: 'films/getFilm',
   GET_MAX_COUNT_OF_MOVIES: 'films/getMaxCountOfFilms',
-  RESET: 'reset',
+  RESET_MAX_COUNT_OF_MOVIES: 'films/resetMaxCountOfFilms',
+  RESET: 'films/reset',
 };
 
 export const ActionCreator = {
@@ -15,6 +16,9 @@ export const ActionCreator = {
   }),
   getMaxCountOfMovies: () => ({
     type: ActionType.GET_MAX_COUNT_OF_MOVIES,
+  }),
+  resetMaxCountOfMovies: () => ({
+    type: ActionType.RESET_MAX_COUNT_OF_MOVIES,
   }),
   reset: () => ({
     type: ActionType.RESET,

@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import { ActionCreator } from '../../store/action';
 
 function LoadMoreButton(props) {
   const {onClickShowMoreMovies} = props;
@@ -24,11 +22,4 @@ LoadMoreButton.propTypes = {
   onClickShowMoreMovies: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onClickShowMoreMovies() {
-    dispatch(ActionCreator.getMaxCountOfMovies());
-  },
-});
-
-export {LoadMoreButton};
-export default connect(null, mapDispatchToProps)(LoadMoreButton);
+export default LoadMoreButton;

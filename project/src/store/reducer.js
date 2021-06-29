@@ -31,6 +31,11 @@ export const reducer = (state = initialState, action) => {
         ...state,
         maxCountOfMoviesShown: Math.min(state.filteredMovies.length, state.maxCountOfMoviesShown + MAX_MOVIES_SHOWN),
       };
+    case ActionType.RESET_MAX_COUNT_OF_MOVIES:
+      return {
+        ...state,
+        maxCountOfMoviesShown: MAX_MOVIES_SHOWN,
+      };
     case ActionType.RESET:
       return {
         ...initialState,
