@@ -12,7 +12,7 @@ import TabLinks from '../tabs/tabs.jsx';
 import SimiliarMovies from '../similiar-movies/similiar-movies.jsx';
 import Footer from '../footer/footer.jsx';
 
-function Movie(props) {
+function MoviePage(props) {
   const {movies, reviews} = props;
   const params = useParams();
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
@@ -74,7 +74,7 @@ function Movie(props) {
   );
 }
 
-Movie.propTypes={
+MoviePage.propTypes={
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
@@ -84,5 +84,5 @@ const mapStateToProps = (state) => ({
   reviews: state.reviews,
 });
 
-export {Movie};
-export default connect(mapStateToProps, null)(Movie);
+export {MoviePage};
+export default connect(mapStateToProps, null)(MoviePage);

@@ -3,7 +3,7 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../consts';
 import MainPage from '../main-page/main-page.jsx';
 import Login from '../user-block/login.jsx';
-import Movie from '../movie-page/movie-page.jsx';
+import MoviePage from '../movie-page/movie-page.jsx';
 import MyList from '../my-list/my-list.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import Review from '../review/review.jsx';
@@ -21,7 +21,7 @@ function App(props) {
           <Login />
         </Route>
         <Route exact path={AppRoute.FILM}>
-          <Movie />
+          <MoviePage />
         </Route>
         <Route exact path={AppRoute.MYLIST}>
           <MyList />
