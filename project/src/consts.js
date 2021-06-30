@@ -6,3 +6,9 @@ export const AppRoute = {
   REVIEW: '/films/:id/review',
   PLAYER: '/player/:id',
 };
+
+export const INITIAL_GENRE = 'All genres';
+
+export const MAX_MOVIES_SHOWN = 8;
+
+export const MAX_SIMILIAR_MOVIES_SHOWN = 4;

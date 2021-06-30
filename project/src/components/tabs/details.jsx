@@ -16,13 +16,13 @@ function Details(props) {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
-        <Detail director={movie.director} title={title.director}/>
-        <Detail starring={movie.starring.reduce((prev, curr) => [prev, ', ', curr])} title={title.starring}/>
+        <Detail data={movie.director} title={title.director}/>
+        <Detail data={movie.starring.reduce((prev, curr) => [prev, ', ', curr])} title={title.starring}/>
       </div>
       <div className="film-card__text-col">
-        <Detail runtime={movie.runTime} title={title.runtime}/>
-        <Detail genre={movie.genre} title={title.genre}/>
-        <Detail released={movie.released} title={title.released}/>
+        <Detail data={movie.runTime} title={title.runtime}/>
+        <Detail data={movie.genre} title={title.genre}/>
+        <Detail data={movie.released} title={title.released}/>
       </div>
     </div>
   );

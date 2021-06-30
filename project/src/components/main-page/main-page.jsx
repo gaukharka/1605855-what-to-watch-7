@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MovieList from '../movie-list/movie-list.jsx';
-import Logo from '../logo/logo.jsx';
-import Footer from '../footer/footer.jsx';
-import Filter from '../filters/filters.jsx';
-import SignOut from '../user-block/signout.jsx';
+import {moviePropTypes} from '../../prop-types/movie-prop-types';
+import MainMovieList from '../movie-list/main-movie-list';
+import Logo from '../logo/logo';
+import Footer from '../footer/footer';
+import Genres from '../genre-list/genre-list';
+import SignOut from '../user-block/signout';
+import PlayButton from '../buttons/button-play.jsx';
+import MyListButton from '../buttons/button-my-list.jsx';
 
 function MainPage(props) {
   const {movies} = props;
-  const [movie] = movies;
-  const {name, genre, released, posterImage} = movie;
-  const filteredMovies = movies.filter((item) => item.id !== movie.id);
-
+  const promoMovie = movies.find((movie) => movie.isPromo);
+  const {name, genre, released, posterImage} = promoMovie;
 
   return (
     <>
@@ -59,7 +60,7 @@ function MainPage(props) {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <Logo/>
+          <Logo />
           <SignOut/>
         </header>
 
@@ -77,18 +78,8 @@ function MainPage(props) {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <PlayButton id={promoMovie.id}/>
+                <MyListButton />
               </div>
             </div>
           </div>
@@ -98,11 +89,8 @@ function MainPage(props) {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <Filter />
-          <MovieList movies={filteredMovies}/>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <Genres />
+          <MainMovieList />
         </section>
         <Footer />
       </div>
@@ -111,14 +99,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-  })).isRequired,
+  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
 export default MainPage;

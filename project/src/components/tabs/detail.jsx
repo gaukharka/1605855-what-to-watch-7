@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 function Detail(props) {
   const {data, title} = props;
-  /* eslint-disable no-console */
-  console.log(data, title);
 
   return (
     <p className="film-card__details-item">
@@ -15,7 +13,7 @@ function Detail(props) {
 }
 
 Detail.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.any.isRequired,
   title: PropTypes.string.isRequired,
 };
 
