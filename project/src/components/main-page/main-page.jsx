@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import MainMovieList from '../movie-list/main-movie-list';
 import Logo from '../logo/logo';
@@ -102,4 +103,11 @@ MainPage.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+});
+
+export {MainPage};
+export default connect(mapStateToProps, null)(MainPage);
+
+// export default MainPage;

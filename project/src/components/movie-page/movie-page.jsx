@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import {reviewPropTypes} from '../../prop-types/review-prop-types';
@@ -78,4 +79,10 @@ Movie.propTypes={
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
-export default Movie;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+  reviews: state.reviews,
+});
+
+export {Movie};
+export default connect(mapStateToProps, null)(Movie);

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import Logo from '../logo/logo.jsx';
 import Footer from '../footer/footer.jsx';
@@ -30,4 +31,9 @@ MyList.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-export default MyList;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+});
+
+export {MyList};
+export default connect(mapStateToProps, null)(MyList);

@@ -1,14 +1,16 @@
 import {INITIAL_GENRE, MAX_MOVIES_SHOWN} from '../consts.js';
 import {ActionType} from './action.js';
 import movies from './../mocks/movies';
+import reviews from '../mocks/reviews.js';
 
 const movieList = movies.filter((movie) => movie.isPromo === false);
 
 const initialState = {
   genre: INITIAL_GENRE,
   movies: movieList,
-  filteredMovies: movieList,
-  maxCountOfMoviesShown: MAX_MOVIES_SHOWN,
+  filteredMovies: movieList,   // убрать
+  maxCountOfMoviesShown: MAX_MOVIES_SHOWN,   // убрать
+  reviews: reviews,
 };
 
 export const reducer = (state = initialState, action) => {
