@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
-import MovieList from '../movie-list/movie-list.jsx';
 import {MAX_SIMILIAR_MOVIES_SHOWN} from '../../consts';
+import {getFilteredMovies} from '../../utils/utils';
+import MovieList from '../movie-list/movie-list.jsx';
 
 function SimiliarMovies(props) {
-  const {currentMovie, filteredMovies} = props;
-  const movies = filteredMovies.filter((movie) => movie.id !== currentMovie.id);
-  const filteredByGenre = movies.filter((movie) => movie.genre === currentMovie.genre);
+  const {currentMovie, movies} = props;
+  const moviesFiltered = movies.filter((movie) => movie.id !== currentMovie.id);
+  const filteredByGenre = moviesFiltered.filter((movie) => movie.genre === currentMovie.genre);
 
   return (
     <section className="catalog catalog--like-this">
@@ -19,12 +20,14 @@ function SimiliarMovies(props) {
 }
 
 SimiliarMovies.propTypes = {
-  filteredMovies: PropTypes.arrayOf(moviePropTypes).isRequired,
+  // filteredMovies: PropTypes.arrayOf(moviePropTypes).isRequired,
+  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
   currentMovie: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  filteredMovies: state.filteredMovies,
+  // filteredMovies: state.filteredMovies,
+  movies: getFilteredMovies(state.movies, state.genre),
 });
 
 export {SimiliarMovies};

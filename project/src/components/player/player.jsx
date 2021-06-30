@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
+// import {moviePropTypes} from '../../prop-types/movie-prop-types';
 
 function Player(props) {
-  const {movies}=props;
+  // const {movies}=props;
 
   return (
     <div className="player">
@@ -42,9 +42,9 @@ function Player(props) {
   );
 }
 
-Player.propTypes = {
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-};
+// Player.propTypes = {
+//   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
+// };
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
