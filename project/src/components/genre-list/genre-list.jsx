@@ -47,8 +47,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange(genre) {
     dispatch(ActionCreator.changeGenre(genre));
-    dispatch(ActionCreator.getMovies());
-    dispatch(ActionCreator.resetMaxCountOfMovies());
   },
 });
 

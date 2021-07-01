@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
 
 function AddReviewForm() {
-  const [userReview, setUserReview]=useState({
+  const [review, setReview] = useState({
     rating: null,
     comment: '',
   });
 
   function handleChange(evt) {
-    evt.preventDefault();
     const name = evt.target.name;
     const value = evt.target.value;
 
-    setUserReview({
-      ...userReview,
+    setReview({
+      ...review,
       [name]: value,
     });
   }
@@ -35,7 +34,7 @@ function AddReviewForm() {
                     type="radio"
                     name="rating"
                     value={ratingValue}
-                    onChange={handleChange}
+                    onChange={(evt) => handleChange(evt)}
                   />
                   <label
                     className="rating__label"
@@ -54,8 +53,8 @@ function AddReviewForm() {
             name="comment"
             id="review-text"
             placeholder="Review text"
-            value={userReview.comment}
-            onChange={handleChange}
+            value={review.comment}
+            onChange={(evt) => handleChange(evt)}
           >
           </textarea>
           <div className="add-review__submit">

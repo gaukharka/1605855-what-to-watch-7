@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
-import MainMovieList from '../movie-list/main-movie-list';
+import MovieList from '../movie-list/movie-list';
 import Logo from '../logo/logo';
 import Footer from '../footer/footer';
 import Genres from '../genre-list/genre-list';
@@ -90,7 +91,7 @@ function MainPage(props) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Genres />
-          <MainMovieList />
+          <MovieList />
         </section>
         <Footer />
       </div>
@@ -102,4 +103,9 @@ MainPage.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+});
+
+export {MainPage};
+export default connect(mapStateToProps, null)(MainPage);

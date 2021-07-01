@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import {reviewPropTypes} from '../../prop-types/review-prop-types';
@@ -11,7 +12,7 @@ import TabLinks from '../tabs/tabs.jsx';
 import SimiliarMovies from '../similiar-movies/similiar-movies.jsx';
 import Footer from '../footer/footer.jsx';
 
-function Movie(props) {
+function MoviePage(props) {
   const {movies, reviews} = props;
   const params = useParams();
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
@@ -73,9 +74,15 @@ function Movie(props) {
   );
 }
 
-Movie.propTypes={
+MoviePage.propTypes={
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
-export default Movie;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+  reviews: state.reviews,
+});
+
+export {MoviePage};
+export default connect(mapStateToProps, null)(MoviePage);

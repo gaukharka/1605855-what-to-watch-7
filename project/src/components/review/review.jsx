@@ -1,6 +1,7 @@
 import React from 'react';
-import {Link, useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Link, useParams} from 'react-router-dom';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import Logo from '../logo/logo.jsx';
 import AddReviewForm from './add-review-form.jsx';
@@ -48,4 +49,9 @@ Review.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-export default Review;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+});
+
+export {Review};
+export default connect(mapStateToProps, null)(Review);

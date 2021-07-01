@@ -1,14 +1,12 @@
-import {INITIAL_GENRE, MAX_MOVIES_SHOWN} from '../consts.js';
+import {INITIAL_GENRE} from '../consts.js';
 import {ActionType} from './action.js';
 import movies from './../mocks/movies';
-
-const movieList = movies.filter((movie) => movie.isPromo === false);
+import reviews from '../mocks/reviews.js';
 
 const initialState = {
   genre: INITIAL_GENRE,
-  movies: movieList,
-  filteredMovies: movieList,
-  maxCountOfMoviesShown: MAX_MOVIES_SHOWN,
+  movies: movies,
+  reviews: reviews,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -21,17 +19,7 @@ export const reducer = (state = initialState, action) => {
     case ActionType.GET_MOVIES:
       return {
         ...state,
-        filteredMovies: state.genre === INITIAL_GENRE ? state.movies : state.movies.filter((movie) => movie.genre === state.genre),
-      };
-    case ActionType.GET_MAX_COUNT_OF_MOVIES:
-      return {
-        ...state,
-        maxCountOfMoviesShown: Math.min(state.filteredMovies.length, state.maxCountOfMoviesShown + MAX_MOVIES_SHOWN),
-      };
-    case ActionType.RESET_MAX_COUNT_OF_MOVIES:
-      return {
-        ...state,
-        maxCountOfMoviesShown: MAX_MOVIES_SHOWN,
+        movies: state.movies,
       };
     case ActionType.RESET:
       return {
