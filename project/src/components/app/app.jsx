@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import {AppRoute} from '../../consts';
+import {AppRoutes} from '../../consts';
+import {isCheckedAuth} from '../../utils/utils';
 import MainPage from '../main-page/main-page.jsx';
 import Login from '../user-block/login.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
@@ -8,28 +11,35 @@ import MyList from '../my-list/my-list.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import Review from '../review/review.jsx';
 import Player from '../player/player.jsx';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(props) {
+  const {authorizationStatus, isMovieListLoaded, isPromoListLoaded, isReviewListLoaded, isFavoriteListLoaded} = props;
+
+  if(isCheckedAuth(authorizationStatus) || !isMovieListLoaded || !isPromoListLoaded || !isReviewListLoaded || !isFavoriteListLoaded) {
+    return <LoadingScreen />;
+  }
+
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={AppRoute.ROOT}>
+        <Route exact path={AppRoutes.ROOT}>
           <MainPage />
         </Route>
-        <Route exact path={AppRoute.LOGIN}>
+        <Route exact path={AppRoutes.LOGIN}>
           <Login />
         </Route>
-        <Route exact path={AppRoute.FILM}>
+        <Route exact path={AppRoutes.FILM}>
           <MoviePage />
         </Route>
-        <Route exact path={AppRoute.MYLIST}>
+        <Route exact path={AppRoutes.MYLIST}>
           <MyList />
         </Route>
-        <Route exact path={AppRoute.REVIEW}>
+        <Route exact path={AppRoutes.REVIEW}>
           <Review />
         </Route>
-        <Route exact path={AppRoute.PLAYER}>
+        <Route exact path={AppRoutes.PLAYER}>
           <Player />
         </Route>
         <Route>
@@ -40,6 +50,21 @@ function App(props) {
   );
 }
 
-App.propTypes = {};
+App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  isMovieListLoaded: PropTypes.bool.isRequired,
+  isPromoListLoaded: PropTypes.bool.isRequired,
+  isReviewListLoaded: PropTypes.bool.isRequired,
+  isFavoriteListLoaded: PropTypes.bool.isRequired,
+};
 
-export default App;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+  isMovieListLoaded: state.isMovieListLoaded,
+  isPromoListLoaded: state.isPromoListLoaded,
+  isReviewListLoaded: state.isReviewListLoaded,
+  isFavoriteListLoaded: state.isFavoriteListLoaded,
+});
+
+export {App};
+export default connect(mapStateToProps, null)(App);

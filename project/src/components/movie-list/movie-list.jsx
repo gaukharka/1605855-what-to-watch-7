@@ -6,12 +6,16 @@ import {MAX_MOVIES_SHOWN} from '../../consts.js';
 import {getFilteredMovies} from '../../utils/utils';
 import MovieCard from '../movie-card/movie-card.jsx';
 import LoadMoreButton from '../buttons/button-load-more';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function MovieList(props) {
-  const {movies} = props;
-  const movieList = movies.filter((movie) => movie.isPromo === false);
+  const {movies, isMovieListLoaded} = props;
   const [activeMovie, setActiveMovie] = useState();
   const [visibleMovies, setVisibleMovies] = useState(MAX_MOVIES_SHOWN);
+
+  if(!isMovieListLoaded) {
+    return <LoadingScreen />;
+  }
 
   const loadMore = () => {
     setVisibleMovies(visibleMovies + MAX_MOVIES_SHOWN);
@@ -20,7 +24,7 @@ function MovieList(props) {
   return (
     <>
       <div className="catalog__films-list">
-        {movieList.slice(0, visibleMovies).map((item) => (
+        {movies.slice(0, visibleMovies).map((item) => (
           <MovieCard
             key={item.id}
             id={item.id}
@@ -33,7 +37,7 @@ function MovieList(props) {
           />
         ))}
       </div>
-      { visibleMovies < movieList.length &&
+      { visibleMovies < movies.length &&
         <LoadMoreButton
           onClickShowMoreMovies={loadMore}
         />}
@@ -43,10 +47,12 @@ function MovieList(props) {
 
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
+  isMovieListLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   movies: getFilteredMovies(state.movies, state.genre),
+  isMovieListLoaded: state.isMovieListLoaded,
 });
 
 export {MovieList};

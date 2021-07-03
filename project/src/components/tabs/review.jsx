@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {reviewPropTypes} from '../../prop-types/review-prop-types';
 import dateFormat from 'dateformat';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function Review(props) {
-  const {reviews}=props;
+  const {reviews, isReviewListLoaded}=props;
+
+  if(!isReviewListLoaded) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="film-card__reviews-col">
@@ -39,6 +45,13 @@ function Review(props) {
 
 Review.propTypes={
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
+  isReviewListLoaded: PropTypes.bool.isRequired,
 };
 
-export default Review;
+const mapStateToProps = (state) => ({
+  reviews: state.reviews,
+  isReviewListLoaded: state.isReviewListLoaded,
+});
+
+export {Review};
+export default connect(mapStateToProps, null)(Review);

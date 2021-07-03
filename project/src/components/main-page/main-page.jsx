@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import MovieList from '../movie-list/movie-list';
 import Logo from '../logo/logo';
 import Footer from '../footer/footer';
@@ -9,11 +8,15 @@ import Genres from '../genre-list/genre-list';
 import SignOut from '../user-block/signout';
 import PlayButton from '../buttons/button-play.jsx';
 import MyListButton from '../buttons/button-my-list.jsx';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function MainPage(props) {
-  const {movies} = props;
-  const promoMovie = movies.find((movie) => movie.isPromo);
+  const {promoMovie, isPromoListLoaded} = props;
   const {name, genre, released, posterImage} = promoMovie;
+
+  if(!isPromoListLoaded) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
@@ -100,11 +103,13 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
+  promoMovie: PropTypes.object.isRequired,
+  isPromoListLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.movies,
+  promoMovie: state.promoMovie,
+  isPromoListLoaded: state.isPromoListLoaded,
 });
 
 export {MainPage};

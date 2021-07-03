@@ -1,13 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../consts';
+import {AppRoutes} from '../../consts';
 
 function NotFoundScreen() {
 
   return (
     <section>
       <h1>404. Page not found</h1>
-      <Link to={AppRoute.ROOT}>Вернуться на главную</Link>
+      <Link to={AppRoutes.ROOT}>Вернуться на главную</Link>
     </section>
   );
 }
