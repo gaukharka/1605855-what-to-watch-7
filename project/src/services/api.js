@@ -3,9 +3,6 @@ import axios from 'axios';
 const BACKEND_URL = 'https://7.react.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;
 
-/* eslint-disable no-console */
-console.log(BACKEND_URL);
-
 const HttpCode = {
   UNAUTHORIZED: 401,
 };
@@ -34,4 +31,6 @@ export const createAPI = (onUnauthorized) => {
   };
 
   api.interceptors.response.use(onSuccess, onFail);
+
+  return api;
 };

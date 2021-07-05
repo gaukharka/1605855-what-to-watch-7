@@ -18,4 +18,4 @@ export const adaptDataToMovie = (data) => ({
   isFavorite: data.is_favorite,
 });
 
-export const adaptDataToMovies = (data) => (data.map((movie) => adaptDataToMovie(data)));
+export const adaptDataToMovies = (data) => (data.map((movie) => adaptDataToMovie(movie)));

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import VideoPreview from '../player/video-preview.jsx';
 
 function MovieCard(props) {
-  const {id, name, previewImage, previewVideo, onMouseOver, onMouseOut,  isActive} = props;
+  const {id, name, previewImage, previewVideo, onMouseOver, onMouseOut, isActive} = props;
 
   return(
     <article

@@ -13,9 +13,9 @@ import Player from '../player/player.jsx';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(props) {
-  const {isMovieListLoaded, isPromoListLoaded} = props;
+  const {isMovieListLoaded, isPromoMovieLoaded} = props;
 
-  if(!isMovieListLoaded || !isPromoListLoaded ) {
+  if(!isMovieListLoaded || !isPromoMovieLoaded ) {
     return <LoadingScreen />;
   }
 
@@ -50,16 +50,12 @@ function App(props) {
 
 App.propTypes = {
   isMovieListLoaded: PropTypes.bool.isRequired,
-  isPromoListLoaded: PropTypes.bool.isRequired,
-  // isReviewListLoaded: PropTypes.bool.isRequired,
-  // isFavoriteListLoaded: PropTypes.bool.isRequired,
+  isPromoMovieLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isMovieListLoaded: state.isMovieListLoaded,
-  isPromoListLoaded: state.isPromoListLoaded,
-  isReviewListLoaded: state.isReviewListLoaded,
-  isFavoriteListLoaded: state.isFavoriteListLoaded,
+  isPromoMovieLoaded: state.isPromoMovieLoaded,
 });
 
 export {App};

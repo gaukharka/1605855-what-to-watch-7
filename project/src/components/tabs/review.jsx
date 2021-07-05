@@ -7,6 +7,9 @@ import dateFormat from 'dateformat';
 function Review(props) {
   const {reviews}=props;
 
+  /* eslint-disable no-console */
+  console.log(reviews);
+
   return (
     <div className="film-card__reviews-col">
       {reviews.map((item) => (

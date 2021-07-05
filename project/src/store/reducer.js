@@ -4,7 +4,7 @@ import {ActionType} from './action.js';
 const initialState = {
   genre: INITIAL_GENRE,
   movies: [],
-  promoMovie: [],
+  promoMovie: {},
   favoriteMovies: [],
   reviews: [],
   authorizationStatus: AuthorizationStatus.UNKNOWN,
@@ -14,9 +14,6 @@ const initialState = {
   isFavoriteListLoaded: false,
   error: '',
 };
-
-/* eslint-disable no-console */
-console.log(initialState.movies);
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
