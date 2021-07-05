@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoutes} from '../../consts';
-import {isCheckedAuth} from '../../utils/utils';
 import MainPage from '../main-page/main-page.jsx';
 import Login from '../user-block/login.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
@@ -14,21 +13,17 @@ import Player from '../player/player.jsx';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(props) {
-  const {authorizationStatus, isMovieListLoaded, isPromoListLoaded, isReviewListLoaded, isFavoriteListLoaded} = props;
+  const {isMovieListLoaded, isPromoListLoaded} = props;
 
-  if(isCheckedAuth(authorizationStatus) || !isMovieListLoaded || !isPromoListLoaded || !isReviewListLoaded || !isFavoriteListLoaded) {
+  if(!isMovieListLoaded || !isPromoListLoaded ) {
     return <LoadingScreen />;
   }
-
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoutes.ROOT}>
           <MainPage />
-        </Route>
-        <Route exact path={AppRoutes.LOGIN}>
-          <Login />
         </Route>
         <Route exact path={AppRoutes.FILM}>
           <MoviePage />
@@ -42,6 +37,9 @@ function App(props) {
         <Route exact path={AppRoutes.PLAYER}>
           <Player />
         </Route>
+        <Route exact path={AppRoutes.LOGIN}>
+          <Login />
+        </Route>
         <Route>
           <NotFoundScreen />
         </Route>
@@ -51,15 +49,13 @@ function App(props) {
 }
 
 App.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
   isMovieListLoaded: PropTypes.bool.isRequired,
   isPromoListLoaded: PropTypes.bool.isRequired,
-  isReviewListLoaded: PropTypes.bool.isRequired,
-  isFavoriteListLoaded: PropTypes.bool.isRequired,
+  // isReviewListLoaded: PropTypes.bool.isRequired,
+  // isFavoriteListLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
   isMovieListLoaded: state.isMovieListLoaded,
   isPromoListLoaded: state.isPromoListLoaded,
   isReviewListLoaded: state.isReviewListLoaded,

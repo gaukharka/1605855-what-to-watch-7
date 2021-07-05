@@ -26,11 +26,11 @@ export const fetchReviewList = () => (dispatch, _getState, api) => (
     .catch((error) => dispatch(ActionCreator.error(error.message)))
 );
 
-export const checkAuth = () => (dispatch, _getState, api) => (
-  api.get(APIRoutes.LOGIN)
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .catch(() => {})
-);
+// export const checkAuth = () => (dispatch, _getState, api) => (
+//   api.get(APIRoutes.LOGIN)
+//     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+//     .catch(() => {})
+// );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoutes.LOGIN, {email, password})

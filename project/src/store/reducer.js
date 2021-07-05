@@ -15,6 +15,9 @@ const initialState = {
   error: '',
 };
 
+/* eslint-disable no-console */
+console.log(initialState.movies);
+
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_GENRE:
@@ -22,14 +25,9 @@ export const reducer = (state = initialState, action) => {
         ...state,
         genre: action.payload,
       };
-    case ActionType.GET_MOVIES:
-      return {
-        ...state,
-        movies: state.movies,
-      };
     case ActionType.RESET:
       return {
-        ...initialState,
+        ...state,
       };
     case ActionType.LOAD_MOVIES:
       return {
@@ -55,7 +53,7 @@ export const reducer = (state = initialState, action) => {
         reviews: action.payload,
         isReviewListLoaded: true,
       };
-    case ActionType.REQUIRED_AUTHORIZATION:
+    case ActionType.REQUIRE_AUTHORIZATION:
       return {
         ...state,
         authorizationStatus: action.payload,

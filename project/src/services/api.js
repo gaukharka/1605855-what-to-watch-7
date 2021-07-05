@@ -3,6 +3,9 @@ import axios from 'axios';
 const BACKEND_URL = 'https://7.react.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;
 
+/* eslint-disable no-console */
+console.log(BACKEND_URL);
+
 const HttpCode = {
   UNAUTHORIZED: 401,
 };

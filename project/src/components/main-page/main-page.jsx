@@ -8,15 +8,10 @@ import Genres from '../genre-list/genre-list';
 import SignOut from '../user-block/signout';
 import PlayButton from '../buttons/button-play.jsx';
 import MyListButton from '../buttons/button-my-list.jsx';
-import LoadingScreen from '../loading-screen/loading-screen';
 
 function MainPage(props) {
-  const {promoMovie, isPromoListLoaded} = props;
+  const {promoMovie} = props;
   const {name, genre, released, posterImage} = promoMovie;
-
-  if(!isPromoListLoaded) {
-    return <LoadingScreen />;
-  }
 
   return (
     <>
@@ -104,12 +99,10 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   promoMovie: PropTypes.object.isRequired,
-  isPromoListLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   promoMovie: state.promoMovie,
-  isPromoListLoaded: state.isPromoListLoaded,
 });
 
 export {MainPage};

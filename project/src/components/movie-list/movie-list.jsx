@@ -6,16 +6,11 @@ import {MAX_MOVIES_SHOWN} from '../../consts.js';
 import {getFilteredMovies} from '../../utils/utils';
 import MovieCard from '../movie-card/movie-card.jsx';
 import LoadMoreButton from '../buttons/button-load-more';
-import LoadingScreen from '../loading-screen/loading-screen';
 
 function MovieList(props) {
-  const {movies, isMovieListLoaded} = props;
+  const {movies} = props;
   const [activeMovie, setActiveMovie] = useState();
   const [visibleMovies, setVisibleMovies] = useState(MAX_MOVIES_SHOWN);
-
-  if(!isMovieListLoaded) {
-    return <LoadingScreen />;
-  }
 
   const loadMore = () => {
     setVisibleMovies(visibleMovies + MAX_MOVIES_SHOWN);
@@ -47,12 +42,10 @@ function MovieList(props) {
 
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-  isMovieListLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   movies: getFilteredMovies(state.movies, state.genre),
-  isMovieListLoaded: state.isMovieListLoaded,
 });
 
 export {MovieList};

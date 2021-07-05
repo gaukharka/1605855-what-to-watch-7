@@ -1,12 +1,11 @@
 export const ActionType = {
   CHANGE_GENRE: 'films/changeGenre',
-  GET_MOVIES: 'films/getFilm',
   RESET: 'films/reset',
   LOAD_MOVIES: 'data/loadMovies',
   LOAD_REVIEWS: 'data/loadReviews',
   LOAD_PROMO_MOVIE: 'data/loadPromoMovie',
   LOAD_FAVORITE_MOVIE: 'data/loadFavoriteMovie',
-  REQUIRED_AUTHORIZATION: 'user/requireAuthorization',
+  REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
   LOGOUT: 'user/logout',
   ERROR: 'data/error',
 };
@@ -15,9 +14,6 @@ export const ActionCreator = {
   changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,
     payload: genre,
-  }),
-  getMovies: () => ({
-    type: ActionType.GET_MOVIES,
   }),
   reset: () => ({
     type: ActionType.RESET,
@@ -35,11 +31,11 @@ export const ActionCreator = {
     payload: favoriteMovies,
   }),
   loadReviews: (reviews) => ({
-    type: ActionType.LOAD_MOVIES,
+    type: ActionType.LOAD_REVIEWS,
     payload: reviews,
   }),
   requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
+    type: ActionType.REQUIRE_AUTHORIZATION,
     payload: status,
   }),
   logout: () => ({
