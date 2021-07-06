@@ -24,7 +24,7 @@ export const reducer = (state = initialState, action) => {
       };
     case ActionType.RESET:
       return {
-        ...state,
+        ...initialState,
       };
     case ActionType.LOAD_MOVIES:
       return {

@@ -26,14 +26,21 @@ export const fetchReviewList = () => (dispatch, _getState, api) => (
     .catch((error) => dispatch(ActionCreator.error(error.message)))
 );
 
+export const checkAuth = () => (dispatch, _getState, api) => (
+  api.get(APIRoutes.LOGIN)
+    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .catch((error) => dispatch(ActionCreator.error(error.message)))
+);
+
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoutes.LOGIN, {email, password})
     .then(({data}) => localStorage.setItem('token', data.token))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .catch((error) => dispatch(ActionCreator.error(error.message)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.delete(APIRoutes.LOGOUT)
     .then(() => localStorage.removeItem('token'))
-    .then(() => dispatch(ActionCreator.LOGOUT))
+    .then(() => dispatch(ActionCreator.logout()))
 );

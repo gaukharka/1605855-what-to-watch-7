@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoutes} from '../../consts';
+import {isCheckedAuth} from '../../utils/utils';
 import MainPage from '../main-page/main-page.jsx';
 import Login from '../user-block/login.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
@@ -11,11 +12,12 @@ import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import Review from '../review/review.jsx';
 import Player from '../player/player.jsx';
 import LoadingScreen from '../loading-screen/loading-screen';
+import PrivateRoute from '../private-route/private-route';
 
 function App(props) {
-  const {isMovieListLoaded, isPromoMovieLoaded} = props;
+  const {authorizationStatus, isMovieListLoaded, isPromoMovieLoaded} = props;
 
-  if(!isMovieListLoaded || !isPromoMovieLoaded ) {
+  if(isCheckedAuth(authorizationStatus) || !isMovieListLoaded || !isPromoMovieLoaded ) {
     return <LoadingScreen />;
   }
 
@@ -28,12 +30,16 @@ function App(props) {
         <Route exact path={AppRoutes.FILM}>
           <MoviePage />
         </Route>
-        <Route exact path={AppRoutes.MYLIST}>
-          <MyList />
-        </Route>
-        <Route exact path={AppRoutes.REVIEW}>
-          <Review />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoutes.MYLIST}
+          render={() => <MyList />}
+        />
+        <PrivateRoute
+          exact
+          path={AppRoutes.REVIEW}
+          render={() => <Review />}
+        />
         <Route exact path={AppRoutes.PLAYER}>
           <Player />
         </Route>
@@ -49,11 +55,13 @@ function App(props) {
 }
 
 App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   isMovieListLoaded: PropTypes.bool.isRequired,
   isPromoMovieLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
   isMovieListLoaded: state.isMovieListLoaded,
   isPromoMovieLoaded: state.isPromoMovieLoaded,
 });

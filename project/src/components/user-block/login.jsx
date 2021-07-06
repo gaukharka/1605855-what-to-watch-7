@@ -1,22 +1,24 @@
-import React, {useState} from 'react';
-import Logo from '../logo/logo.jsx';
-import Footer from '../footer/footer.jsx';
+import React, {useRef} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import Logo from '../logo/logo';
+import Footer from '../footer/footer';
+import {login} from '../../store/api-actions';
 
-function Login() {
-  const [userLogin, setUserLogin]=useState({
-    email: '',
-    password: '',
-  });
+function Login(props) {
+  const {onSubmit} = props;
 
-  function handleUserEmailInput(evt) {
-    const email=evt.target.value;
-    setUserLogin({...userLogin, email: email});
-  }
+  const loginRef = useRef();
+  const passwordRef = useRef();
 
-  function handleUserPasswordInput(evt) {
-    const password=evt.target.value;
-    setUserLogin({...userLogin, password: password});
-  }
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    onSubmit({
+      login: loginRef.current.value,
+      password: passwordRef.current.value,
+    });
+  };
 
   return (
     <div className="user-page">
@@ -25,17 +27,20 @@ function Login() {
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form
+          action="#"
+          className="sign-in__form"
+          onSubmit={handleSubmit}
+        >
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
+                ref={loginRef}
                 className="sign-in__input"
                 type="email"
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
-                value={userLogin.email}
-                onChange={handleUserEmailInput}
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -46,13 +51,12 @@ function Login() {
             </div>
             <div className="sign-in__field">
               <input
+                ref={passwordRef}
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
-                value={userLogin.password}
-                onChange={handleUserPasswordInput}
               />
               <label
                 className="sign-in__label visually-hidden"
@@ -77,4 +81,19 @@ function Login() {
   );
 }
 
-export default Login;
+Login.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(authData) {
+    dispatch(login(authData));
+  },
+});
+
+export {Login};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

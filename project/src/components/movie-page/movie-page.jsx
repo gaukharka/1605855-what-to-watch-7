@@ -4,13 +4,13 @@ import {connect} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import {reviewPropTypes} from '../../prop-types/review-prop-types';
-import Logo from '../logo/logo.jsx';
-import SignOut from '../user-block/signout.jsx';
-import PlayButton from '../buttons/button-play.jsx';
-import MyListButton from '../buttons/button-my-list.jsx';
-import TabLinks from '../tabs/tabs.jsx';
-import SimiliarMovies from '../similiar-movies/similiar-movies.jsx';
-import Footer from '../footer/footer.jsx';
+import Logo from '../logo/logo';
+import UserBlock from '../user-block/user-block';
+import PlayButton from '../buttons/button-play';
+import MyListButton from '../buttons/button-my-list';
+import TabLinks from '../tabs/tabs';
+import SimiliarMovies from '../similiar-movies/similiar-movies';
+import Footer from '../footer/footer';
 
 function MoviePage(props) {
   const {movies, reviews} = props;
@@ -30,7 +30,7 @@ function MoviePage(props) {
 
           <header className="page-header film-card__head">
             <Logo />
-            <SignOut />
+            <UserBlock />
           </header>
 
           <div className="film-card__wrap">
