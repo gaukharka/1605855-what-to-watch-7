@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {AppRoutes} from '../../consts';
 import {isCheckedAuth} from '../../utils/utils';
-import MainPage from '../main-page/main-page.jsx';
+import MainPage from '../main-page/main-page';
 import Login from '../user-block/login.jsx';
-import MoviePage from '../movie-page/movie-page.jsx';
-import MyList from '../my-list/my-list.jsx';
-import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
-import Review from '../review/review.jsx';
-import Player from '../player/player.jsx';
+import MoviePage from '../movie-page/movie-page';
+import MyList from '../my-list/my-list';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import Review from '../review/review';
+import Player from '../player/player';
 import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
+import {browserHistory} from '../../browser-history';
 
 function App(props) {
   const {authorizationStatus, isMovieListLoaded, isPromoMovieLoaded} = props;
@@ -22,7 +23,7 @@ function App(props) {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoutes.ROOT}>
           <MainPage />

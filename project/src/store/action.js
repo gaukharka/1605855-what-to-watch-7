@@ -7,6 +7,7 @@ export const ActionType = {
   LOAD_FAVORITE_MOVIE: 'data/loadFavoriteMovie',
   REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
   LOGOUT: 'user/logout',
+  REDIRECT_TO_ROUTE: 'films/redirectToRoute',
   ERROR: 'data/error',
 };
 
@@ -40,6 +41,10 @@ export const ActionCreator = {
   }),
   logout: () => ({
     type: ActionType.LOGOUT,
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   }),
   error: (error) => ({
     type: ActionType.ERROR,

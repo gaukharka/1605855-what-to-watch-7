@@ -1,5 +1,5 @@
 import {ActionCreator} from './action';
-import {AuthorizationStatus, APIRoutes} from '../consts';
+import {AuthorizationStatus, APIRoutes, AppRoutes} from '../consts';
 import {adaptDataToMovie, adaptDataToMovies} from '../services/adaptors';
 
 export const fetchMovieList = () => (dispatch, _getState, api) => (
@@ -36,6 +36,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
   api.post(APIRoutes.LOGIN, {email, password})
     .then(({data}) => localStorage.setItem('token', data.token))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoutes.ROOT)))
     .catch((error) => dispatch(ActionCreator.error(error.message)))
 );
 
