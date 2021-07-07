@@ -9,7 +9,7 @@ function Review(props) {
     <div className="film-card__reviews-col">
       {reviews.map((item) => (
         <div
-          key={item.user.id}
+          key={item.id+1}
           className="review"
         >
           <blockquote className="review__quote">

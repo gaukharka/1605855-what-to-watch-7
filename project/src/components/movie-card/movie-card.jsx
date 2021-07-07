@@ -4,7 +4,8 @@ import {Link} from 'react-router-dom';
 import VideoPreview from '../player/video-preview.jsx';
 
 function MovieCard(props) {
-  const {id, name, previewImage, previewVideo, onMouseOver, onMouseOut, isActive} = props;
+  const {movie, onMouseOver, onMouseOut, isActive } = props;
+  const {id, name, previewImage, previewVideo } = movie;
 
   return(
     <article
@@ -35,11 +36,8 @@ function MovieCard(props) {
 }
 
 MovieCard.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  previewImage: PropTypes.string.isRequired,
-  previewVideo: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
+  movie: PropTypes.object.isRequired,
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
 };
