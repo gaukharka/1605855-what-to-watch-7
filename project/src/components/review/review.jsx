@@ -5,7 +5,7 @@ import {Link, useParams} from 'react-router-dom';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import Logo from '../logo/logo.jsx';
 import AddReviewForm from './add-review-form.jsx';
-import SignOut from '../user-block/signout.jsx';
+import UserBlock from '../user-block/user-block';
 
 function Review(props) {
   const {movies} = props;
@@ -33,7 +33,7 @@ function Review(props) {
               </li>
             </ul>
           </nav>
-          <SignOut />
+          <UserBlock />
         </header>
 
         <div className="film-card__poster film-card__poster--small">

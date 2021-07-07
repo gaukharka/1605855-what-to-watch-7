@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
-import Logo from '../logo/logo.jsx';
-import Footer from '../footer/footer.jsx';
-import MovieList from '../movie-list/movie-list.jsx';
-import SignOut from '../user-block/signout.jsx';
+import Logo from '../logo/logo';
+import Footer from '../footer/footer';
+import MovieList from '../movie-list/movie-list';
+import UserBlock from '../user-block/user-block';
 
 function MyList(props) {
   const {movies}=props;
@@ -16,7 +16,7 @@ function MyList(props) {
       <header className="page-header user-page__head">
         <Logo />
         <h1 className="page-title user-page__title">My list</h1>
-        <SignOut />
+        <UserBlock />
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>

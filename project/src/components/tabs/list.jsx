@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function List(props) {
-  const {rating, scoresCount, description, director, starring}=props.movie;
+  const {rating, scoresCount, description, director, starring} = props.movie;
 
   return (
     <>
@@ -32,14 +32,7 @@ function List(props) {
 }
 
 List.propTypes = {
-  movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.array.isRequired,
-  }).isRequired,
+  movie: PropTypes.object.isRequired,
 };
 
 export default List;

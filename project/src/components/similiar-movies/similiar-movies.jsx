@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import {MAX_SIMILIAR_MOVIES_SHOWN} from '../../consts';
-import {getFilteredMovies} from '../../utils/utils';
+import {getFilteredMovies} from '../../selectors/selectors';
 import MovieCard from '../movie-card/movie-card';
 
 function SimiliarMovies(props) {
@@ -19,11 +19,8 @@ function SimiliarMovies(props) {
       <div className="catalog__films-list">
         {filteredByGenre.slice(0, MAX_SIMILIAR_MOVIES_SHOWN).map((item) => (
           <MovieCard
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            previewImage={item.previewImage}
-            previewVideo={item.previewVideo}
+            key={item.id+1}
+            movie={item}
             isActive={item === activeMovie}
             onMouseOver={() => setActiveMovie(item)}
             onMouseOut={() => setActiveMovie(null)}

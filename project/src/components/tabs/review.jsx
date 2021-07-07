@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {reviewPropTypes} from '../../prop-types/review-prop-types';
 import dateFormat from 'dateformat';
 
 function Review(props) {
@@ -10,7 +9,7 @@ function Review(props) {
     <div className="film-card__reviews-col">
       {reviews.map((item) => (
         <div
-          key={item.user.id}
+          key={item.id+1}
           className="review"
         >
           <blockquote className="review__quote">
@@ -38,7 +37,7 @@ function Review(props) {
 }
 
 Review.propTypes={
-  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default Review;

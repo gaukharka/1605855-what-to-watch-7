@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
-import {reviewPropTypes} from '../../prop-types/review-prop-types';
-import Logo from '../logo/logo.jsx';
-import SignOut from '../user-block/signout.jsx';
-import PlayButton from '../buttons/button-play.jsx';
-import MyListButton from '../buttons/button-my-list.jsx';
-import TabLinks from '../tabs/tabs.jsx';
-import SimiliarMovies from '../similiar-movies/similiar-movies.jsx';
-import Footer from '../footer/footer.jsx';
+import Logo from '../logo/logo';
+import UserBlock from '../user-block/user-block';
+import PlayButton from '../buttons/button-play';
+import MyListButton from '../buttons/button-my-list';
+import TabLinks from '../tabs/tabs';
+import SimiliarMovies from '../similiar-movies/similiar-movies';
+import Footer from '../footer/footer';
+import {fetchReviewList} from '../../store/api-actions';
 
 function MoviePage(props) {
-  const {movies, reviews} = props;
+  const {movies, getReview} = props;
   const params = useParams();
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
@@ -30,7 +30,7 @@ function MoviePage(props) {
 
           <header className="page-header film-card__head">
             <Logo />
-            <SignOut />
+            <UserBlock />
           </header>
 
           <div className="film-card__wrap">
@@ -61,7 +61,7 @@ function MoviePage(props) {
             </div>
             <TabLinks
               currentMovie={currentMovie}
-              reviews={reviews}
+              currentReviews={getReview(id)}
             />
           </div>
         </div>
@@ -76,7 +76,7 @@ function MoviePage(props) {
 
 MoviePage.propTypes={
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
+  getReview: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -84,5 +84,11 @@ const mapStateToProps = (state) => ({
   reviews: state.reviews,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  getReview(id) {
+    dispatch(fetchReviewList(id));
+  },
+});
+
 export {MoviePage};
-export default connect(mapStateToProps, null)(MoviePage);
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

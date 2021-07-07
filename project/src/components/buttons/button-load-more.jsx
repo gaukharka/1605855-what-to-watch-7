@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 function LoadMoreButton(props) {
   const {onClickShowMoreMovies} = props;
-  /* eslint-disable no-console */
-  // console.log(onClickShowMoreMovies);
 
   return (
     <div className="catalog__more">

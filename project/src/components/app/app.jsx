@@ -1,37 +1,41 @@
-import React from 'react';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import {AppRoute} from '../../consts';
-import MainPage from '../main-page/main-page.jsx';
+import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
+import {AppRoutes} from '../../consts';
+import {isCheckedAuth} from '../../utils/utils';
+import MainPage from '../main-page/main-page';
 import Login from '../user-block/login.jsx';
-import MoviePage from '../movie-page/movie-page.jsx';
-import MyList from '../my-list/my-list.jsx';
-import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
-import Review from '../review/review.jsx';
-import Player from '../player/player.jsx';
+import MoviePage from '../movie-page/movie-page';
+import MyList from '../my-list/my-list';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import Review from '../review/review';
+import Player from '../player/player';
+import LoadingScreen from '../loading-screen/loading-screen';
+import PrivateRoute from '../private-route/private-route';
+import {browserHistory} from '../../browser-history';
+import {init} from './action/init';
 
 function App(props) {
+  const {authorizationStatus, isMovieListLoaded, isPromoMovieLoaded} = props;
+
+  useEffect(() => {
+    props.init();
+  }, []);
+
+  if(isCheckedAuth(authorizationStatus) || !isMovieListLoaded || !isPromoMovieLoaded ) {
+    return <LoadingScreen />;
+  }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path={AppRoute.ROOT}>
-          <MainPage />
-        </Route>
-        <Route exact path={AppRoute.LOGIN}>
-          <Login />
-        </Route>
-        <Route exact path={AppRoute.FILM}>
-          <MoviePage />
-        </Route>
-        <Route exact path={AppRoute.MYLIST}>
-          <MyList />
-        </Route>
-        <Route exact path={AppRoute.REVIEW}>
-          <Review />
-        </Route>
-        <Route exact path={AppRoute.PLAYER}>
-          <Player />
-        </Route>
+        <Route exact path={AppRoutes.ROOT} component={MainPage}/>
+        <Route exact path={AppRoutes.FILM} component={MoviePage}/>
+        <PrivateRoute exact path={AppRoutes.MYLIST} render={() => <MyList />}/>
+        <PrivateRoute exact path={AppRoutes.REVIEW} render={() => <Review />}/>
+        <Route exact path={AppRoutes.PLAYER} component={Player}/>
+        <Route exact path={AppRoutes.LOGIN} component={Login}/>
         <Route>
           <NotFoundScreen />
         </Route>
@@ -40,6 +44,22 @@ function App(props) {
   );
 }
 
-App.propTypes = {};
+App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  isMovieListLoaded: PropTypes.bool.isRequired,
+  isPromoMovieLoaded: PropTypes.bool.isRequired,
+  init: PropTypes.func.isRequired,
+};
 
-export default App;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+  isMovieListLoaded: state.isMovieListLoaded,
+  isPromoMovieLoaded: state.isPromoMovieLoaded,
+});
+
+const mapDispatchToProps = (dispatch) =>({
+  init: () => dispatch(init()),
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

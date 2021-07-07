@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import {MAX_MOVIES_SHOWN} from '../../consts.js';
-import {getFilteredMovies} from '../../utils/utils';
+import {getFilteredMovies} from '../../selectors/selectors';
 import MovieCard from '../movie-card/movie-card.jsx';
 import LoadMoreButton from '../buttons/button-load-more';
 
 function MovieList(props) {
   const {movies} = props;
-  const movieList = movies.filter((movie) => movie.isPromo === false);
   const [activeMovie, setActiveMovie] = useState();
   const [visibleMovies, setVisibleMovies] = useState(MAX_MOVIES_SHOWN);
 
@@ -20,20 +19,17 @@ function MovieList(props) {
   return (
     <>
       <div className="catalog__films-list">
-        {movieList.slice(0, visibleMovies).map((item) => (
+        {movies.slice(0, visibleMovies).map((item) => (
           <MovieCard
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            previewImage={item.previewImage}
-            previewVideo={item.previewVideo}
+            key={item.id+1}
+            movie={item}
             isActive={item === activeMovie}
             onMouseOver={() => setActiveMovie(item)}
             onMouseOut={() => setActiveMovie(null)}
           />
         ))}
       </div>
-      { visibleMovies < movieList.length &&
+      { visibleMovies < movies.length &&
         <LoadMoreButton
           onClickShowMoreMovies={loadMore}
         />}

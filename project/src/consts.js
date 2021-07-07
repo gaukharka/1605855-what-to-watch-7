@@ -1,4 +1,4 @@
-export const AppRoute = {
+export const AppRoutes = {
   ROOT: '/',
   LOGIN: '/login',
   MYLIST: '/mylist',
@@ -12,3 +12,18 @@ export const INITIAL_GENRE = 'All genres';
 export const MAX_MOVIES_SHOWN = 8;
 
 export const MAX_SIMILIAR_MOVIES_SHOWN = 4;
+
+export const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+};
+
+export const APIRoutes = {
+  MOVIES: '/films',
+  PROMO_MOVIE: '/promo',
+  FAVORITE_MOVIES: '/favorite',
+  GET_COMMENTS: '/comments',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+};
