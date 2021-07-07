@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import {MAX_MOVIES_SHOWN} from '../../consts.js';
-import {getFilteredMovies} from '../../utils/utils';
+import {getFilteredMovies} from '../../selectors/selectors';
 import MovieCard from '../movie-card/movie-card.jsx';
 import LoadMoreButton from '../buttons/button-load-more';
 

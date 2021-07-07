@@ -1,7 +1,3 @@
-import {INITIAL_GENRE, AuthorizationStatus} from '../consts';
-
-export const getFilteredMovies = (movies, genre) => (
-  genre === INITIAL_GENRE ? movies : movies.filter((movie) => movie.genre === genre)
-);
+import {AuthorizationStatus} from '../consts';
 
 export const isCheckedAuth = (authorizationStatus) => authorizationStatus === AuthorizationStatus.UNKNOWN;

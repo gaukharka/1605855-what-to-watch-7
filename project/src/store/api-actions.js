@@ -20,8 +20,8 @@ export const fetchFavoriteMovieList = () => (dispatch, _getState, api) => (
     .catch((error) => dispatch(ActionCreator.error(error.message)))
 );
 
-export const fetchReviewList = () => (dispatch, _getState, api) => (
-  api.get(APIRoutes.REVIEWS)
+export const fetchReviewList = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoutes.GET_COMMENTS}/${id}`)
     .then(({data})=> dispatch(ActionCreator.loadReviews(data)))
     .catch((error) => dispatch(ActionCreator.error(error.message)))
 );

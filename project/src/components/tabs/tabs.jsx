@@ -5,7 +5,7 @@ import Details from './details.jsx';
 import Reviews from './reviews.jsx';
 
 function Tabs(props){
-  const {currentMovie, reviews} = props;
+  const {currentMovie} = props;
   const [activeNav, setActiveNav] = useState(1);
 
   return (
@@ -50,14 +50,13 @@ function Tabs(props){
       </nav>
       {activeNav === 1 ? <List movie={currentMovie}/> : ''}
       {activeNav === 2 ? <Details movie={currentMovie}/> : ''}
-      {activeNav === 3 ? <Reviews reviews={reviews}/> : ''}
+      {activeNav === 3 ? <Reviews /> : ''}
     </div>
   );
 }
 
 Tabs.propTypes = {
   currentMovie: PropTypes.object.isRequired,
-  reviews: PropTypes.array.isRequired,
 };
 
 export default Tabs;

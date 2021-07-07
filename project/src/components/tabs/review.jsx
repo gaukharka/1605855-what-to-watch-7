@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {reviewPropTypes} from '../../prop-types/review-prop-types';
 import dateFormat from 'dateformat';
 
 function Review(props) {
   const {reviews}=props;
-
-  /* eslint-disable no-console */
-  console.log(reviews);
 
   return (
     <div className="film-card__reviews-col">
@@ -42,12 +37,7 @@ function Review(props) {
 }
 
 Review.propTypes={
-  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  reviews: state.reviews,
-});
-
-export {Review};
-export default connect(mapStateToProps, null)(Review);
+export default Review;

@@ -23,7 +23,7 @@ export const APIRoutes = {
   MOVIES: '/films',
   PROMO_MOVIE: '/promo',
   FAVORITE_MOVIES: '/favorite',
-  REVIEWS: '/comments',
+  GET_COMMENTS: '/comments',
   LOGIN: '/login',
   LOGOUT: '/logout',
 };
