@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {reviewPropTypes} from '../../prop-types/review-prop-types';
 import dateFormat from 'dateformat';
-
 
 function Reviews(props) {
   const {reviews} = props;
@@ -45,5 +45,9 @@ Reviews.propTypes={
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
-export default Reviews;
+const mapStateToProps = (state) => ({
+  reviews: state.reviews,
+});
 
+export {Reviews};
+export default connect(mapStateToProps, null)(Reviews);

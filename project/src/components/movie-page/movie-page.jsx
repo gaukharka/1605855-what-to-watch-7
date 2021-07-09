@@ -10,9 +10,10 @@ import MyListButton from '../buttons/button-my-list';
 import TabLinks from '../tabs/tabs';
 import SimiliarMovies from '../similiar-movies/similiar-movies';
 import Footer from '../footer/footer';
+import {fetchReviewList} from '../../store/api-actions';
 
 function MoviePage(props) {
-  const {movies} = props;
+  const {movies, getReview} = props;
   const params = useParams();
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
@@ -60,6 +61,7 @@ function MoviePage(props) {
             </div>
             <TabLinks
               currentMovie={currentMovie}
+              currentReviews={getReview(id)}
             />
           </div>
         </div>
@@ -74,11 +76,18 @@ function MoviePage(props) {
 
 MoviePage.propTypes={
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
+  getReview: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  getReview(id) {
+    dispatch(fetchReviewList(id));
+  },
+});
+
 export {MoviePage};
-export default connect(mapStateToProps, null)(MoviePage);
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

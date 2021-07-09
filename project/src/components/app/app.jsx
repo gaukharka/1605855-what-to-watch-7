@@ -17,10 +17,10 @@ import {browserHistory} from '../../browser-history';
 import {init} from './action/init';
 
 function App(props) {
-  const {authorizationStatus, isFetching, init} = props;
+  const {authorizationStatus, isFetching} = props;
 
   useEffect(() => {
-    init();
+    props.init();
   }, []);
 
   if(isCheckedAuth(authorizationStatus) || !isFetching) {
