@@ -17,13 +17,13 @@ import {browserHistory} from '../../browser-history';
 import {init} from './action/init';
 
 function App(props) {
-  const {authorizationStatus, isMovieListLoaded, isPromoMovieLoaded} = props;
+  const {authorizationStatus, isFetching} = props;
 
   useEffect(() => {
     props.init();
   }, []);
 
-  if(isCheckedAuth(authorizationStatus) || !isMovieListLoaded || !isPromoMovieLoaded ) {
+  if(isCheckedAuth(authorizationStatus) || !isFetching) {
     return <LoadingScreen />;
   }
 
@@ -46,15 +46,13 @@ function App(props) {
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  isMovieListLoaded: PropTypes.bool.isRequired,
-  isPromoMovieLoaded: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   init: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
-  isMovieListLoaded: state.isMovieListLoaded,
-  isPromoMovieLoaded: state.isPromoMovieLoaded,
+  isFetching: state.isFetching,
 });
 
 const mapDispatchToProps = (dispatch) =>({

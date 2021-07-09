@@ -81,7 +81,6 @@ MoviePage.propTypes={
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
-  reviews: state.reviews,
 });
 
 const mapDispatchToProps = (dispatch) => ({
