@@ -1,15 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 import {reviewPropTypes} from '../../prop-types/review-prop-types';
-import Review from './review.jsx';
+import dateFormat from 'dateformat';
+
 
 function Reviews(props) {
   const {reviews} = props;
 
   return (
     <div className="film-card__reviews film-card__row">
-      <Review reviews={reviews}/>
+      <div className="film-card__reviews-col">
+        {reviews.map((item) => (
+          <div
+            key={item.id+1}
+            className="review"
+          >
+            <blockquote className="review__quote">
+              <p className="review__text">
+                {item.comment}
+              </p>
+              <footer className="review__details">
+                <cite className="review__author">
+                  {item.user.name}
+                </cite>
+                <time
+                  className="review__date"
+                  dateTime="2016-12-24"
+                >
+                  {dateFormat(item.date, 'yyyy-mm-dd')}
+                </time>
+              </footer>
+            </blockquote>
+            <div className="review__rating">
+              {item.rating}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -18,9 +45,5 @@ Reviews.propTypes={
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  reviews: state.reviews,
-});
+export default Reviews;
 
-export {Reviews};
-export default connect(mapStateToProps, null)(Reviews);

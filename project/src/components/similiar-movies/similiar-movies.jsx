@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import {MAX_SIMILIAR_MOVIES_SHOWN} from '../../consts';
-import {getFilteredMovies} from '../../selectors/selectors';
+import {getFilteredMovies} from '../../selectors/get-filtered-movies';
 import MovieCard from '../movie-card/movie-card';
 
 function SimiliarMovies(props) {

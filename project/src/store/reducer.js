@@ -8,10 +8,7 @@ const initialState = {
   favoriteMovies: [],
   reviews: [],
   authorizationStatus: AuthorizationStatus.UNKNOWN,
-  isMovieListLoaded: false,
-  isPromoMovieLoaded: false,
-  isReviewListLoaded: false,
-  isFavoriteListLoaded: false,
+  isFetching: false,
   error: '',
 };
 
@@ -30,25 +27,25 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         movies: action.payload,
-        isMovieListLoaded: true,
+        isFetching: true,
       };
     case ActionType.LOAD_PROMO_MOVIE:
       return {
         ...state,
         promoMovie: action.payload,
-        isPromoMovieLoaded: true,
+        isFetching: true,
       };
     case ActionType.LOAD_FAVORITE_MOVIES:
       return {
         ...state,
         favoriteMovies: action.payload,
-        isFavoriteListLoaded: true,
+        isFetching: true,
       };
     case ActionType.LOAD_REVIEWS:
       return {
         ...state,
         reviews: action.payload,
-        isReviewListLoaded: true,
+        isFetching: true,
       };
     case ActionType.REQUIRE_AUTHORIZATION:
       return {

@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import List from './list.jsx';
 import Details from './details.jsx';
 import Reviews from './reviews.jsx';
+import {fetchReviewList} from '../../store/api-actions';
 
 function Tabs(props){
-  const {currentMovie} = props;
+  const {currentMovie, getReview} = props;
   const [activeNav, setActiveNav] = useState(1);
+  const {id} = currentMovie;
+
+  /* eslint-disable no-console */
+  console.log(id);
 
   return (
     <div className="film-card__desc">
@@ -50,13 +56,25 @@ function Tabs(props){
       </nav>
       {activeNav === 1 ? <List movie={currentMovie}/> : ''}
       {activeNav === 2 ? <Details movie={currentMovie}/> : ''}
-      {activeNav === 3 ? <Reviews /> : ''}
+      {activeNav === 3 ? <Reviews reviews={getReview(id)}/> : ''}
     </div>
   );
 }
 
 Tabs.propTypes = {
   currentMovie: PropTypes.object.isRequired,
+  getReview: PropTypes.func.isRequired,
 };
 
-export default Tabs;
+const mapStateToProps = (state) => ({
+  reviews: state.reviews,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getReview(id) {
+    dispatch(fetchReviewList(id));
+  },
+});
+
+export {Tabs};
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
