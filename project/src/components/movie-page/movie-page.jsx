@@ -11,9 +11,10 @@ import TabLinks from '../tabs/tabs';
 import SimiliarMovies from '../similiar-movies/similiar-movies';
 import Footer from '../footer/footer';
 import {fetchReviewList} from '../../store/api-actions';
+import {AuthorizationStatus} from '../../consts';
 
 function MoviePage(props) {
-  const {movies, getReview} = props;
+  const {movies, getReview, authorizationStatus} = props;
   const params = useParams();
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
@@ -44,11 +45,14 @@ function MoviePage(props) {
               <div className="film-card__buttons">
                 <PlayButton id={currentMovie.id}/>
                 <MyListButton />
-                <Link
-                  to={`/films/${id}/review`}
-                  className="btn film-card__button"
-                >Add review
-                </Link>
+                {
+                  authorizationStatus === AuthorizationStatus.AUTH &&
+                    <Link
+                      to={`/films/${id}/review`}
+                      className="btn film-card__button"
+                    >Add review
+                    </Link>
+                }
               </div>
             </div>
           </div>
@@ -77,10 +81,12 @@ function MoviePage(props) {
 MoviePage.propTypes={
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
   getReview: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
