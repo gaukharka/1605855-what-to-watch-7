@@ -40,7 +40,7 @@ function Review(props) {
           <img src={previewImage} alt={name} width="218" height="327" />
         </div>
       </div>
-      <AddReviewForm />
+      <AddReviewForm id={id}/>
     </section>
   );
 }

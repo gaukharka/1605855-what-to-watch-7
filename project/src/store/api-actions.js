@@ -45,3 +45,9 @@ export const logout = () => (dispatch, _getState, api) => (
     .then(() => localStorage.removeItem('token'))
     .then(() => dispatch(ActionCreator.logout()))
 );
+
+export const postReview = (id, review, history) => (dispatch, _getState, api) => (
+  api.post(`${APIRoutes.GET_COMMENTS}/${id}`, {...review})
+    .then(({data}) => history.goBack())
+    .catch((error) => dispatch(ActionCreator.error(error.message)))
+);

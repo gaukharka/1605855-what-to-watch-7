@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+import {useHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {postReview} from '../../store/api-actions';
 
-function AddReviewForm() {
+function AddReviewForm(props) {
+  const {id, postUserReview} = props;
+
   const [review, setReview] = useState({
     rating: null,
     comment: '',
@@ -16,11 +22,19 @@ function AddReviewForm() {
     });
   }
 
+  const history = useHistory();
+
+  const onReviewSubmit = (evt) => {
+    evt.preventDefault();
+    postUserReview(id, review, history);
+  };
+
   return (
     <div className="add-review">
       <form
         action="#"
         className="add-review__form"
+        onSubmit={onReviewSubmit}
       >
         <div className="rating">
           <div className="rating__stars">
@@ -71,4 +85,21 @@ function AddReviewForm() {
   );
 }
 
-export default AddReviewForm;
+AddReviewForm.propTypes = {
+  id: PropTypes.number.isRequired,
+  postUserReview: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+  isFetching: state.isFetching,
+});
+
+const mapDispatchToProps = (dispatch) =>({
+  postUserReview(id, review, history) {
+    dispatch(postReview(id, review, history));
+  },
+});
+
+export {AddReviewForm};
+export default connect(mapStateToProps, mapDispatchToProps)(AddReviewForm);
