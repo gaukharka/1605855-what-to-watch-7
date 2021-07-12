@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {postReview} from '../../store/api-actions';
+import {ReviewLength} from '../../consts';
 
 function AddReviewForm(props) {
   const {id, postUserReview} = props;
@@ -11,6 +12,18 @@ function AddReviewForm(props) {
     rating: null,
     comment: '',
   });
+
+  const errorMessage = '*Please, dont forget to rate this movie and your review length should not be less than 50 and more than 140';
+
+  const history = useHistory();
+
+  const validate = () => {
+    if (review.rating === null || review.comment.length < ReviewLength.MIN || review.comment.length > ReviewLength.MAX) {
+      return false;
+    }
+
+    return true;
+  };
 
   function handleChange(evt) {
     const name = evt.target.name;
@@ -22,11 +35,13 @@ function AddReviewForm(props) {
     });
   }
 
-  const history = useHistory();
-
   const onReviewSubmit = (evt) => {
     evt.preventDefault();
-    postUserReview(id, review, history);
+    const isValid = validate();
+
+    if(isValid) {
+      postUserReview(id, review, history);
+    }
   };
 
   return (
@@ -35,6 +50,7 @@ function AddReviewForm(props) {
         action="#"
         className="add-review__form"
         onSubmit={onReviewSubmit}
+        disabled={!validate()}
       >
         <div className="rating">
           <div className="rating__stars">
@@ -75,11 +91,16 @@ function AddReviewForm(props) {
             <button
               className="add-review__btn"
               type="submit"
+              disabled={!validate()}
             >
               Post
             </button>
           </div>
         </div>
+        {!validate() &&
+          <div style={{ fontSize: 12, color: 'red' }}>
+            {errorMessage}
+          </div>}
       </form>
     </div>
   );

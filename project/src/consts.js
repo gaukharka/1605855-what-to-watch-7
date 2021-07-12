@@ -27,3 +27,8 @@ export const APIRoutes = {
   LOGIN: '/login',
   LOGOUT: '/logout',
 };
+
+export const ReviewLength = {
+  MIN: 50,
+  MAX: 401,
+};
