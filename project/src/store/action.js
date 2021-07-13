@@ -4,7 +4,7 @@ export const ActionType = {
   LOAD_MOVIES: 'data/loadMovies',
   LOAD_REVIEWS: 'data/loadReviews',
   LOAD_PROMO_MOVIE: 'data/loadPromoMovie',
-  LOAD_FAVORITE_MOVIE: 'data/loadFavoriteMovie',
+  LOAD_FAVORITE_MOVIES: 'data/loadFavoriteMovie',
   REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'films/redirectToRoute',
@@ -31,7 +31,7 @@ export const loadPromoMovie = (promoMovie) => ({
 });
 
 export const loadFavoriteMovies = (favoriteMovies) => ({
-  type: ActionType.LOAD_FAVORITE_MOVIE,
+  type: ActionType.LOAD_FAVORITE_MOVIES,
   payload: favoriteMovies,
 });
 
