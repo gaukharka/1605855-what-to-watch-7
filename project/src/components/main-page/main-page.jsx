@@ -67,8 +67,8 @@ MainPage.propTypes = {
   promoMovie: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  promoMovie: state.promoMovie,
+const mapStateToProps = ({MOVIE}) => ({
+  promoMovie: MOVIE.promoMovie,
 });
 
 export {MainPage};

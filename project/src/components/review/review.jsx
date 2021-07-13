@@ -49,8 +49,8 @@ Review.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  movies: state.movies,
+const mapStateToProps = ({MOVIE}) => ({
+  movies: MOVIE.movies,
 });
 
 export {Review};

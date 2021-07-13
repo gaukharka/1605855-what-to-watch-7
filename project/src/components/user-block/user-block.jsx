@@ -48,9 +48,9 @@ UserBlock.propTypes = {
   handleLogout: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  authInfo: state.authInfo,
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  authInfo: USER.authInfo,
 });
 
 const mapDispatchToProps = (dispatch) => ({

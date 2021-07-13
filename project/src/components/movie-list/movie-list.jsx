@@ -41,8 +41,8 @@ MovieList.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  movies: getFilteredMovies(state.movies, state.genre),
+const mapStateToProps = ({MOVIE}) => ({
+  movies: getFilteredMovies(MOVIE.movies, MOVIE.genre),
 });
 
 export {MovieList};

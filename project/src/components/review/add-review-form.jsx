@@ -87,9 +87,9 @@ AddReviewForm.propTypes = {
   postUserReview: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  isFetching: state.isFetching,
+const mapStateToProps = ({USER, MOVIE}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  isFetching: MOVIE.isFetching,
 });
 
 const mapDispatchToProps = (dispatch) =>({

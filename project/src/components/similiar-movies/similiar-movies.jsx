@@ -36,8 +36,8 @@ SimiliarMovies.propTypes = {
   currentMovie: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  movies: getFilteredMovies(state.movies, state.genre),
+const mapStateToProps = ({MOVIE}) => ({
+  movies: getFilteredMovies(MOVIE.movies, MOVIE.genre),
 });
 
 export {SimiliarMovies};
