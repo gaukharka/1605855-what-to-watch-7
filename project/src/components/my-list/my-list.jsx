@@ -6,6 +6,7 @@ import Logo from '../logo/logo';
 import Footer from '../footer/footer';
 import MovieList from '../movie-list/movie-list';
 import UserBlock from '../user-block/user-block';
+import { getMovies } from '../../store/movie-data/selectors';
 
 function MyList(props) {
   const {movies}=props;
@@ -31,8 +32,8 @@ MyList.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-const mapStateToProps = ({MOVIE}) => ({
-  movies: MOVIE.movies,
+const mapStateToProps = (state) => ({
+  movies: getMovies(state),
 });
 
 export {MyList};

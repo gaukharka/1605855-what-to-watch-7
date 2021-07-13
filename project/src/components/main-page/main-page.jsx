@@ -9,6 +9,7 @@ import UserBlock from '../user-block/user-block';
 import PlayButton from '../buttons/button-play';
 import MyListButton from '../buttons/button-my-list';
 import HiddenPart from './hidden-part';
+import { getPromoMovie } from '../../store/movie-data/selectors';
 
 function MainPage(props) {
   const {promoMovie} = props;
@@ -67,8 +68,8 @@ MainPage.propTypes = {
   promoMovie: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({MOVIE}) => ({
-  promoMovie: MOVIE.promoMovie,
+const mapStateToProps = (state) => ({
+  promoMovie: getPromoMovie(state),
 });
 
 export {MainPage};

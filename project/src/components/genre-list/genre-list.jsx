@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {INITIAL_GENRE} from '../../consts';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import { changeGenre } from '../../store/action';
+import { getMovies, getGenres } from '../../store/movie-data/selectors';
 
 function GenreList(props) {
   const {movies, genre, onGenreChange} = props;
@@ -39,9 +40,9 @@ GenreList.propTypes = {
   onGenreChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({MOVIE}) => ({
-  movies: MOVIE.movies,
-  genre: MOVIE.genre,
+const mapStateToProps = (state) => ({
+  movies: getMovies(state),
+  genre: getGenres(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

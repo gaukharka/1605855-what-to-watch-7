@@ -5,6 +5,7 @@ import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import {MAX_SIMILIAR_MOVIES_SHOWN} from '../../consts';
 import {getFilteredMovies} from '../../selectors/get-filtered-movies';
 import MovieCard from '../movie-card/movie-card';
+import { getMovies, getGenres } from '../../store/movie-data/selectors';
 
 function SimiliarMovies(props) {
   const {currentMovie, movies} = props;
@@ -36,8 +37,8 @@ SimiliarMovies.propTypes = {
   currentMovie: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({MOVIE}) => ({
-  movies: getFilteredMovies(MOVIE.movies, MOVIE.genre),
+const mapStateToProps = (state) => ({
+  movies: getFilteredMovies(getMovies(state), getGenres(state)),
 });
 
 export {SimiliarMovies};

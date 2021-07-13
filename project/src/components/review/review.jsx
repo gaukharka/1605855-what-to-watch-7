@@ -6,6 +6,7 @@ import {moviePropTypes} from '../../prop-types/movie-prop-types';
 import Logo from '../logo/logo.jsx';
 import AddReviewForm from './add-review-form.jsx';
 import UserBlock from '../user-block/user-block';
+import { getMovies } from '../../store/movie-data/selectors';
 
 function Review(props) {
   const {movies} = props;
@@ -49,8 +50,8 @@ Review.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-const mapStateToProps = ({MOVIE}) => ({
-  movies: MOVIE.movies,
+const mapStateToProps = (state) => ({
+  movies: getMovies(state),
 });
 
 export {Review};

@@ -15,6 +15,8 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
 import {browserHistory} from '../../browser-history';
 import {init as initApp} from './action/init';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { getFetchedMovieStatus } from '../../store/movie-data/selectors';
 
 function App(props) {
   const {authorizationStatus, isFetching} = props;
@@ -50,9 +52,9 @@ App.propTypes = {
   init: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({USER, MOVIE}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  isFetching: MOVIE.isFetching,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  isFetching: getFetchedMovieStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) =>({

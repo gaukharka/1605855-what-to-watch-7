@@ -4,6 +4,7 @@ import {useHistory} from 'react-router';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
+import { getMovies } from '../../store/movie-data/selectors';
 
 function Player(props) {
   const {movies} = props;
@@ -58,8 +59,8 @@ Player.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-const mapStateToProps = ({MOVIE}) => ({
-  movies: MOVIE.movies,
+const mapStateToProps = (state) => ({
+  movies: getMovies(state),
 });
 
 export {Player};

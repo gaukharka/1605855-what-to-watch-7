@@ -6,7 +6,6 @@ const initialState = {
   movies: [],
   promoMovie: {},
   favoriteMovies: [],
-  reviews: [],
   isFetching: false,
   error: '',
 };

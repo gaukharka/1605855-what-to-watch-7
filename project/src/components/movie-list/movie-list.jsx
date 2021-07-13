@@ -6,6 +6,7 @@ import {MAX_MOVIES_SHOWN} from '../../consts.js';
 import {getFilteredMovies} from '../../selectors/get-filtered-movies';
 import MovieCard from '../movie-card/movie-card.jsx';
 import LoadMoreButton from '../buttons/button-load-more';
+import { getMovies, getGenres } from '../../store/movie-data/selectors';
 
 function MovieList(props) {
   const {movies} = props;
@@ -41,8 +42,8 @@ MovieList.propTypes = {
   movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
-const mapStateToProps = ({MOVIE}) => ({
-  movies: getFilteredMovies(MOVIE.movies, MOVIE.genre),
+const mapStateToProps = (state) => ({
+  movies: getFilteredMovies(getMovies(state), getGenres(state)),
 });
 
 export {MovieList};

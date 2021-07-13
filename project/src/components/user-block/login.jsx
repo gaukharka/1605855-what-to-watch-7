@@ -1,9 +1,10 @@
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Logo from '../logo/logo';
 import Footer from '../footer/footer';
-import {login} from '../../store/api-actions';
+import { login } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 function Login(props) {
   const {onSubmit} = props;
@@ -85,8 +86,8 @@ Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

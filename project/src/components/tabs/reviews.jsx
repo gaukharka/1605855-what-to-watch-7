@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {reviewPropTypes} from '../../prop-types/review-prop-types';
 import Review from './review';
+import { getReviews } from '../../store/review/selectors';
 function Reviews(props) {
   const {reviews} = props;
 
@@ -24,8 +25,8 @@ Reviews.propTypes={
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
-const mapStateToProps = ({REVIEW}) => ({
-  reviews: REVIEW.reviews,
+const mapStateToProps = (state) => ({
+  reviews: getReviews(state),
 });
 
 export {Reviews};

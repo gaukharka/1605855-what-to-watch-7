@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Link, useParams} from 'react-router-dom';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
+import { connect } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { moviePropTypes } from '../../prop-types/movie-prop-types';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 import PlayButton from '../buttons/button-play';
@@ -10,8 +10,10 @@ import MyListButton from '../buttons/button-my-list';
 import TabLinks from '../tabs/tabs';
 import SimiliarMovies from '../similiar-movies/similiar-movies';
 import Footer from '../footer/footer';
-import {fetchReviewList} from '../../store/api-actions';
-import {AuthorizationStatus} from '../../consts';
+import { fetchReviewList } from '../../store/api-actions';
+import { AuthorizationStatus } from '../../consts';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { getMovies } from '../../store/movie-data/selectors';
 
 function MoviePage(props) {
   const {movies, getReview, authorizationStatus} = props;
@@ -84,9 +86,9 @@ MoviePage.propTypes={
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({MOVIE, USER}) => ({
-  movies: MOVIE.movies,
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  movies: getMovies(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

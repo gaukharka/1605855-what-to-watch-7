@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {useHistory} from 'react-router';
-import {connect} from 'react-redux';
-import {postReview} from '../../store/api-actions';
-import {ReviewLength} from '../../consts';
+import { useHistory } from 'react-router';
+import { connect } from 'react-redux';
+import { postReview } from '../../store/api-actions';
+import { ReviewLength } from '../../consts';
 import Rating from './rating';
 import Comment from './comment';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { getFetchedMovieStatus } from '../../store/movie-data/selectors';
 
 function AddReviewForm(props) {
   const {id, postUserReview} = props;
@@ -87,9 +89,9 @@ AddReviewForm.propTypes = {
   postUserReview: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({USER, MOVIE}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  isFetching: MOVIE.isFetching,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  isFetching: getFetchedMovieStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) =>({
