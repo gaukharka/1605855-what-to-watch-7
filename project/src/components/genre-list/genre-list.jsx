@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {INITIAL_GENRE} from '../../consts';
 import {moviePropTypes} from '../../prop-types/movie-prop-types';
-import { ActionCreator } from '../../store/action';
+import { changeGenre } from '../../store/action';
 
 function GenreList(props) {
   const {movies, genre, onGenreChange} = props;
@@ -46,7 +46,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreChange(genre) {
-    dispatch(ActionCreator.changeGenre(genre));
+    dispatch(changeGenre(genre));
   },
 });
 

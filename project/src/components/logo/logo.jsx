@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { ActionCreator } from '../../store/action';
+import { reset as resetMovieList } from '../../store/action';
 import {AppRoutes} from '../../consts';
 
 function Logo(props) {
@@ -26,7 +26,7 @@ Logo.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   reset() {
-    dispatch(ActionCreator.reset());
+    dispatch(resetMovieList());
   },
 });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../logo/logo';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { ActionCreator } from '../../store/action';
+import { reset as resetMovieList } from '../../store/action';
 
 function Footer(props) {
   const {reset} = props;
@@ -23,7 +23,7 @@ Footer.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   reset() {
-    dispatch(ActionCreator.reset());
+    dispatch(resetMovieList());
   },
 });
 
