@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { AppRoutes, AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 
-function PrivateRoute({render, path, exact, authorizationStatus}) {
+function PrivateRoute(props) {
+  const {render, path, exact, authorizationStatus} = props;
   return (
     <Route
       path={path}
@@ -29,7 +30,6 @@ PrivateRoute.propTypes = {
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
 });
-
 
 export {PrivateRoute};
 export default connect(mapStateToProps)(PrivateRoute);
