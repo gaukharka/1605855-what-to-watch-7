@@ -14,7 +14,7 @@ import Player from '../player/player';
 import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
 import {browserHistory} from '../../browser-history';
-import {init} from './action/init';
+import {init as initApp} from './action/init';
 
 function App(props) {
   const {authorizationStatus, isFetching} = props;
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>({
-  init: () => dispatch(init()),
+  init: () => dispatch(initApp()),
 });
 
 export {App};
