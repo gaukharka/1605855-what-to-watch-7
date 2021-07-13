@@ -1,3 +1,5 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
   CHANGE_GENRE: 'films/changeGenre',
   RESET: 'films/reset',
@@ -11,50 +13,38 @@ export const ActionType = {
   ERROR: 'data/error',
 };
 
-export const changeGenre = (genre) => ({
-  type: ActionType.CHANGE_GENRE,
+export const changeGenre = createAction(ActionType.CHANGE_GENRE, (genre) => ({
   payload: genre,
-});
+}));
 
-export const reset = () => ({
-  type: ActionType.RESET,
-});
+export const reset = createAction(ActionType.RESET);
 
-export const loadMovies = (movies) => ({
-  type: ActionType.LOAD_MOVIES,
+export const loadMovies = createAction(ActionType.LOAD_MOVIES, (movies) => ({
   payload: movies,
-});
+}));
 
-export const loadPromoMovie = (promoMovie) => ({
-  type: ActionType.LOAD_PROMO_MOVIE,
+export const loadPromoMovie = createAction(ActionType.LOAD_PROMO_MOVIE, (promoMovie) => ({
   payload: promoMovie,
-});
+}));
 
-export const loadFavoriteMovies = (favoriteMovies) => ({
-  type: ActionType.LOAD_FAVORITE_MOVIES,
+export const loadFavoriteMovies = createAction(ActionType.LOAD_FAVORITE_MOVIES, (favoriteMovies) => ({
   payload: favoriteMovies,
-});
+}));
 
-export const loadReviews = (reviews) => ({
-  type: ActionType.LOAD_REVIEWS,
+export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
   payload: reviews,
-});
+}));
 
-export const requireAuthorization = (status) => ({
-  type: ActionType.REQUIRE_AUTHORIZATION,
+export const requireAuthorization = createAction(ActionType.REQUIRE_AUTHORIZATION, (status) => ({
   payload: status,
-});
+}));
 
-export const logout = () => ({
-  type: ActionType.LOGOUT,
-});
+export const logout = createAction(ActionType.LOGOUT);
 
-export const redirectToRoute = (url) => ({
-  type: ActionType.REDIRECT_TO_ROUTE,
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
   payload: url,
-});
+}));
 
-export const error = (err) => ({
-  type: ActionType.ERROR,
+export const error = createAction(ActionType.ERROR, (err) => ({
   payload: err,
-});
+}));
