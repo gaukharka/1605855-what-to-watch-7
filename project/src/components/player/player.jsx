@@ -1,13 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {useHistory} from 'react-router';
-import {useParams} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
+import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { getMovies } from '../../store/movie-data/selectors';
 
-function Player(props) {
-  const {movies} = props;
+function Player() {
+  const movies = useSelector(getMovies);
   const params = useParams();
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {name, backgroundImage, videoLink} = currentMovie;
@@ -55,13 +53,4 @@ function Player(props) {
   );
 }
 
-Player.propTypes = {
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  movies: getMovies(state),
-});
-
-export {Player};
-export default connect(mapStateToProps, null)(Player);
+export default Player;

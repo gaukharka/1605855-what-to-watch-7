@@ -1,11 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {reviewPropTypes} from '../../prop-types/review-prop-types';
+import { useSelector } from 'react-redux';
 import Review from './review';
 import { getReviews } from '../../store/review/selectors';
-function Reviews(props) {
-  const {reviews} = props;
+function Reviews() {
+  const reviews = useSelector(getReviews);
 
   return (
     <div className="film-card__reviews film-card__row">
@@ -21,13 +19,4 @@ function Reviews(props) {
   );
 }
 
-Reviews.propTypes={
-  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  reviews: getReviews(state),
-});
-
-export {Reviews};
-export default connect(mapStateToProps, null)(Reviews);
+export default Reviews;

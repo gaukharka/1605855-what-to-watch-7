@@ -1,15 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
+import { useSelector } from 'react-redux';
 import Logo from '../logo/logo';
 import Footer from '../footer/footer';
 import MovieList from '../movie-list/movie-list';
 import UserBlock from '../user-block/user-block';
 import { getMovies } from '../../store/movie-data/selectors';
 
-function MyList(props) {
-  const {movies}=props;
+function MyList() {
+  const movies = useSelector(getMovies);
   const filteredMovies = movies.filter((item) => item.isFavorite);
 
   return (
@@ -28,13 +26,4 @@ function MyList(props) {
   );
 }
 
-MyList.propTypes = {
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  movies: getMovies(state),
-});
-
-export {MyList};
-export default connect(mapStateToProps, null)(MyList);
+export default MyList;

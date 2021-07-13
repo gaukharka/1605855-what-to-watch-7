@@ -1,6 +1,6 @@
 import { loadMovies,loadPromoMovie, loadFavoriteMovies, loadReviews, requireAuthorization, redirectToRoute, logout as closeSession, error } from './action';
-import {AuthorizationStatus, APIRoutes, AppRoutes} from '../consts';
-import {adaptDataToMovie, adaptDataToMovies} from '../services/adaptors';
+import { AuthorizationStatus, APIRoutes, AppRoutes } from '../consts';
+import { adaptDataToMovie, adaptDataToMovies } from '../services/adaptors';
 
 export const fetchMovieList = () => (dispatch, _getState, api) => (
   api.get(APIRoutes.MOVIES)

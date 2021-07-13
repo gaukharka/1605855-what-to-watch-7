@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { moviePropTypes } from '../../prop-types/movie-prop-types';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 import PlayButton from '../buttons/button-play';
@@ -15,11 +13,16 @@ import { AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import { getMovies } from '../../store/movie-data/selectors';
 
-function MoviePage(props) {
-  const {movies, getReview, authorizationStatus} = props;
+function MoviePage() {
+  const movies = useSelector(getMovies);
+
   const params = useParams();
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
+
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -67,7 +70,7 @@ function MoviePage(props) {
             </div>
             <TabLinks
               currentMovie={currentMovie}
-              currentReviews={getReview(id)}
+              currentReviews={dispatch(fetchReviewList(id))}
             />
           </div>
         </div>
@@ -80,22 +83,4 @@ function MoviePage(props) {
   );
 }
 
-MoviePage.propTypes={
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-  getReview: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  movies: getMovies(state),
-  authorizationStatus: getAuthorizationStatus(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getReview(id) {
-    dispatch(fetchReviewList(id));
-  },
-});
-
-export {MoviePage};
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
+export default MoviePage;

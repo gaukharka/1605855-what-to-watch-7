@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
-import {MAX_MOVIES_SHOWN} from '../../consts.js';
-import {getFilteredMovies} from '../../selectors/get-filtered-movies';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { MAX_MOVIES_SHOWN } from '../../consts.js';
 import MovieCard from '../movie-card/movie-card.jsx';
 import LoadMoreButton from '../buttons/button-load-more';
 import { getMovies, getGenres } from '../../store/movie-data/selectors';
+import { getFilteredMovies } from '../../selectors/get-filtered-movies';
 
-function MovieList(props) {
-  const {movies} = props;
+
+function MovieList() {
+  const movies = useSelector(getMovies);
+  const genre = useSelector(getGenres);
   const [activeMovie, setActiveMovie] = useState();
   const [visibleMovies, setVisibleMovies] = useState(MAX_MOVIES_SHOWN);
+  const filteredMovies = getFilteredMovies(movies, genre);
 
   const loadMore = () => {
     setVisibleMovies(visibleMovies + MAX_MOVIES_SHOWN);
@@ -20,7 +21,7 @@ function MovieList(props) {
   return (
     <>
       <div className="catalog__films-list">
-        {movies.slice(0, visibleMovies).map((item) => (
+        {filteredMovies.slice(0, visibleMovies).map((item) => (
           <MovieCard
             key={item.id+1}
             movie={item}
@@ -30,7 +31,7 @@ function MovieList(props) {
           />
         ))}
       </div>
-      { visibleMovies < movies.length &&
+      { visibleMovies < filteredMovies.length &&
         <LoadMoreButton
           onClickShowMoreMovies={loadMore}
         />}
@@ -38,13 +39,4 @@ function MovieList(props) {
   );
 }
 
-MovieList.propTypes = {
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  movies: getFilteredMovies(getMovies(state), getGenres(state)),
-});
-
-export {MovieList};
-export default connect(mapStateToProps, null)(MovieList);
+export default MovieList;

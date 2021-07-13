@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { postReview } from '../../store/api-actions';
 import { ReviewLength } from '../../consts';
 import Rating from './rating';
 import Comment from './comment';
-import { getAuthorizationStatus } from '../../store/user/selectors';
-import { getFetchedMovieStatus } from '../../store/movie-data/selectors';
 
 function AddReviewForm(props) {
-  const {id, postUserReview} = props;
+  const {id} = props;
 
   const [review, setReview] = useState({
     rating: null,
@@ -20,6 +18,7 @@ function AddReviewForm(props) {
   const errorMessage = '*Please, dont forget to rate this movie and your review length should not be less than 50 and more than 140';
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const validate = () => {
     if (review.rating === null || review.comment.length < ReviewLength.MIN || review.comment.length > ReviewLength.MAX) {
@@ -44,7 +43,7 @@ function AddReviewForm(props) {
     const isValid = validate();
 
     if(isValid) {
-      postUserReview(id, review, history);
+      dispatch(postReview(id, review, history));
     }
   };
 
@@ -86,19 +85,6 @@ function AddReviewForm(props) {
 
 AddReviewForm.propTypes = {
   id: PropTypes.number.isRequired,
-  postUserReview: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-  isFetching: getFetchedMovieStatus(state),
-});
-
-const mapDispatchToProps = (dispatch) =>({
-  postUserReview(id, review, history) {
-    dispatch(postReview(id, review, history));
-  },
-});
-
-export {AddReviewForm};
-export default connect(mapStateToProps, mapDispatchToProps)(AddReviewForm);
+export default AddReviewForm;

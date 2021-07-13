@@ -1,4 +1,4 @@
-import {NameSpace} from '../root-reducer';
+import { NameSpace } from '../root-reducer';
 
 export const getFetchedMovieStatus = (state) => state[NameSpace.MOVIE].isFetching;
 

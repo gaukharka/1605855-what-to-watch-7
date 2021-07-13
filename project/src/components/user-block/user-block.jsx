@@ -1,15 +1,14 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {useHistory} from 'react-router-dom';
-import PropTypes from 'prop-types';
-import {AppRoutes, AuthorizationStatus} from '../../consts';
-import {logout} from '../../store/api-actions';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { AppRoutes, AuthorizationStatus } from '../../consts';
+import { logout } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 
-function UserBlock(props) {
-  const {authorizationStatus, handleLogout} = props;
-
+function UserBlock() {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   return (
@@ -30,7 +29,7 @@ function UserBlock(props) {
               className="user-block__link"
               onClick={(evt) => {
                 evt.preventDefault();
-                handleLogout();
+                dispatch(logout());
               }}
             >Sign out
             </Link>
@@ -44,21 +43,4 @@ function UserBlock(props) {
     </ul>);
 }
 
-UserBlock.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  handleLogout: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-  // authInfo: USER.authInfo,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleLogout() {
-    dispatch(logout());
-  },
-});
-
-export {UserBlock};
-export default connect(mapStateToProps, mapDispatchToProps)(UserBlock);
+export default UserBlock;
