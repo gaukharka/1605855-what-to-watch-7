@@ -15,8 +15,6 @@ function AddReviewForm(props) {
     comment: '',
   });
 
-  const errorMessage = '*Please, dont forget to rate this movie and your review length should not be less than 50 and more than 140';
-
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -40,11 +38,7 @@ function AddReviewForm(props) {
 
   const onReviewSubmit = (evt) => {
     evt.preventDefault();
-    const isValid = validate();
-
-    if(isValid) {
-      dispatch(postReview(id, review, history));
-    }
+    dispatch(postReview(id, review, history));
   };
 
   return (
@@ -74,10 +68,6 @@ function AddReviewForm(props) {
           onChange={handleChange}
           disabled={!validate()}
         />
-        {!validate() &&
-          <div style={{ fontSize: 12, color: 'red' }}>
-            {errorMessage}
-          </div>}
       </form>
     </div>
   );
