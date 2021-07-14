@@ -7,7 +7,6 @@ function Review(props) {
 
   return (
     <div
-      key={review.id+1}
       className="review"
     >
       <blockquote className="review__quote">

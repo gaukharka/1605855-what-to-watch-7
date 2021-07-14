@@ -15,12 +15,11 @@ import { getMovies } from '../../store/movie-data/selectors';
 
 function MoviePage() {
   const movies = useSelector(getMovies);
-
   const params = useParams();
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
-
-  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const dispatch = useDispatch();
 
@@ -76,7 +75,7 @@ function MoviePage() {
         </div>
       </section>
       <div className="page-content">
-        <SimiliarMovies currentMovie={currentMovie} movies={movies}/>
+        <SimiliarMovies currentMovie={currentMovie} />
         <Footer />
       </div>
     </>

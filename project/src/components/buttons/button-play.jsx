@@ -20,7 +20,7 @@ function PlayButton(props) {
   );
 }
 
-PlayButton.propTypes={
+PlayButton.propTypes = {
   id: PropTypes.number.isRequired,
 };
 
