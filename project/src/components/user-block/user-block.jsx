@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import { AppRoutes, AuthorizationStatus } from '../../consts';
 import { logout } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user/selectors';
