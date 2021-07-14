@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { reviewPropTypes } from '../../prop-types/review-prop-types';
 
 function Comment(props) {
   const {review, onChange, disabled} = props;
+
   return (
     <div className="add-review__text">
       <textarea
@@ -28,7 +30,7 @@ function Comment(props) {
 }
 
 Comment.propTypes = {
-  review: PropTypes.object.isRequired,
+  review: reviewPropTypes,
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
 };
