@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { postReview } from '../../store/api-actions';
 import { ReviewLength } from '../../consts';
 import Rating from './rating';
-import Comment from './comment';
 
 function AddReviewForm(props) {
   const {id} = props;
@@ -63,11 +62,26 @@ function AddReviewForm(props) {
             })}
           </div>
         </div>
-        <Comment
-          review={review}
-          onChange={handleChange}
-          disabled={!validate()}
-        />
+        <div className="add-review__text">
+          <textarea
+            className="add-review__textarea"
+            name="comment"
+            id="review-text"
+            placeholder="Review text"
+            value={review.comment}
+            onChange={handleChange}
+          >
+          </textarea>
+          <div className="add-review__submit">
+            <button
+              className="add-review__btn"
+              type="submit"
+              disabled={!validate()}
+            >
+              Post
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );
