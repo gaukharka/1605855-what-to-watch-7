@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
-import {AppRoutes} from '../../consts';
-import {isCheckedAuth} from '../../utils/utils';
+import { connect } from 'react-redux';
+import { Switch, Route, Router as BrowserRouter } from 'react-router-dom';
+import { AppRoutes } from '../../consts';
+import { isCheckedAuth } from '../../utils/utils';
 import MainPage from '../main-page/main-page';
 import Login from '../user-block/login.jsx';
 import MoviePage from '../movie-page/movie-page';
@@ -13,14 +13,16 @@ import Review from '../review/review';
 import Player from '../player/player';
 import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
-import {browserHistory} from '../../browser-history';
-import {init} from './action/init';
+import { browserHistory } from '../../browser-history';
+import { init as initApp } from './action/init';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { getFetchedMovieStatus } from '../../store/movie-data/selectors';
 
 function App(props) {
-  const {authorizationStatus, isFetching} = props;
+  const {authorizationStatus, isFetching, init} = props;
 
   useEffect(() => {
-    props.init();
+    init();
   }, []);
 
   if(isCheckedAuth(authorizationStatus) || !isFetching) {
@@ -51,12 +53,14 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  isFetching: state.isFetching,
+  authorizationStatus: getAuthorizationStatus(state),
+  isFetching: getFetchedMovieStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) =>({
-  init: () => dispatch(init()),
+  init(){
+    dispatch(initApp());
+  },
 });
 
 export {App};

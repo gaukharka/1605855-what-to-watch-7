@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { useSelector } from 'react-redux';
 import MovieList from '../movie-list/movie-list';
 import Logo from '../logo/logo';
 import Footer from '../footer/footer';
@@ -9,9 +8,10 @@ import UserBlock from '../user-block/user-block';
 import PlayButton from '../buttons/button-play';
 import MyListButton from '../buttons/button-my-list';
 import HiddenPart from './hidden-part';
+import { getPromoMovie } from '../../store/movie-data/selectors';
 
-function MainPage(props) {
-  const {promoMovie} = props;
+function MainPage() {
+  const promoMovie = useSelector(getPromoMovie);
   const {name, genre, released, posterImage, backgroundImage} = promoMovie;
 
   return (
@@ -63,13 +63,4 @@ function MainPage(props) {
   );
 }
 
-MainPage.propTypes = {
-  promoMovie: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  promoMovie: state.promoMovie,
-});
-
-export {MainPage};
-export default connect(mapStateToProps, null)(MainPage);
+export default MainPage;

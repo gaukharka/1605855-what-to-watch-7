@@ -1,18 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Link, useParams} from 'react-router-dom';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
+import { useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 import Logo from '../logo/logo.jsx';
 import AddReviewForm from './add-review-form.jsx';
 import UserBlock from '../user-block/user-block';
+import { getMovies } from '../../store/movie-data/selectors';
 
-function Review(props) {
-  const {movies} = props;
+function Review() {
+  const movies = useSelector(getMovies);
   const params = useParams();
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage} = currentMovie;
-
 
   return (
     <section className="film-card film-card--full">
@@ -40,18 +38,9 @@ function Review(props) {
           <img src={previewImage} alt={name} width="218" height="327" />
         </div>
       </div>
-      <AddReviewForm />
+      <AddReviewForm id={id}/>
     </section>
   );
 }
 
-Review.propTypes = {
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  movies: state.movies,
-});
-
-export {Review};
-export default connect(mapStateToProps, null)(Review);
+export default Review;

@@ -1,14 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {INITIAL_GENRE} from '../../consts';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
-import { ActionCreator } from '../../store/action';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { INITIAL_GENRE } from '../../consts';
+import { changeGenre } from '../../store/action';
+import { getMovies, getGenres } from '../../store/movie-data/selectors';
 
-function GenreList(props) {
-  const {movies, genre, onGenreChange} = props;
+function GenreList() {
+  const movies = useSelector(getMovies);
+  const genre = useSelector(getGenres);
+
   const genres = [...new Set([INITIAL_GENRE, ...movies.map((movie) => movie.genre)])];
+
+  const dispatch = useDispatch();
 
   return (
     <ul className="catalog__genres-list">
@@ -19,7 +22,7 @@ function GenreList(props) {
           <li
             key={keyValue}
             className={`catalog__genres-item ${item === genre ? 'catalog__genres-item--active' : ''}`}
-            onClick={() => onGenreChange(item)}
+            onClick={() => dispatch(changeGenre(item))}
           >
             <Link
               to="/#"
@@ -33,22 +36,4 @@ function GenreList(props) {
   );
 }
 
-GenreList.propTypes = {
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-  genre: PropTypes.string.isRequired,
-  onGenreChange: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  movies: state.movies,
-  genre: state.genre,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onGenreChange(genre) {
-    dispatch(ActionCreator.changeGenre(genre));
-  },
-});
-
-export {GenreList};
-export default connect(mapStateToProps, mapDispatchToProps)(GenreList);
+export default GenreList;

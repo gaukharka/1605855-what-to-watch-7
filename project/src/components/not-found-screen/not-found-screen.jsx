@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {AppRoutes} from '../../consts';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../consts';
 
 function NotFoundScreen() {
 

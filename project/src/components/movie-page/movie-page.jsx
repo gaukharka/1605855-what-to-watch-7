@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Link, useParams} from 'react-router-dom';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 import PlayButton from '../buttons/button-play';
@@ -10,13 +8,21 @@ import MyListButton from '../buttons/button-my-list';
 import TabLinks from '../tabs/tabs';
 import SimiliarMovies from '../similiar-movies/similiar-movies';
 import Footer from '../footer/footer';
-import {fetchReviewList} from '../../store/api-actions';
+import { fetchReviewList } from '../../store/api-actions';
+import { AuthorizationStatus } from '../../consts';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { getMovies } from '../../store/movie-data/selectors';
 
-function MoviePage(props) {
-  const {movies, getReview} = props;
+function MoviePage() {
+  const movies = useSelector(getMovies);
+
   const params = useParams();
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
+
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -44,11 +50,14 @@ function MoviePage(props) {
               <div className="film-card__buttons">
                 <PlayButton id={currentMovie.id}/>
                 <MyListButton />
-                <Link
-                  to={`/films/${id}/review`}
-                  className="btn film-card__button"
-                >Add review
-                </Link>
+                {
+                  authorizationStatus === AuthorizationStatus.AUTH &&
+                    <Link
+                      to={`/films/${id}/review`}
+                      className="btn film-card__button"
+                    >Add review
+                    </Link>
+                }
               </div>
             </div>
           </div>
@@ -61,7 +70,7 @@ function MoviePage(props) {
             </div>
             <TabLinks
               currentMovie={currentMovie}
-              currentReviews={getReview(id)}
+              currentReviews={dispatch(fetchReviewList(id))}
             />
           </div>
         </div>
@@ -74,20 +83,4 @@ function MoviePage(props) {
   );
 }
 
-MoviePage.propTypes={
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
-  getReview: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  movies: state.movies,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getReview(id) {
-    dispatch(fetchReviewList(id));
-  },
-});
-
-export {MoviePage};
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
+export default MoviePage;

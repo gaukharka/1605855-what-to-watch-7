@@ -1,15 +1,19 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {moviePropTypes} from '../../prop-types/movie-prop-types';
-import {MAX_SIMILIAR_MOVIES_SHOWN} from '../../consts';
-import {getFilteredMovies} from '../../selectors/get-filtered-movies';
+import { useSelector } from 'react-redux';
+import { MAX_SIMILIAR_MOVIES_SHOWN } from '../../consts';
+import { getFilteredMovies } from '../../selectors/get-filtered-movies';
 import MovieCard from '../movie-card/movie-card';
+import { getMovies, getGenres } from '../../store/movie-data/selectors';
 
 function SimiliarMovies(props) {
-  const {currentMovie, movies} = props;
-  const moviesFiltered = movies.filter((movie) => movie.id !== currentMovie.id);
-  const filteredByGenre = moviesFiltered.filter((movie) => movie.genre === currentMovie.genre );
+  const {currentMovie} = props;
+  const movies = useSelector(getMovies);
+  const genre = useSelector(getGenres);
+
+  const filteredMovies = getFilteredMovies(movies, genre);
+  const moviesFilteredBySimilarity = filteredMovies.filter((movie) => movie.id !== currentMovie.id);
+  const filteredByGenre = moviesFilteredBySimilarity.filter((movie) => movie.genre === currentMovie.genre );
 
   const [activeMovie, setActiveMovie] = useState();
 
@@ -32,13 +36,7 @@ function SimiliarMovies(props) {
 }
 
 SimiliarMovies.propTypes = {
-  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
   currentMovie: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  movies: getFilteredMovies(state.movies, state.genre),
-});
-
-export {SimiliarMovies};
-export default connect(mapStateToProps, null)(SimiliarMovies);
+export default SimiliarMovies;
