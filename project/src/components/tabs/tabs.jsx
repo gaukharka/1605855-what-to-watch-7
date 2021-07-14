@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import List from './list.jsx';
 import Details from './details.jsx';
 import Reviews from './reviews.jsx';
+import { fetchReviewList } from '../../store/api-actions';
+import { moviePropTypes } from '../../prop-types/movie-prop-types';
 
 function Tabs(props){
-  const {currentMovie} = props;
+  const {currentMovie, id} = props;
+
   const [activeNav, setActiveNav] = useState(1);
+  const dispatch = useDispatch();
+
+  const currentReviews = dispatch(fetchReviewList(id));
 
   return (
     <div className="film-card__desc">
@@ -50,13 +57,14 @@ function Tabs(props){
       </nav>
       {activeNav === 1 ? <List movie={currentMovie}/> : ''}
       {activeNav === 2 ? <Details movie={currentMovie}/> : ''}
-      {activeNav === 3 ? <Reviews /> : ''}
+      {activeNav === 3 ? <Reviews currentReviews={currentReviews}/> : ''}
     </div>
   );
 }
 
 Tabs.propTypes = {
-  currentMovie: PropTypes.object.isRequired,
+  currentMovie: moviePropTypes,
+  id: PropTypes.number.isRequired,
 };
 
 export default Tabs;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
@@ -8,7 +8,6 @@ import MyListButton from '../buttons/button-my-list';
 import TabLinks from '../tabs/tabs';
 import SimiliarMovies from '../similiar-movies/similiar-movies';
 import Footer from '../footer/footer';
-import { fetchReviewList } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import { getMovies } from '../../store/movie-data/selectors';
@@ -20,8 +19,6 @@ function MoviePage() {
 
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
-
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -69,7 +66,7 @@ function MoviePage() {
             </div>
             <TabLinks
               currentMovie={currentMovie}
-              currentReviews={dispatch(fetchReviewList(id))}
+              id={id}
             />
           </div>
         </div>
