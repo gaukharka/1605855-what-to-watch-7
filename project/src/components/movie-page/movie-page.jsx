@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 import MyListButton from '../buttons/button-my-list';
+import PlayButton from '../buttons/play-button';
 import TabLinks from '../tabs/tabs';
 import SimiliarMovies from '../similiar-movies/similiar-movies';
 import Footer from '../footer/footer';
@@ -20,6 +21,8 @@ function MoviePage() {
 
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
+
+  const handlePlayButtonClick = () => history.push(`/player/${id}`);
 
   return (
     <>
@@ -45,17 +48,9 @@ function MoviePage() {
               </p>
 
               <div className="film-card__buttons">
-                {/* <PlayButton id={id}/> */}
-                <button
-                  className="btn btn--play film-card__button"
-                  type="button"
-                  onClick={() => history.push(`/player/${id}`)}
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <PlayButton
+                  onClick={handlePlayButtonClick}
+                />
                 <MyListButton />
                 {
                   authorizationStatus === AuthorizationStatus.AUTH &&

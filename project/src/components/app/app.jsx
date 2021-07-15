@@ -10,7 +10,7 @@ import MoviePage from '../movie-page/movie-page';
 import MyList from '../my-list/my-list';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import Review from '../review/review';
-import Player from '../player/player';
+import PlayerScreen from '../player/player-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
 import { browserHistory } from '../../browser-history';
@@ -36,7 +36,7 @@ function App(props) {
         <Route exact path={AppRoutes.FILM} component={MoviePage}/>
         <PrivateRoute exact path={AppRoutes.MYLIST} render={() => <MyList />}/>
         <PrivateRoute exact path={AppRoutes.REVIEW} render={() => <Review />}/>
-        <Route exact path={AppRoutes.PLAYER} component={Player}/>
+        <Route exact path={AppRoutes.PLAYER} component={PlayerScreen}/>
         <Route exact path={AppRoutes.LOGIN} component={Login}/>
         <Route>
           <NotFoundScreen />

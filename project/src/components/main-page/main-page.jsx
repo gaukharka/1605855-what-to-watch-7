@@ -6,7 +6,7 @@ import Logo from '../logo/logo';
 import Footer from '../footer/footer';
 import Genres from '../genre-list/genre-list';
 import UserBlock from '../user-block/user-block';
-// import PlayButton from '../buttons/button-play';
+import PlayButton from '../buttons/play-button';
 import MyListButton from '../buttons/button-my-list';
 import HiddenPart from './hidden-part';
 import { getPromoMovie } from '../../store/movie-data/selectors';
@@ -16,6 +16,8 @@ function MainPage() {
   const {id, name, genre, released, posterImage, backgroundImage} = promoMovie;
 
   const history = useHistory();
+
+  const handlePlayButtonClick = () => history.push(`/player/${id}`);
 
   return (
     <>
@@ -46,17 +48,9 @@ function MainPage() {
               </p>
 
               <div className="film-card__buttons">
-                {/* <PlayButton id={id}/> */}
-                <button
-                  className="btn btn--play film-card__button"
-                  type="button"
-                  onClick={() => history.push(`/player/${id}`)}
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <PlayButton
+                  onClick={handlePlayButtonClick}
+                />
                 <MyListButton />
               </div>
             </div>
