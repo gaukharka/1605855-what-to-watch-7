@@ -9,10 +9,12 @@ import UserBlock from '../user-block/user-block';
 import PlayButton from '../buttons/play-button';
 import MyListButton from '../buttons/button-my-list';
 import HiddenPart from './hidden-part';
-import { getPromoMovie } from '../../store/movie-data/selectors';
+import { getMovies, getPromoMovie } from '../../store/movie-data/selectors';
+
 
 function MainPage() {
   const promoMovie = useSelector(getPromoMovie);
+  const movies = useSelector(getMovies);
   const {id, name, genre, released, posterImage, backgroundImage} = promoMovie;
 
   const history = useHistory();
@@ -62,7 +64,7 @@ function MainPage() {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Genres />
-          <MovieList />
+          <MovieList movies={movies}/>
         </section>
         <Footer />
       </div>
