@@ -51,7 +51,7 @@ function MoviePage() {
                 <PlayButton
                   onClick={handlePlayButtonClick}
                 />
-                <MyListButton />
+                <MyListButton id={id}/>
                 {
                   authorizationStatus === AuthorizationStatus.AUTH &&
                     <Link

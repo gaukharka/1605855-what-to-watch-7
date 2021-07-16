@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { MAX_MOVIES_SHOWN } from '../../consts.js';
+import { moviePropTypes } from '../../prop-types/movie-prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import LoadMoreButton from '../buttons/button-load-more';
 import { getGenres } from '../../store/movie-data/selectors';
@@ -40,7 +41,7 @@ function MovieList(props) {
 }
 
 MovieList.propTypes = {
-  movies: PropTypes.object.isRequired,
+  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
 };
 
 export default MovieList;

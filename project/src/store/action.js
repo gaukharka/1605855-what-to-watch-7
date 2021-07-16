@@ -11,7 +11,6 @@ export const ActionType = {
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'films/redirectToRoute',
   ERROR: 'data/error',
-  LOAD_MOVIE: 'data/loadMovie',
 };
 
 export const changeGenre = createAction(ActionType.CHANGE_GENRE, (genre) => ({
@@ -48,8 +47,4 @@ export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) 
 
 export const error = createAction(ActionType.ERROR, (err) => ({
   payload: err,
-}));
-
-export const loadMovie = createAction(ActionType.LOAD_MOVIE, (movie) => ({
-  payload: movie,
 }));

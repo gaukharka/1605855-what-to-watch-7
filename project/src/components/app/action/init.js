@@ -1,4 +1,4 @@
-import {checkAuth, fetchMovieList, fetchPromoMovie} from '../../../store/api-actions';
+import { checkAuth, fetchMovieList, fetchPromoMovie } from '../../../store/api-actions';
 
 export const init = () => (dispatch) => {
   dispatch(checkAuth());

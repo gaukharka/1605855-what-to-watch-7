@@ -11,7 +11,6 @@ import MyListButton from '../buttons/button-my-list';
 import HiddenPart from './hidden-part';
 import { getMovies, getPromoMovie } from '../../store/movie-data/selectors';
 
-
 function MainPage() {
   const promoMovie = useSelector(getPromoMovie);
   const movies = useSelector(getMovies);
@@ -53,7 +52,7 @@ function MainPage() {
                 <PlayButton
                   onClick={handlePlayButtonClick}
                 />
-                <MyListButton />
+                <MyListButton id={id}/>
               </div>
             </div>
           </div>

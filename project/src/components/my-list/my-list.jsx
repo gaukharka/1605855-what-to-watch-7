@@ -17,9 +17,6 @@ function MyList() {
     dispatch(fetchFavoriteMovieList);
   }, []);
 
-  /* eslint-disable no-console */
-  console.log(favoriteMovies);
-
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
