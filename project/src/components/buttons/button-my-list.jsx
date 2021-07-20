@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
 import { getPromoMovie, getMovies } from '../../store/movie-data/selectors';
 import { fetchPromoMovie, fetchMovieList, updateFavoriteStatus } from '../../store/api-actions';
+import { useHistory } from 'react-router';
+import { AppRoutes, AuthorizationStatus } from '../../consts';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 function MyListButton(props) {
   const {id} = props;
@@ -15,6 +18,10 @@ function MyListButton(props) {
 
   const isPromoFavorite = promoMovie && promoMovie.id === +id;
   const isMovieFavorite = movie && movie.id === +id;
+  const history = useHistory();
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
+  const onMyListReroute = () => history.push(`${AppRoutes.LOGIN}`);
 
   const isFavorite = isPromoFavorite ? promoMovie.isFavorite : movie.isFavorite;
 
@@ -24,11 +31,13 @@ function MyListButton(props) {
     dispatch(fetchMovieList());
   };
 
+  const onButtonClick = () => authorizationStatus === AuthorizationStatus.AUTH ? onMyListClick : onMyListReroute;
+
   return (
     <button
       className="btn btn--list film-card__button"
       type="button"
-      onClick={() => onMyListClick()}
+      onClick={onButtonClick()}
     >
       {isFavorite ?
         <svg viewBox="0 0 18 14" width="18" height="14">
