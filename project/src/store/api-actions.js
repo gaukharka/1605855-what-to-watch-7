@@ -1,4 +1,4 @@
-import { loadMovies,loadPromoMovie, loadFavoriteMovies, loadReviews, requireAuthorization, redirectToRoute, logout as closeSession, error } from './action';
+import { loadMovies,loadPromoMovie, loadFavoriteMovies, loadReviews, requireAuthorization, redirectToRoute, logout as closeSession, error, setStatus } from './action';
 import { AuthorizationStatus, APIRoutes, AppRoutes } from '../consts';
 import { adaptDataToMovie, adaptDataToMovies } from '../services/adaptors';
 
@@ -58,4 +58,8 @@ export const updateFavoriteStatus = (id, movie, promoMovie, status) => (dispatch
       movie ?? dispatch(loadMovies(adaptDataToMovies(data)));
       promoMovie ?? dispatch(loadPromoMovie(adaptDataToMovies(data)));
     })
+);
+
+export const setFetchStatus = (status) => (
+  setStatus(status)
 );

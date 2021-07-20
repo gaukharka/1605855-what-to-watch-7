@@ -25,7 +25,7 @@ function App(props) {
     init();
   }, []);
 
-  if(isCheckedAuth(authorizationStatus) || !isFetching) {
+  if(isCheckedAuth(authorizationStatus) || isFetching) {
     return <LoadingScreen />;
   }
 
