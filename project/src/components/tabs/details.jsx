@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Detail from './detail';
+import { moviePropTypes } from '../../prop-types/movie-prop-types';
 
 function Details(props) {
   const {movie} = props;
@@ -29,7 +29,7 @@ function Details(props) {
 }
 
 Details.propTypes = {
-  movie: PropTypes.object.isRequired,
+  movie: moviePropTypes,
 };
 
 export default Details;

@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
+import {reviewPropTypes} from '../../prop-types/review-prop-types';
 
 function Review(props) {
   const {review}=props;
 
   return (
     <div
-      key={review.id+1}
       className="review"
     >
       <blockquote className="review__quote">
@@ -34,7 +33,7 @@ function Review(props) {
 }
 
 Review.propTypes={
-  review: PropTypes.object.isRequired,
+  review: reviewPropTypes,
 };
 
 export default Review;

@@ -1,28 +1,28 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
-import PlayButton from '../buttons/button-play';
 import MyListButton from '../buttons/button-my-list';
+import PlayButton from '../buttons/play-button';
 import TabLinks from '../tabs/tabs';
 import SimiliarMovies from '../similiar-movies/similiar-movies';
 import Footer from '../footer/footer';
-import { fetchReviewList } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import { getMovies } from '../../store/movie-data/selectors';
 
 function MoviePage() {
   const movies = useSelector(getMovies);
-
   const params = useParams();
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const history = useHistory();
+
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
 
-  const authorizationStatus = useSelector(getAuthorizationStatus);
-
-  const dispatch = useDispatch();
+  const handlePlayButtonClick = () => history.push(`/player/${id}`);
 
   return (
     <>
@@ -48,8 +48,10 @@ function MoviePage() {
               </p>
 
               <div className="film-card__buttons">
-                <PlayButton id={currentMovie.id}/>
-                <MyListButton />
+                <PlayButton
+                  onClick={handlePlayButtonClick}
+                />
+                <MyListButton movie={currentMovie} />
                 {
                   authorizationStatus === AuthorizationStatus.AUTH &&
                     <Link
@@ -70,13 +72,15 @@ function MoviePage() {
             </div>
             <TabLinks
               currentMovie={currentMovie}
-              currentReviews={dispatch(fetchReviewList(id))}
+              id={id}
             />
           </div>
         </div>
       </section>
       <div className="page-content">
-        <SimiliarMovies currentMovie={currentMovie} movies={movies}/>
+        <SimiliarMovies
+          currentMovie={currentMovie}
+        />
         <Footer />
       </div>
     </>

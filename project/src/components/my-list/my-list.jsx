@@ -1,14 +1,21 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Logo from '../logo/logo';
 import Footer from '../footer/footer';
 import MovieList from '../movie-list/movie-list';
 import UserBlock from '../user-block/user-block';
 import { getMovies } from '../../store/movie-data/selectors';
+import { fetchFavoriteMovieList } from '../../store/api-actions';
 
 function MyList() {
   const movies = useSelector(getMovies);
-  const filteredMovies = movies.filter((item) => item.isFavorite);
+  const favoriteMovies = movies.filter((item) => item.isFavorite);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFavoriteMovieList);
+  }, []);
 
   return (
     <div className="user-page">
@@ -19,7 +26,7 @@ function MyList() {
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <MovieList movies={filteredMovies}/>
+        <MovieList movies={favoriteMovies}/>
       </section>
       <Footer />
     </div>

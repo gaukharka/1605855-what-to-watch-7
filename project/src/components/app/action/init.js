@@ -1,8 +1,9 @@
-import {checkAuth, fetchMovieList, fetchPromoMovie, fetchFavoriteMovieList} from '../../../store/api-actions';
+import { checkAuth, fetchMovieList, fetchPromoMovie, setFetchStatus } from '../../../store/api-actions';
 
-export const init = () => (dispatch) => {
-  dispatch(checkAuth());
-  dispatch(fetchMovieList());
-  dispatch(fetchPromoMovie());
-  dispatch(fetchFavoriteMovieList());
+export const init = () => async (dispatch) => {
+  dispatch(setFetchStatus(true));
+  await dispatch(checkAuth());
+  await dispatch(fetchMovieList());
+  await dispatch(fetchPromoMovie());
+  dispatch(setFetchStatus(false));
 };

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { MAX_MOVIES_SHOWN } from '../../consts.js';
+import { moviePropTypes } from '../../prop-types/movie-prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import LoadMoreButton from '../buttons/button-load-more';
-import { getMovies, getGenres } from '../../store/movie-data/selectors';
+import { getGenres } from '../../store/movie-data/selectors';
 import { getFilteredMovies } from '../../selectors/get-filtered-movies';
 
-
-function MovieList() {
-  const movies = useSelector(getMovies);
+function MovieList(props) {
+  const {movies} = props;
   const genre = useSelector(getGenres);
   const [activeMovie, setActiveMovie] = useState();
   const [visibleMovies, setVisibleMovies] = useState(MAX_MOVIES_SHOWN);
@@ -38,5 +39,9 @@ function MovieList() {
     </>
   );
 }
+
+MovieList.propTypes = {
+  movies: PropTypes.arrayOf(moviePropTypes).isRequired,
+};
 
 export default MovieList;

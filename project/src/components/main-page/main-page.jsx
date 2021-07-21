@@ -1,18 +1,24 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import MovieList from '../movie-list/movie-list';
+import { useHistory } from 'react-router';
 import Logo from '../logo/logo';
 import Footer from '../footer/footer';
 import Genres from '../genre-list/genre-list';
 import UserBlock from '../user-block/user-block';
-import PlayButton from '../buttons/button-play';
+import PlayButton from '../buttons/play-button';
 import MyListButton from '../buttons/button-my-list';
 import HiddenPart from './hidden-part';
-import { getPromoMovie } from '../../store/movie-data/selectors';
+import { getMovies, getPromoMovie } from '../../store/movie-data/selectors';
 
 function MainPage() {
   const promoMovie = useSelector(getPromoMovie);
-  const {name, genre, released, posterImage, backgroundImage} = promoMovie;
+  const movies = useSelector(getMovies);
+  const {id, name, genre, released, posterImage, backgroundImage} = promoMovie;
+
+  const history = useHistory();
+
+  const handlePlayButtonClick = () => history.push(`/player/${id}`);
 
   return (
     <>
@@ -43,8 +49,10 @@ function MainPage() {
               </p>
 
               <div className="film-card__buttons">
-                <PlayButton id={promoMovie.id}/>
-                <MyListButton />
+                <PlayButton
+                  onClick={handlePlayButtonClick}
+                />
+                <MyListButton movie={promoMovie} />
               </div>
             </div>
           </div>
@@ -55,7 +63,7 @@ function MainPage() {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <Genres />
-          <MovieList />
+          <MovieList movies={movies}/>
         </section>
         <Footer />
       </div>

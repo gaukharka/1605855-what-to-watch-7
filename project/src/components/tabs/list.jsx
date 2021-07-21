@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { moviePropTypes } from '../../prop-types/movie-prop-types';
 
 function List(props) {
   const {rating, scoresCount, description, director, starring} = props.movie;
@@ -32,7 +32,7 @@ function List(props) {
 }
 
 List.propTypes = {
-  movie: PropTypes.object.isRequired,
+  movie: moviePropTypes,
 };
 
 export default List;

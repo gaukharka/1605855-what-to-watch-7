@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import VideoPreview from '../player/video-preview.jsx';
+import { moviePropTypes } from '../../prop-types/movie-prop-types';
 
 function MovieCard(props) {
   const {movie, onMouseOver, onMouseOut, isActive } = props;
@@ -37,7 +38,7 @@ function MovieCard(props) {
 
 MovieCard.propTypes = {
   isActive: PropTypes.bool.isRequired,
-  movie: PropTypes.object.isRequired,
+  movie: moviePropTypes,
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
 };
