@@ -32,12 +32,12 @@ function App(props) {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path={AppRoutes.ROOT} component={MainPage}/>
-        <Route exact path={AppRoutes.FILM} component={MoviePage}/>
+        <Route exact path={AppRoutes.ROOT} render={() => <MainPage />} />
+        <Route exact path={AppRoutes.FILM} render={() => <MoviePage />} />
         <PrivateRoute exact path={AppRoutes.MYLIST} render={() => <MyList />}/>
         <PrivateRoute exact path={AppRoutes.REVIEW} render={() => <Review />}/>
-        <Route exact path={AppRoutes.PLAYER} component={PlayerScreen}/>
-        <Route exact path={AppRoutes.LOGIN} component={Login}/>
+        <Route exact path={AppRoutes.PLAYER} render={() => <PlayerScreen />} />
+        <Route exact path={AppRoutes.LOGIN} render={() => <Login />} />
         <Route>
           <NotFoundScreen />
         </Route>

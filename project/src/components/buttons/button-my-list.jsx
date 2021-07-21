@@ -1,34 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {useSelector, useDispatch} from 'react-redux';
-import { getPromoMovie, getMovies } from '../../store/movie-data/selectors';
-import { fetchPromoMovie, fetchMovieList, updateFavoriteStatus } from '../../store/api-actions';
+import { updateMovie, fetchPromoMovie, fetchMovieList } from '../../store/api-actions';
 import { useHistory } from 'react-router';
 import { AppRoutes, AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
+import { moviePropTypes } from '../../prop-types/movie-prop-types';
 
 function MyListButton(props) {
-  const {id} = props;
-
-  const movies = useSelector(getMovies);
-  const [movie] = movies.filter((item) => item.id === id);
-
+  const {movie} = props;
   const dispatch = useDispatch();
-  const promoMovie = useSelector(getPromoMovie);
 
-  const isPromoFavorite = promoMovie && promoMovie.id === +id;
-  const isMovieFavorite = movie && movie.id === +id;
+  const allData = () => {
+    dispatch(fetchPromoMovie());
+    dispatch(fetchMovieList());
+  };
+
+  /* eslint-disable no-console */
+  console.log(movie.id);
+
   const history = useHistory();
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const onMyListReroute = () => history.push(`${AppRoutes.LOGIN}`);
 
-  const isFavorite = isPromoFavorite ? promoMovie.isFavorite : movie.isFavorite;
-
   const onMyListClick = () => {
-    dispatch(updateFavoriteStatus(id, isMovieFavorite, isPromoFavorite, isFavorite ? 0 : 1));
-    dispatch(fetchPromoMovie());
-    dispatch(fetchMovieList());
+    dispatch(updateMovie(movie.id, movie.isFavorite ? 0 : 1));
+    allData();
   };
 
   const onButtonClick = () => authorizationStatus === AuthorizationStatus.AUTH ? onMyListClick : onMyListReroute;
@@ -39,7 +36,7 @@ function MyListButton(props) {
       type="button"
       onClick={onButtonClick()}
     >
-      {isFavorite ?
+      {movie.isFavorite ?
         <svg viewBox="0 0 18 14" width="18" height="14">
           <use xlinkHref="#in-list"></use>
         </svg> :
@@ -52,7 +49,7 @@ function MyListButton(props) {
 }
 
 MyListButton.propTypes = {
-  id: PropTypes.number.isRequired,
+  movie: moviePropTypes,
 };
 
 export default MyListButton;

@@ -12,24 +12,17 @@ import Footer from '../footer/footer';
 import { AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import { getMovies } from '../../store/movie-data/selectors';
-// import { useEffect } from 'react';
-// import { fetchMovieList } from '../../store/api-actions';
 
 function MoviePage() {
   const movies = useSelector(getMovies);
   const params = useParams();
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const history = useHistory();
-  // const dispatch = useDispatch();
 
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
 
   const handlePlayButtonClick = () => history.push(`/player/${id}`);
-
-  // useEffect(() => {
-  //   dispatch(fetchMovieList());
-  // }, []);
 
   return (
     <>
@@ -58,7 +51,7 @@ function MoviePage() {
                 <PlayButton
                   onClick={handlePlayButtonClick}
                 />
-                <MyListButton id={id}/>
+                <MyListButton movie={currentMovie} />
                 {
                   authorizationStatus === AuthorizationStatus.AUTH &&
                     <Link

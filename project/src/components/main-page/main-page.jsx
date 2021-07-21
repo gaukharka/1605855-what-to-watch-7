@@ -52,7 +52,7 @@ function MainPage() {
                 <PlayButton
                   onClick={handlePlayButtonClick}
                 />
-                <MyListButton id={id}/>
+                <MyListButton movie={promoMovie} />
               </div>
             </div>
           </div>
