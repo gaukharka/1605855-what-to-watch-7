@@ -32,3 +32,24 @@ export const ReviewLength = {
   MIN: 50,
   MAX: 401,
 };
+
+const Rating = {
+  BAD: 'Bad',
+  NORMAL: 'Normal',
+  GOOD: 'Good',
+  VERY_GOOD: 'Very good',
+  AWESOME: 'Awesome',
+};
+
+export const getRating = (score) => {
+  if(score >= 0 & score < 3){
+    return Rating.BAD;
+  } else if(score >= 3 && score < 5){
+    return Rating.NORMAL;
+  } else if(score >= 5 && score < 8){
+    return Rating.GOOD;
+  } else if(score >= 8 && score < 10){
+    return Rating.VERY_GOOD;
+  }
+  return Rating.AWESOME;
+};
