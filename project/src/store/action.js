@@ -38,8 +38,11 @@ export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
   payload: reviews,
 }));
 
-export const requireAuthorization = createAction(ActionType.REQUIRE_AUTHORIZATION, (status) => ({
-  payload: status,
+export const requireAuthorization = createAction(ActionType.REQUIRE_AUTHORIZATION, (status, user) => ({
+  payload: {
+    authStatus: status,
+    authInfo: user,
+  },
 }));
 
 export const logout = createAction(ActionType.LOGOUT);
