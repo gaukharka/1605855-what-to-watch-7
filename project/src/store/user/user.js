@@ -6,7 +6,7 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.UNKNOWN,
 };
 
-export const user = createReducer(initialState, (builder) => {
+export const userData = createReducer(initialState, (builder) => {
   builder
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
