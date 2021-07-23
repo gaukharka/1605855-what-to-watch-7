@@ -1,4 +1,4 @@
-import { loadMovies,loadPromoMovie, loadFavoriteMovies, loadReviews, requireAuthorization, redirectToRoute, logout as closeSession, error, setStatus, updateFilm } from './action';
+import { loadMovies,loadPromoMovie, loadFavoriteMovies, loadReviews, requireAuthorization, redirectToRoute, logout as closeSession, error, setStatus, updateFilm, setReviewIsSending } from './action';
 import { AuthorizationStatus, APIRoutes, AppRoutes } from '../consts';
 import { adaptDataToMovie, adaptDataToMovies } from '../services/adaptors';
 
@@ -49,6 +49,7 @@ export const logout = () => (dispatch, _getState, api) => (
 export const postReview = (id, review, history) => (dispatch, _getState, api) => (
   api.post(`${APIRoutes.GET_COMMENTS}/${id}`, {...review})
     .then(() => history.goBack())
+    .then(() => dispatch(setReviewIsSending(false)))
     .catch((err) => dispatch(error(err.message)))
 );
 
@@ -56,14 +57,6 @@ export const updateMovie = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoutes.FAVORITE_MOVIE}/${id}/${status}`)
     .then(({data}) => dispatch(updateFilm(adaptDataToMovie(data))))
 );
-
-// export const updateFavoriteStatus = (id, movie, promoMovie, status) => (dispatch, _getState, api) => (
-//   api.post(`${APIRoutes.FAVORITE_MOVIE}/${id}/${status}`)
-//     .then(({data}) => {
-//       movie ?? dispatch(loadMovies(adaptDataToMovies(data)));
-//       promoMovie ?? dispatch(loadPromoMovie(adaptDataToMovies(data)));
-//     })
-// );
 
 export const setFetchStatus = (status) => (
   setStatus(status)

@@ -14,6 +14,7 @@ export const ActionType = {
   FETCHING_STATUS: 'data/fetchingStatus',
   LOAD_MOVIE: 'data/loadMovie',
   UPDATE_MOVIE: 'data/updateMovie',
+  POST_REVIEWS: 'data/postReview',
 };
 
 export const changeGenre = createAction(ActionType.CHANGE_GENRE, (genre) => ({
@@ -61,4 +62,8 @@ export const setStatus = createAction(ActionType.FETCHING_STATUS, (isFetching) =
 
 export const updateFilm = createAction(ActionType.UPDATE_MOVIE, (movie) => ({
   payload: movie,
+}));
+
+export const setReviewIsSending = createAction(ActionType.POST_REVIEWS, (isSending) => ({
+  payload: isSending,
 }));

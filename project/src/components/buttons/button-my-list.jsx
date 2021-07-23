@@ -15,9 +15,6 @@ function MyListButton(props) {
     dispatch(fetchMovieList());
   };
 
-  /* eslint-disable no-console */
-  console.log(movie.id);
-
   const history = useHistory();
   const authorizationStatus = useSelector(getAuthorizationStatus);
 

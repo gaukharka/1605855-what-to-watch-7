@@ -127,13 +127,13 @@ describe('Reducer: movieData', () => {
     expect(movieData(state, resetAction)).toEqual({...state});
   });
 
-  // it('should update movie and promoMovie isFavorite status', () => {
-  //   const state = {...initialState, movie: movies[2].isFavorite, promoMovie: movies[0].isFavorite};
-  //   const updateMoviesAction = {
-  //     type: ActionType.UPDATE_MOVIE,
-  //   };
+  it('should update movie&#39s isFavorite status', () => {
+    const state = initialState;
+    const updateMoviesAction = {
+      type: ActionType.UPDATE_MOVIE,
+      payload: movies[0].isFavorite, movie: movies[2].isFavorite,
+    };
 
-  //   expect(movieData(state, updateMoviesAction)).toEqual({...state, movie: {...state.movie, isFavorite: true}, promoMovie: {...state.movies[0], isFavorite: true}});
-  // });
-
+    expect(movieData(state, updateMoviesAction)).toEqual({...state, promoMovie: movies[0].isFavorite, movie: movies[0].isFavorite});
+  });
 });
