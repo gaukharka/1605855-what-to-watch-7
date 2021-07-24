@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import MovieList from '../movie-list/movie-list';
 import { useHistory } from 'react-router';
 import Logo from '../logo/logo';
@@ -10,6 +10,7 @@ import PlayButton from '../buttons/play-button';
 import MyListButton from '../buttons/my-list-button';
 import HiddenPart from './hidden-part';
 import { getMovies, getPromoMovie } from '../../store/movie-data/selectors';
+import { reset as resetMovieList } from '../../store/action';
 
 function MainPage() {
   const promoMovie = useSelector(getPromoMovie);
@@ -17,8 +18,15 @@ function MainPage() {
   const {id, name, genre, released, posterImage, backgroundImage} = promoMovie;
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handlePlayButtonClick = () => history.push(`/player/${id}`);
+
+  const onReset = () => {
+    dispatch(resetMovieList());
+  };
+
+  useEffect(() => onReset);
 
   return (
     <>

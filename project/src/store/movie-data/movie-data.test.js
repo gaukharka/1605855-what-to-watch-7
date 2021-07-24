@@ -136,4 +136,17 @@ describe('Reducer: movieData', () => {
 
     expect(movieData(state, updateMoviesAction)).toEqual({...state, promoMovie: movies[0].isFavorite, movie: movies[0].isFavorite});
   });
+
+  it('should reset genre to initial value', () => {
+    const state = initialState;
+    const resetGenreToInitialAction = {
+      type: ActionType.INITIAL_GENRE,
+    };
+
+    expect(movieData(state, resetGenreToInitialAction))
+      .toEqual({
+        ...state,
+        genre: INITIAL_GENRE,
+      });
+  });
 });

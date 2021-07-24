@@ -3,6 +3,7 @@ import { createAction } from '@reduxjs/toolkit';
 export const ActionType = {
   CHANGE_GENRE: 'films/changeGenre',
   RESET: 'films/reset',
+  RESET_GENRE: 'films/resetGenre',
   LOAD_MOVIES: 'data/loadMovies',
   LOAD_REVIEWS: 'data/loadReviews',
   LOAD_PROMO_MOVIE: 'data/loadPromoMovie',
@@ -67,3 +68,5 @@ export const updateFilm = createAction(ActionType.UPDATE_MOVIE, (movie) => ({
 export const setReviewIsSending = createAction(ActionType.POST_REVIEWS, (isSending) => ({
   payload: isSending,
 }));
+
+export const resetGenreToInitial = createAction(ActionType.RESET_GENRE);

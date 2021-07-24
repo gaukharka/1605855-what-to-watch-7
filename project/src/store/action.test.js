@@ -10,6 +10,7 @@ import {
   requireAuthorization,
   redirectToRoute,
   logout,
+  resetGenreToInitial,
   ActionType
 } from './action';
 
@@ -138,5 +139,13 @@ describe('Actions', () => {
     };
 
     expect(redirectToRoute()).toEqual(expectedAction);
+  });
+
+  it('action creator for reseting genre to initial values returns correct action', () => {
+    const expectedAction = {
+      type: ActionType.RESET_GENRE,
+    };
+
+    expect(resetGenreToInitial()).toEqual(expectedAction);
   });
 });

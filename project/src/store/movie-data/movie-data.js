@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { INITIAL_GENRE } from '../../consts';
-import { changeGenre, reset, loadMovies, loadPromoMovie, loadFavoriteMovies, setStatus, updateFilm } from '../action';
+import { changeGenre, reset, loadMovies, loadPromoMovie, loadFavoriteMovies, setStatus, updateFilm, resetGenreToInitial } from '../action';
 
 const initialState = {
   genre: INITIAL_GENRE,
@@ -33,5 +33,8 @@ export const movieData = createReducer(initialState, (builder) => {
     .addCase(updateFilm, (state, action) => {
       state.movie = action.payload;
       state.promoMovie = action.payload;
+    })
+    .addCase(resetGenreToInitial, (state) => {
+      state.genre = INITIAL_GENRE;
     });
 });
