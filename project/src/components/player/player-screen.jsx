@@ -11,9 +11,6 @@ function PlayerScreen() {
   const [currentMovie] = movies.filter((item) => item.id === +params.id);
   const {name, backgroundImage, videoLink, runTime} = currentMovie;
 
-  /* eslint-disable no-console */
-  console.log(movies);
-
   const history = useHistory();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [currentVideoTime, setCurrentVideoTime] = useState(0);

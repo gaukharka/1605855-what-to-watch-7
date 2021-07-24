@@ -46,10 +46,10 @@ export const logout = () => (dispatch, _getState, api) => (
     .then(() => dispatch(closeSession()))
 );
 
-export const postReview = (id, review, history) => (dispatch, _getState, api) => (
+export const postReview = (id, review, getHistory) => (dispatch, _getState, api) => (
   api.post(`${APIRoutes.GET_COMMENTS}/${id}`, {...review})
-    .then(() => history.goBack())
     .then(() => dispatch(setReviewIsSending(false)))
+    .then(() => getHistory())
     .catch((err) => dispatch(error(err.message)))
 );
 

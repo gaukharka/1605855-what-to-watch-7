@@ -219,25 +219,25 @@ describe('Async operations', () => {
       });
   });
 
-  // it('should make a correct API call to POST /comments/: film_id', () => {
-  //   const apiMock = new MockAdapter(api);
-  //   const dispatch = jest.fn();
-  //   const id = 1;
-  //   const history = () => {};
-  //   const postReviewLoader = postReview(id, reviewPostData, history);
+  it('should make a correct API call to POST /comments/: film_id', () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const id = 1;
+    const history = () => {};
+    const postReviewLoader = postReview(id, reviewPostData, history);
 
-  //   apiMock
-  //     .onPost(`${APIRoutes.GET_COMMENTS}/${id}`)
-  //     .reply(200, [reviewPostData]);
+    apiMock
+      .onPost(`${APIRoutes.GET_COMMENTS}/${id}`)
+      .reply(200, [reviewPostData]);
 
-  //   return postReviewLoader(dispatch, () => {}, api)
-  //     .then(() => {
-  //       expect(dispatch).toHaveBeenCalledTimes(1);
+    return postReviewLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
 
-  //       expect(dispatch).toHaveBeenNthCalledWith(1, {
-  //         type: ActionType.POST_REVIEWS,
-  //         payload: false,
-  //       });
-  //     });
-  // });
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.POST_REVIEWS,
+          payload: false,
+        });
+      });
+  });
 });

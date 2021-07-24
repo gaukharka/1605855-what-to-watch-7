@@ -35,9 +35,13 @@ function AddReviewForm(props) {
     });
   }
 
+  const getHistory = () => {
+    history.goBack();
+  };
+
   const onReviewSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(postReview(id, review, history));
+    dispatch(postReview(id, review, getHistory));
   };
 
   return (
