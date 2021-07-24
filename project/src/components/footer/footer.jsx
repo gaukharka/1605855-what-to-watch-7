@@ -7,7 +7,7 @@ function Footer() {
   const dispatch = useDispatch();
 
   return (
-    <footer className="page-footer">
+    <footer className="page-footer" data-testid="footer">
       <Logo reset={dispatch(resetMovieList())} isFooter/>
       <div className="copyright">
         <p>© 2019 What to watch Ltd.</p>
