@@ -4,6 +4,7 @@ export const ActionType = {
   CHANGE_GENRE: 'films/changeGenre',
   RESET: 'films/reset',
   RESET_GENRE: 'films/resetGenre',
+  RESET_MAX_MOVIES_SHOWN: 'films/resetMaxMoviesShown',
   LOAD_MOVIES: 'data/loadMovies',
   LOAD_REVIEWS: 'data/loadReviews',
   LOAD_PROMO_MOVIE: 'data/loadPromoMovie',
@@ -70,3 +71,5 @@ export const setReviewIsSending = createAction(ActionType.POST_REVIEWS, (isSendi
 }));
 
 export const resetGenreToInitial = createAction(ActionType.RESET_GENRE);
+
+export const resetMaxMoviesShown = createAction(ActionType.RESET_MAX_MOVIES_SHOWN);

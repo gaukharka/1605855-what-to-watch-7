@@ -140,7 +140,7 @@ describe('Reducer: movieData', () => {
   it('should reset genre to initial value', () => {
     const state = initialState;
     const resetGenreToInitialAction = {
-      type: ActionType.INITIAL_GENRE,
+      type: ActionType.RESET_GENRE,
     };
 
     expect(movieData(state, resetGenreToInitialAction))
