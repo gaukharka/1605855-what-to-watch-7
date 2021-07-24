@@ -7,7 +7,7 @@ import Footer from '../footer/footer';
 import Genres from '../genre-list/genre-list';
 import UserBlock from '../user-block/user-block';
 import PlayButton from '../buttons/play-button';
-import MyListButton from '../buttons/button-my-list';
+import MyListButton from '../buttons/my-list-button';
 import HiddenPart from './hidden-part';
 import { getMovies, getPromoMovie } from '../../store/movie-data/selectors';
 

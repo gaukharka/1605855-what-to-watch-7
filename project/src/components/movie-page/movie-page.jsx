@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
-import MyListButton from '../buttons/button-my-list';
+import MyListButton from '../buttons/my-list-button';
 import PlayButton from '../buttons/play-button';
 import TabLinks from '../tabs/tabs';
 import SimiliarMovies from '../similiar-movies/similiar-movies';
