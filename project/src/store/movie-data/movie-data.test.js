@@ -1,6 +1,6 @@
 import { movieData } from './movie-data';
 import { ActionType } from '../action';
-import { INITIAL_GENRE } from '../../consts';
+import { INITIAL_GENRE, MAX_MOVIES_SHOWN } from '../../consts';
 
 const initialState = {
   genre: INITIAL_GENRE,
@@ -10,6 +10,8 @@ const initialState = {
   favoriteMovies: [],
   isFetching: false,
   error: '',
+  maxMoviesShown: MAX_MOVIES_SHOWN,
+  similarMovies: [],
 };
 
 const movies = [
