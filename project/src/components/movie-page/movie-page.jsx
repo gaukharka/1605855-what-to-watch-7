@@ -4,12 +4,12 @@ import { Link, useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
-import MyListButton from '../buttons/button-my-list';
+import MyListButton from '../buttons/my-list-button';
 import PlayButton from '../buttons/play-button';
 import TabLinks from '../tabs/tabs';
 import SimiliarMovies from '../similiar-movies/similiar-movies';
 import Footer from '../footer/footer';
-import { AuthorizationStatus } from '../../consts';
+import { AppRoutes, AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import { getMovies } from '../../store/movie-data/selectors';
 
@@ -23,6 +23,8 @@ function MoviePage() {
   const {id, name, previewImage, genre, released, backgroundImage} = currentMovie;
 
   const handlePlayButtonClick = () => history.push(`/player/${id}`);
+
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH ? `/films/${id}/review` : `${AppRoutes.LOGIN}`;
 
   return (
     <>
@@ -52,14 +54,11 @@ function MoviePage() {
                   onClick={handlePlayButtonClick}
                 />
                 <MyListButton movie={currentMovie} />
-                {
-                  authorizationStatus === AuthorizationStatus.AUTH &&
-                    <Link
-                      to={`/films/${id}/review`}
-                      className="btn film-card__button"
-                    >Add review
-                    </Link>
-                }
+                <Link
+                  to={isAuth}
+                  className="btn film-card__button"
+                >Add review
+                </Link>
               </div>
             </div>
           </div>

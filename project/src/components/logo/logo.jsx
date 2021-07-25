@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { reset as resetMovieList } from '../../store/action';
+import { resetGenreToInitial } from '../../store/action';
 import { AppRoutes } from '../../consts';
 
 function Logo(props) {
@@ -12,7 +12,13 @@ function Logo(props) {
 
   return (
     <div className="logo">
-      <Link to={AppRoutes.ROOT} className={`logo__link ${isFooter ? 'logo__link--light' : ''}`} onClick={() => dispatch(resetMovieList())}>
+      <Link
+        to={AppRoutes.ROOT}
+        className={`logo__link ${isFooter ? 'logo__link--light' : ''}`}
+        onClick={() => {
+          dispatch(resetGenreToInitial());
+        }}
+      >
         <span className="logo__letter logo__letter--1">W</span>
         <span className="logo__letter logo__letter--2">T</span>
         <span className="logo__letter logo__letter--3">W</span>

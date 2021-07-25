@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { MAX_MOVIES_SHOWN } from '../../consts.js';
 import { moviePropTypes } from '../../prop-types/movie-prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
-import LoadMoreButton from '../buttons/button-load-more';
+import LoadMoreButton from '../buttons/load-more-button';
 import { getGenres } from '../../store/movie-data/selectors';
 import { getFilteredMovies } from '../../selectors/get-filtered-movies';
 

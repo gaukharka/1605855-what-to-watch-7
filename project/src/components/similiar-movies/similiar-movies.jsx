@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MAX_SIMILIAR_MOVIES_SHOWN } from '../../consts';
-import { getFilteredMovies } from '../../selectors/get-filtered-movies';
 import MovieCard from '../movie-card/movie-card';
 import { getMovies, getGenres } from '../../store/movie-data/selectors';
 import { moviePropTypes } from '../../prop-types/movie-prop-types';
+import { getFilteredMovies } from '../../selectors/get-filtered-movies';
 
 function SimiliarMovies(props) {
   const {currentMovie} = props;

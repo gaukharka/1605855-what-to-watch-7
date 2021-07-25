@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { INITIAL_GENRE } from '../../consts';
-import { changeGenre, reset, loadMovies, loadPromoMovie, loadFavoriteMovies, setStatus, updateFilm } from '../action';
+import { INITIAL_GENRE, MAX_MOVIES_SHOWN } from '../../consts';
+import { changeGenre, reset, loadMovies, loadPromoMovie, loadFavoriteMovies, setStatus, updateFilm, resetGenreToInitial, resetMaxMoviesShown, loadSimilarMovies } from '../action';
 
 const initialState = {
   genre: INITIAL_GENRE,
@@ -10,6 +10,8 @@ const initialState = {
   favoriteMovies: [],
   isFetching: false,
   error: '',
+  maxMoviesShown: MAX_MOVIES_SHOWN,
+  similarMovies: [],
 };
 
 export const movieData = createReducer(initialState, (builder) => {
@@ -33,5 +35,14 @@ export const movieData = createReducer(initialState, (builder) => {
     .addCase(updateFilm, (state, action) => {
       state.movie = action.payload;
       state.promoMovie = action.payload;
+    })
+    .addCase(resetGenreToInitial, (state) => {
+      state.genre = INITIAL_GENRE;
+    })
+    .addCase(resetMaxMoviesShown, (state) => {
+      state.maxMoviesShown = MAX_MOVIES_SHOWN;
+    })
+    .addCase(loadSimilarMovies, (state, action) => {
+      state.similarMovies = action.payload;
     });
 });

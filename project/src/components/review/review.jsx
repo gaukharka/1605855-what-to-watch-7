@@ -2,9 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../logo/logo.jsx';
-import AddReviewForm from './add-review-form.jsx';
 import UserBlock from '../user-block/user-block';
 import { getMovies } from '../../store/movie-data/selectors';
+
+import AddReviewForm from './add-review-form';
 
 function Review() {
   const movies = useSelector(getMovies);

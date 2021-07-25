@@ -6,8 +6,11 @@ import rootReducer from './store/root-reducer';
 import { createAPI } from './services/api';
 import { requireAuthorization } from './store/action';
 import { AuthorizationStatus } from './consts';
-import App from './components/app/app';
 import { redirect } from './store/middlewares/redirect';
+import {Router as BrowserRouter} from 'react-router-dom';
+import { browserHistory } from './browser-history';
+
+import App from './components/app/app';
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
@@ -26,7 +29,9 @@ const store = configureStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter history={browserHistory}>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

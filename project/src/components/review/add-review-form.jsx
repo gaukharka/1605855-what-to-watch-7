@@ -35,9 +35,13 @@ function AddReviewForm(props) {
     });
   }
 
+  const getHistory = () => {
+    history.goBack();
+  };
+
   const onReviewSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(postReview(id, review, history));
+    dispatch(postReview(id, review, getHistory));
   };
 
   return (
@@ -70,6 +74,7 @@ function AddReviewForm(props) {
             placeholder="Review text"
             value={review.comment}
             onChange={handleChange}
+            data-testid="review-textarea"
           >
           </textarea>
           <div className="add-review__submit">
