@@ -9,6 +9,7 @@ export const ActionType = {
   LOAD_REVIEWS: 'data/loadReviews',
   LOAD_PROMO_MOVIE: 'data/loadPromoMovie',
   LOAD_FAVORITE_MOVIES: 'data/loadFavoriteMovie',
+  LOAD_SIMILAR_MOVIES: 'data/loadSimilarMovies',
   REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
   LOGOUT: 'user/logout',
   REDIRECT_TO_ROUTE: 'films/redirectToRoute',
@@ -73,3 +74,7 @@ export const setReviewIsSending = createAction(ActionType.POST_REVIEWS, (isSendi
 export const resetGenreToInitial = createAction(ActionType.RESET_GENRE);
 
 export const resetMaxMoviesShown = createAction(ActionType.RESET_MAX_MOVIES_SHOWN);
+
+export const loadSimilarMovies = createAction(ActionType.LOAD_SIMILAR_MOVIES, (similarMovies) => ({
+  payload: similarMovies,
+}));

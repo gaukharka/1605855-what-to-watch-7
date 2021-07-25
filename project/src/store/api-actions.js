@@ -1,4 +1,4 @@
-import { loadMovies,loadPromoMovie, loadFavoriteMovies, loadReviews, requireAuthorization, redirectToRoute, logout as closeSession, error, setStatus, updateFilm, setReviewIsSending } from './action';
+import { loadMovies,loadPromoMovie, loadFavoriteMovies, loadReviews, requireAuthorization, redirectToRoute, logout as closeSession, error, setStatus, updateFilm, setReviewIsSending, loadSimilarMovies } from './action';
 import { AuthorizationStatus, APIRoutes, AppRoutes } from '../consts';
 import { adaptDataToMovie, adaptDataToMovies } from '../services/adaptors';
 
@@ -60,4 +60,10 @@ export const updateMovie = (id, status) => (dispatch, _getState, api) => (
 
 export const setFetchStatus = (status) => (
   setStatus(status)
+);
+
+export const fetchSimilarMovies = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoutes.MOVIES}/${id}/similar`)
+    .then((data) => dispatch(loadSimilarMovies(adaptDataToMovies(data))))
+    .catch((err) => dispatch(error(err.message)))
 );
