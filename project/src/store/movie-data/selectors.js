@@ -9,7 +9,3 @@ export const getGenres = (state) => state[NameSpace.MOVIE].genre;
 export const getPromoMovie = (state) => state[NameSpace.MOVIE].promoMovie;
 
 export const getMovie = (state) => state[NameSpace.MOVIE].movie;
-
-export const getFavoriteMovies = (state) => state[NameSpace.MOVIE].favoriteMovies;
-
-export const getSimilarMovies = (state) => state[NameSpace.MOVIE].similarMovies;

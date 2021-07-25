@@ -11,7 +11,7 @@ export const INITIAL_GENRE = 'All genres';
 
 export const MAX_MOVIES_SHOWN = 8;
 
-export const MAX_SIMILIAR_MOVIES_SHOWN = 4;
+export const MAX_SIMILAR_MOVIES_SHOWN = 4;
 
 export const AuthorizationStatus = {
   AUTH: 'AUTH',
@@ -53,3 +53,5 @@ export const getRating = (score) => {
   }
   return Rating.AWESOME;
 };
+
+export const seconds = 60;

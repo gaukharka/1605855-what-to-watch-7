@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getMovies } from '../../store/movie-data/selectors';
 import { timeFormating } from '../../utils/utils';
+import { seconds } from '../../consts';
 
 function PlayerScreen() {
   const movies = useSelector(getMovies);
@@ -14,7 +15,7 @@ function PlayerScreen() {
   const history = useHistory();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [currentVideoTime, setCurrentVideoTime] = useState(0);
-  const videoDuration = runTime*60;
+  const videoDuration = runTime*seconds;
 
   const videoRef = useRef(null);
   const playerRef = useRef(null);

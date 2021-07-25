@@ -16,5 +16,3 @@ export const timeFormating = (time) => {
 
   return hours;
 };
-
-export const getPlayerProgress = (maxTime, current) => current / maxTime * 100;
