@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { updateMovie, fetchPromoMovie, fetchMovieList } from '../../store/api-actions';
+import { updateMovie, updateMovies, fetchPromoMovie, fetchMovieList } from '../../store/api-actions';
 import { useHistory } from 'react-router';
 import { AppRoutes, AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
@@ -21,6 +21,10 @@ function MyListButton(props) {
   const onMyListReroute = () => history.push(`${AppRoutes.LOGIN}`);
 
   const onMyListClick = () => {
+    if(movie.id !== 1){
+      dispatch(updateMovies(movie.id, movie.isFavorite ? 0 : 1));
+      allData();
+    }
     dispatch(updateMovie(movie.id, movie.isFavorite ? 0 : 1));
     allData();
   };

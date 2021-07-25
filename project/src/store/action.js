@@ -67,6 +67,10 @@ export const updateFilm = createAction(ActionType.UPDATE_MOVIE, (movie) => ({
   payload: movie,
 }));
 
+export const updateFilms = createAction(ActionType.UPDATE_MOVIE, (movies) => ({
+  payload: movies,
+}));
+
 export const setReviewIsSending = createAction(ActionType.POST_REVIEWS, (isSending) => ({
   payload: isSending,
 }));
