@@ -1,21 +1,25 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getMovies } from '../../store/movie-data/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { getMovie } from '../../store/movie-data/selectors';
 import { timeFormating } from '../../utils/utils';
 import { seconds } from '../../consts';
+import { fetchMovie } from '../../store/api-actions';
 
-function PlayerScreen() {
-  const movies = useSelector(getMovies);
-  const params = useParams();
-  const [currentMovie] = movies.filter((item) => item.id === +params.id);
-  const {name, backgroundImage, videoLink, runTime} = currentMovie;
 
+function PlayerScreen({id}) {
+  const currentMovie = useSelector(getMovie);
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMovie(id));
+  }, []);
+
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [currentVideoTime, setCurrentVideoTime] = useState(0);
-  const videoDuration = runTime*seconds;
+  const videoDuration = currentMovie.runTime*seconds;
 
   const videoRef = useRef(null);
   const playerRef = useRef(null);
@@ -45,9 +49,9 @@ function PlayerScreen() {
   return (
     <div className="player" ref={playerRef}>
       <video
-        src={videoLink}
+        src={currentMovie.videoLink}
         className="player__video"
-        poster={backgroundImage}
+        poster={currentMovie.backgroundImage}
         onProgress={onProgress}
         muted={false}
         ref={videoRef}
@@ -100,7 +104,7 @@ function PlayerScreen() {
                 <span>Play</span>
               </>}
           </button>
-          <div className="player__name">{name}</div>
+          <div className="player__name">{currentMovie.name}</div>
 
           <button
             type="button"
@@ -117,5 +121,9 @@ function PlayerScreen() {
     </div>
   );
 }
+
+PlayerScreen.propTypes = {
+  id: PropTypes.number.isRequired,
+};
 
 export default PlayerScreen;

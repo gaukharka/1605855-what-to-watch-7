@@ -4,9 +4,9 @@ import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import { AuthorizationStatus } from '../../consts';
 import MoviePage from './movie-page';
-import thunk from 'redux-thunk';
 
 const initialState = {
   USER: {
