@@ -11,6 +11,11 @@ import {
   redirectToRoute,
   logout,
   resetGenreToInitial,
+  updateFilms,
+  setReviewIsSending,
+  resetMaxMoviesShown,
+  loadSimilarMovies,
+  loadMovie,
   ActionType
 } from './action';
 
@@ -147,5 +152,54 @@ describe('Actions', () => {
     };
 
     expect(resetGenreToInitial()).toEqual(expectedAction);
+  });
+
+  it('Action creator for updating movies returns correct action', () => {
+    const expectedAction = {
+      type: ActionType.UPDATE_MOVIE,
+    };
+
+    expect(updateFilms()).toEqual(expectedAction);
+  });
+
+  it('Action for setting status for review posting returns correct action', () => {
+    const isSending = true;
+
+    const expectedAction = {
+      type: ActionType.POST_REVIEWS,
+      payload: true,
+    };
+
+    expect(setReviewIsSending(isSending)).toEqual(expectedAction);
+  });
+
+  it('Action creator for reseting maximum rendered movies returns correct action', () => {
+    const expectedAction = {
+      type: ActionType.RESET_MAX_MOVIES_SHOWN,
+    };
+
+    expect(resetMaxMoviesShown()).toEqual(expectedAction);
+  });
+
+  it('Action creator for loading similar movies returns correct action', () => {
+    const similarMovies = [{id:1}, {id:2}, {id:3}];
+
+    const expectedAction = {
+      type: ActionType.LOAD_SIMILAR_MOVIES,
+      payload: similarMovies,
+    };
+
+    expect(loadSimilarMovies(similarMovies)).toEqual(expectedAction);
+  });
+
+  it('Action creator for loading movie returns correct action', () => {
+    const movie = {id:4, name: 'name'};
+
+    const expectedAction = {
+      type: ActionType.LOAD_MOVIE,
+      payload: movie,
+    };
+
+    expect(loadMovie(movie)).toEqual(expectedAction);
   });
 });

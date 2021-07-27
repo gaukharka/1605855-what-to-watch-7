@@ -1,9 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchReviewList } from '../../store/api-actions';
+import { getReviews } from '../../store/review/selectors.js';
+
 import Review from './review';
-import { getReviews } from '../../store/review/selectors';
-function Reviews() {
+
+function Reviews({id}) {
+
   const reviews = useSelector(getReviews);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchReviewList(id));
+  }, []);
 
   return (
     <div className="film-card__reviews film-card__row">
@@ -18,5 +28,9 @@ function Reviews() {
     </div>
   );
 }
+
+Reviews.propTypes = {
+  id: PropTypes.number.isRequired,
+};
 
 export default Reviews;

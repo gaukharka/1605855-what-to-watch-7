@@ -2,8 +2,19 @@ import MockAdapter from 'axios-mock-adapter';
 import { APIRoutes, AppRoutes, AuthorizationStatus } from '../consts';
 import { createAPI } from '../services/api';
 import { ActionType } from './action';
-import {checkAuth, login, logout, fetchMovieList, fetchPromoMovie, fetchFavoriteMovieList, fetchReviewList,  postReview, updateMovie } from './api-actions';
 import { adaptDataToMovie, adaptDataToMovies } from '../services/adaptors';
+import { checkAuth,
+  login,
+  logout,
+  fetchMovieList,
+  fetchPromoMovie,
+  fetchFavoriteMovieList,
+  fetchReviewList,
+  postReview,
+  updateMovie,
+  fetchSimilarMovies,
+  fetchMovie,
+  updateMovies } from './api-actions';
 
 let api = null;
 
@@ -237,6 +248,90 @@ describe('Async operations', () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.POST_REVIEWS,
           payload: false,
+        });
+      });
+  });
+
+  it('should make a correct API call to GET /films/:id/similar', () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const id = 1;
+    const fetchSimilarMoviesLoader = fetchSimilarMovies(id);
+
+    apiMock
+      .onGet(`${APIRoutes.MOVIES}/${id}/similar`)
+      .reply(200, [{...movieData, id: 2}, {...movieData, id: 3}]);
+
+    return fetchSimilarMoviesLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_SIMILAR_MOVIES,
+          payload: adaptDataToMovie([{...movieData, id: 2}, {...movieData, id: 3}]),
+        });
+      });
+  });
+
+  it('should make a correct API call to update movies', () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const fetchMoviesLoader = fetchMovieList();
+
+    apiMock
+      .onGet(APIRoutes.MOVIES)
+      .reply(200, [movieData, movieData, movieData]);
+
+    return fetchMoviesLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_MOVIES,
+          payload: adaptDataToMovies([movieData, movieData, movieData]),
+        });
+      });
+  });
+
+  it('should make a correct API call to POST /favorite/: film_id/: status for movies', () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const id = 1;
+    const status = 1;
+    const updateMoviesLoader = updateMovies(id, status);
+
+    apiMock
+      .onPost(`${APIRoutes.FAVORITE_MOVIE}/${id}/${status}`)
+      .reply(200, movieData);
+
+    return updateMoviesLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.UPDATE_MOVIE,
+          payload: adaptDataToMovie(movieData),
+        });
+      });
+  });
+
+  it('should make a correct API call to GET /films/: film_id', () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const id = 1;
+    const fetchMovieLoader = fetchMovie(id);
+
+    apiMock
+      .onGet(`${APIRoutes.MOVIES}/${id}`)
+      .reply(200, movieData);
+
+    return fetchMovieLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_MOVIE,
+          payload: adaptDataToMovie(movieData),
         });
       });
   });

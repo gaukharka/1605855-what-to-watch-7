@@ -36,6 +36,7 @@ function MyListButton(props) {
       className="btn btn--list film-card__button"
       type="button"
       onClick={onButtonClick()}
+      data-testid="button-mylist"
     >
       {movie.isFavorite ?
         <svg viewBox="0 0 18 14" width="18" height="14">

@@ -11,12 +11,12 @@ function Logo(props) {
   const dispatch = useDispatch();
 
   return (
-    <div className="logo">
+    <div className="logo" data-testid="app-logo">
       <Link
         to={AppRoutes.ROOT}
         className={`logo__link ${isFooter ? 'logo__link--light' : ''}`}
-        onClick={() => {
-          dispatch(resetGenreToInitial());
+        onClick={() => async() => {
+          await dispatch(resetGenreToInitial());
         }}
       >
         <span className="logo__letter logo__letter--1">W</span>

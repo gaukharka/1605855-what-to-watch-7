@@ -24,7 +24,7 @@ function List(props) {
           <strong>Director: {director}</strong>
         </p>
         <p className="film-card__starring">
-          <strong>Starring: {starring.reduce((prev, curr) => [prev, ', ', curr])}</strong>
+          <strong>Starring: {starring}</strong>
         </p>
       </div>
     </>

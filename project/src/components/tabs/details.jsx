@@ -13,11 +13,18 @@ function Details(props) {
     released: 'Released',
   };
 
+  const movieStars = () => {
+    if(movie.starring.length > 1) {
+      return movie.starring.reduce((prev, curr) => [prev, ', ', curr]);
+    }
+    return movie.starring;
+  };
+
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <Detail data={movie.director} title={title.director}/>
-        <Detail data={movie.starring.reduce((prev, curr) => [prev, ', ', curr])} title={title.starring}/>
+        <Detail data={movieStars()} title={title.starring}/>
       </div>
       <div className="film-card__text-col">
         <Detail data={movie.runTime} title={title.runtime}/>

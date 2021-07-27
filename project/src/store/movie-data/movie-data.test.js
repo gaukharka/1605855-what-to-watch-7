@@ -145,10 +145,39 @@ describe('Reducer: movieData', () => {
       type: ActionType.RESET_GENRE,
     };
 
-    expect(movieData(state, resetGenreToInitialAction))
-      .toEqual({
-        ...state,
-        genre: INITIAL_GENRE,
-      });
+    expect(movieData(state, resetGenreToInitialAction)).toEqual({...state, genre: INITIAL_GENRE});
+  });
+
+  it('should reset maximum number of movies rendered', () => {
+    const state = {
+      ...initialState,
+      maxMoviesShown: 7,
+    };
+
+    const resetMaxMoviesShownAction = {
+      type: ActionType.RESET_MAX_MOVIES_SHOWN,
+    };
+
+    expect(movieData(state, resetMaxMoviesShownAction)).toEqual({...state, maxMoviesShown: MAX_MOVIES_SHOWN});
+  });
+
+  it('should update/load similar movies', () => {
+    const state = initialState;
+    const loadSimilarMoviesAction = {
+      type: ActionType.LOAD_SIMILAR_MOVIES,
+      payload: movies,
+    };
+
+    expect(movieData(state, loadSimilarMoviesAction)).toEqual({...state, similarMovies: movies});
+  });
+
+  it('should load movie', () => {
+    const state = initialState;
+    const loadMovieAction = {
+      type: ActionType.LOAD_MOVIE,
+      payload: movies[2],
+    };
+
+    expect(movieData(state, loadMovieAction)).toEqual({...state, movie: movies[2]});
   });
 });

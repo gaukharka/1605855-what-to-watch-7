@@ -1,8 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import MovieCard from './movie-card';
+import {render, screen} from '@testing-library/react';
+import {Router} from 'react-router-dom';
+import {createMemoryHistory} from 'history';
+
+import Details from './details';
 
 const movie = {
   id: 2,
@@ -24,24 +25,24 @@ const movie = {
   isFavorite: false,
 };
 
-const isActive = true;
-
-describe('Component: MovieCard', () => {
+describe('Component: Details',() => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
 
-    const {getByText} = render(
+    render(
       <Router history={history}>
-        <MovieCard
+        <Details
           movie={movie}
-          isActive={isActive}
-          onMouseOver={() => {}}
-          onMouseOut={() => {}}
-
         />
-      </Router>,
-    );
+      </Router>);
 
-    expect(getByText(`${movie.name}`)).toBeInTheDocument();
+    expect(screen.getByText(`${movie.director}`)).toBeInTheDocument();
+    expect(screen.getByText('Director')).toBeInTheDocument();
+    expect(screen.getByText(`${movie.runTime}`)).toBeInTheDocument();
+    expect(screen.getByText('Run Time')).toBeInTheDocument();
+    expect(screen.getByText(`${movie.genre}`)).toBeInTheDocument();
+    expect(screen.getByText('Genre')).toBeInTheDocument();
+    expect(screen.getByText(`${movie.released}`)).toBeInTheDocument();
+    expect(screen.getByText('Released')).toBeInTheDocument();
   });
 });

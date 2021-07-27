@@ -31,9 +31,9 @@ function App(props) {
   return (
     <Switch>
       <Route exact path={AppRoutes.ROOT} render={() => <MainPage />} />
-      <Route exact path={AppRoutes.FILM} render={() => <MoviePage />} />
+      <Route exact path={AppRoutes.FILM} render={(data) => <MoviePage id={Number(data.match.params.id)} />} />
       <PrivateRoute exact path={AppRoutes.MYLIST} render={() => <MyList />}/>
-      <PrivateRoute exact path={AppRoutes.REVIEW} render={() => <Review />}/>
+      <PrivateRoute exact path={AppRoutes.REVIEW} render={(data) => <Review id={Number(data.match.params.id)} />}/>
       <Route exact path={AppRoutes.PLAYER} render={() => <PlayerScreen />} />
       <Route exact path={AppRoutes.LOGIN} render={() => <Login />} />
       <Route>

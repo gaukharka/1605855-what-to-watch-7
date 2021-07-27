@@ -6,7 +6,7 @@ import { getMovies, getGenres } from '../../store/movie-data/selectors';
 import { moviePropTypes } from '../../prop-types/movie-prop-types';
 import { getFilteredMovies } from '../../selectors/get-filtered-movies';
 
-function SimiliarMovies(props) {
+function SimilarMovies(props) {
   const {currentMovie} = props;
   const movies = useSelector(getMovies);
   const genre = useSelector(getGenres);
@@ -18,7 +18,7 @@ function SimiliarMovies(props) {
   const [activeMovie, setActiveMovie] = useState();
 
   return (
-    <section className="catalog catalog--like-this">
+    <section className="catalog catalog--like-this" data-testid="smilar-movies">
       <h2 className="catalog__title">More like this</h2>
       <div className="catalog__films-list">
         {filteredByGenre.slice(0, MAX_SIMILAR_MOVIES_SHOWN).map((item) => (
@@ -35,8 +35,8 @@ function SimiliarMovies(props) {
   );
 }
 
-SimiliarMovies.propTypes = {
+SimilarMovies.propTypes = {
   currentMovie: moviePropTypes,
 };
 
-export default SimiliarMovies;
+export default SimilarMovies;
