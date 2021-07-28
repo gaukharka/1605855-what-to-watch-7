@@ -1,8 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import MovieCard from './movie-card';
+import VidepPreview from './video-preview';
 
 const movie = {
   id: 2,
@@ -24,24 +22,24 @@ const movie = {
   isFavorite: false,
 };
 
-const isActive = true;
 
-describe('Component: MovieCard', () => {
+describe('Component: VideoPreview', () => {
+  beforeAll(() => {
+    window.HTMLMediaElement.prototype.play = () => {};
+    window.HTMLMediaElement.prototype.pause = () => {};
+  });
+
   it('should render correctly', () => {
-    const history = createMemoryHistory();
-
-    const {getByText} = render(
-      <Router history={history}>
-        <MovieCard
-          movie={movie}
-          isActive={isActive}
-          onMouseOver={() => {}}
-          onMouseOut={() => {}}
-
-        />
-      </Router>,
+    const {container} = render(
+      <VidepPreview
+        previewImage={movie.previewImage}
+        previewVideo={movie.previewVideo}
+        isActive
+      />,
     );
 
-    expect(getByText(`${movie.name}`)).toBeInTheDocument();
+    expect(container.querySelector('video')).toBeInTheDocument();
+    expect(container.querySelector('video').getAttribute('src')).toEqual(movie.previewVideo);
   });
 });
+

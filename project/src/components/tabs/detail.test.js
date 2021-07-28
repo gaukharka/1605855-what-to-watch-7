@@ -1,8 +1,8 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import MovieCard from './movie-card';
+import {render, screen} from '@testing-library/react';
+import {Router} from 'react-router-dom';
+import {createMemoryHistory} from 'history';
+import Detail from './detail';
 
 const movie = {
   id: 2,
@@ -24,24 +24,21 @@ const movie = {
   isFavorite: false,
 };
 
-const isActive = true;
+const title = 'Director';
 
-describe('Component: MovieCard', () => {
+describe('Component: Detail',() => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
 
-    const {getByText} = render(
+    render(
       <Router history={history}>
-        <MovieCard
-          movie={movie}
-          isActive={isActive}
-          onMouseOver={() => {}}
-          onMouseOut={() => {}}
-
+        <Detail
+          data={movie.director}
+          title={title}
         />
-      </Router>,
-    );
+      </Router>);
 
-    expect(getByText(`${movie.name}`)).toBeInTheDocument();
+    expect(screen.getByText(`${movie.director}`)).toBeInTheDocument();
+    expect(screen.getByText('Director')).toBeInTheDocument();
   });
 });

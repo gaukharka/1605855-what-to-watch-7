@@ -1,8 +1,12 @@
 import React from 'react';
-import { moviePropTypes } from '../../prop-types/movie-prop-types';
+import { useSelector } from 'react-redux';
+import { getMovie } from '../../store/movie-data/selectors';
 import { getRating } from '../../consts';
-function List(props) {
-  const {rating, scoresCount, description, director, starring} = props.movie;
+
+function List() {
+  const currentMovie = useSelector(getMovie);
+
+  const {rating, scoresCount, description, director, starring} = currentMovie;
 
   return (
     <>
@@ -24,15 +28,11 @@ function List(props) {
           <strong>Director: {director}</strong>
         </p>
         <p className="film-card__starring">
-          <strong>Starring: {starring.reduce((prev, curr) => [prev, ', ', curr])}</strong>
+          <strong>Starring: {starring}</strong>
         </p>
       </div>
     </>
   );
 }
-
-List.propTypes = {
-  movie: moviePropTypes,
-};
 
 export default List;

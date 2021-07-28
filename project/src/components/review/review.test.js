@@ -1,13 +1,23 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
 import configureStore from 'redux-mock-store';
-import { getRating } from '../../consts';
-import List from './list';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { AuthorizationStatus } from '../../consts';
+import Review from './review';
 
 const initialState = {
+  USER: {
+    authorizationStatus: AuthorizationStatus.AUTH,
+    authInfo: {
+      'id': 14,
+      'name': 'Corey',
+      'avatar_url': 'img/avatar.jpg',
+      'token': 'YXNkYUBnbWFpbC5jb20=',
+    },
+  },
   MOVIE: {
     movie:
       {
@@ -33,27 +43,23 @@ const initialState = {
 };
 
 const movie = initialState.MOVIE.movie;
-const mockStore = configureStore({});
+const id = 2;
 
-describe('Component: List', () => {
+const mockStore = configureStore([thunk]);
+
+describe('Component: Review', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
 
-    const {getByText} = render(
+    render(
       <Provider store={mockStore(initialState)}>
         <Router history={history}>
-          <List />
+          <Review id={id}/>
         </Router>
       </Provider>,
     );
 
-    expect(getByText(`${movie.rating}`)).toBeInTheDocument();
-    expect(getByText(`${getRating(movie.rating)}`)).toBeInTheDocument();
-    expect(getByText(`${movie.scoresCount} ratings`)).toBeInTheDocument();
-    expect(getByText('Description')).toBeInTheDocument();
-    expect(getByText(`${movie.description}`)).toBeInTheDocument();
-    expect(getByText(`Director: ${movie.director}`)).toBeInTheDocument();
+    expect(screen.getByText(`${movie.name}`)).toBeInTheDocument();
+    expect(screen.getByText('Add review')).toBeInTheDocument();
   });
 });
-
-

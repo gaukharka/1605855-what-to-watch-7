@@ -21,7 +21,7 @@ function MovieList(props) {
 
   return (
     <>
-      <div className="catalog__films-list">
+      <div className="catalog__films-list" data-testid="catalog-films-list">
         {filteredMovies.slice(0, visibleMovies).map((item) => (
           <MovieCard
             key={item.id+1}

@@ -1,13 +1,24 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createMemoryHistory } from 'history';
+import {render, screen} from '@testing-library/react';
+import {Router} from 'react-router-dom';
+import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
-import { getRating } from '../../consts';
-import List from './list';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { AuthorizationStatus } from '../../consts';
+import { createAPI } from '../../services/api';
+import MoviePage from './movie-page';
 
 const initialState = {
+  USER: {
+    authorizationStatus: AuthorizationStatus.AUTH,
+    authInfo: {
+      'id': 14,
+      'name': 'Corey',
+      'avatar_url': 'img/avatar.jpg',
+      'token': 'YXNkYUBnbWFpbC5jb20=',
+    },
+  },
   MOVIE: {
     movie:
       {
@@ -32,28 +43,31 @@ const initialState = {
   },
 };
 
-const movie = initialState.MOVIE.movie;
-const mockStore = configureStore({});
+const api = createAPI(() => {});
+const mockStore = configureStore([thunk.withExtraArgument(api)]);
+const id = 2;
 
-describe('Component: List', () => {
+describe('Component: MoviePage', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
+    history.push('/films/2');
 
-    const {getByText} = render(
+    render(
       <Provider store={mockStore(initialState)}>
         <Router history={history}>
-          <List />
+          <MoviePage id={id}/>
         </Router>
       </Provider>,
     );
 
-    expect(getByText(`${movie.rating}`)).toBeInTheDocument();
-    expect(getByText(`${getRating(movie.rating)}`)).toBeInTheDocument();
-    expect(getByText(`${movie.scoresCount} ratings`)).toBeInTheDocument();
-    expect(getByText('Description')).toBeInTheDocument();
-    expect(getByText(`${movie.description}`)).toBeInTheDocument();
-    expect(getByText(`Director: ${movie.director}`)).toBeInTheDocument();
+    expect(screen.getByText(/More like this/i)).toBeInTheDocument();
+    expect(screen.getByText(/My list/i)).toBeInTheDocument();
+    expect(screen.getByTestId('app-user-block')).toBeInTheDocument();
+    expect(screen.getByTestId('film-card-hero')).toBeInTheDocument();
+    expect(screen.getByTestId('button-play')).toBeInTheDocument();
+    expect(screen.getByTestId('button-mylist')).toBeInTheDocument();
+    expect(screen.getByTestId('tabs')).toBeInTheDocument();
+    expect(screen.getByTestId('smilar-movies')).toBeInTheDocument();
+
   });
 });
-
-

@@ -82,3 +82,7 @@ export const resetMaxMoviesShown = createAction(ActionType.RESET_MAX_MOVIES_SHOW
 export const loadSimilarMovies = createAction(ActionType.LOAD_SIMILAR_MOVIES, (similarMovies) => ({
   payload: similarMovies,
 }));
+
+export const loadMovie = createAction(ActionType.LOAD_MOVIE, (movie) => ({
+  payload: movie,
+}));

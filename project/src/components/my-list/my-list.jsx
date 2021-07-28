@@ -14,7 +14,7 @@ function MyList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchFavoriteMovieList);
+    dispatch(fetchFavoriteMovieList());
   }, []);
 
   return (

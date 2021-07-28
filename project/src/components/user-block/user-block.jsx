@@ -12,7 +12,7 @@ function UserBlock() {
   const history = useHistory();
 
   return (
-    <ul className="user-block">
+    <ul className="user-block" data-testid="app-user-block">
       {authorizationStatus === AuthorizationStatus.AUTH ?
         <>
           <li className="user-block__item">

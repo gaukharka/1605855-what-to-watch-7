@@ -1,12 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import {render, screen} from '@testing-library/react';
+import {Router} from 'react-router-dom';
+import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import userEvent from '@testing-library/user-event';
-import { AuthorizationStatus } from '../../consts';
-import AddReviewForm from './add-review-form';
+import GenreList from './genre-list';
+import { INITIAL_GENRE } from '../../consts';
 
 const initialState = {
   MOVIE: {
@@ -51,38 +50,23 @@ const initialState = {
       },
     ],
   },
-  USER: {
-    authorizationStatus: AuthorizationStatus.AUTH,
-    authInfo: {
-      'id': 14,
-      'name': 'Corey',
-      'avatar_url': 'img/avatar.jpg',
-      'token': 'YXNkYUBnbWFpbC5jb20=',
-    },
-  },
 };
 
 const mockStore = configureStore({});
-const id = 2;
 
-describe('Component: AddReviewForm', () => {
-  it('should render component AddReviewForm', () => {
+describe('Component: GenresList', () => {
+  it('should render correctly', () => {
     const history = createMemoryHistory();
-    history.push('/films/2/review');
 
     render(
-      <Provider store={mockStore({})}>
+      <Provider store={mockStore(initialState)}>
         <Router history={history}>
-          <AddReviewForm
-            id={id}
-          />
+          <GenreList />
         </Router>
       </Provider>,
     );
 
-    expect(screen.getByText(/Rating 10/i)).toBeInTheDocument();
-    expect(screen.getByText(/Post/i)).toBeInTheDocument();
-    userEvent.type(screen.getByTestId('review-textarea'), 'Review Text');
-    expect(screen.getByDisplayValue(/Review Text/i)).toBeInTheDocument();
+    expect(screen.getByText(`${INITIAL_GENRE}`)).toBeInTheDocument();
+    expect(screen.getByText(`${initialState.MOVIE.movies[0].genre}`)).toBeInTheDocument();
   });
 });

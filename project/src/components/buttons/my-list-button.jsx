@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { updateMovie, updateMovies, fetchPromoMovie, fetchMovieList } from '../../store/api-actions';
+import { updateMovie, updateMovies, fetchPromoMovie, fetchMovieList, fetchFavoriteMovieList } from '../../store/api-actions';
 import { useHistory } from 'react-router';
 import { AppRoutes, AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
@@ -13,6 +13,7 @@ function MyListButton(props) {
   const allData = () => {
     dispatch(fetchPromoMovie());
     dispatch(fetchMovieList());
+    dispatch(fetchFavoriteMovieList());
   };
 
   const history = useHistory();
@@ -36,6 +37,7 @@ function MyListButton(props) {
       className="btn btn--list film-card__button"
       type="button"
       onClick={onButtonClick()}
+      data-testid="button-mylist"
     >
       {movie.isFavorite ?
         <svg viewBox="0 0 18 14" width="18" height="14">
