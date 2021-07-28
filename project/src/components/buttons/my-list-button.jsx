@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { updateMovie, updateMovies, fetchPromoMovie, fetchMovieList } from '../../store/api-actions';
+import { updateMovie, updateMovies, fetchPromoMovie, fetchMovieList, fetchFavoriteMovieList } from '../../store/api-actions';
 import { useHistory } from 'react-router';
 import { AppRoutes, AuthorizationStatus } from '../../consts';
 import { getAuthorizationStatus } from '../../store/user/selectors';
@@ -13,6 +13,7 @@ function MyListButton(props) {
   const allData = () => {
     dispatch(fetchPromoMovie());
     dispatch(fetchMovieList());
+    dispatch(fetchFavoriteMovieList());
   };
 
   const history = useHistory();
