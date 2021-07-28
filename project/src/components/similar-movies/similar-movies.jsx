@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MAX_SIMILAR_MOVIES_SHOWN } from '../../consts';
 import MovieCard from '../movie-card/movie-card';
-import { getMovies, getGenres } from '../../store/movie-data/selectors';
-import { moviePropTypes } from '../../prop-types/movie-prop-types';
+import { getMovie, getMovies, getGenres } from '../../store/movie-data/selectors';
 import { getFilteredMovies } from '../../selectors/get-filtered-movies';
 
-function SimilarMovies(props) {
-  const {currentMovie} = props;
+function SimilarMovies() {
+  const currentMovie = useSelector(getMovie);
   const movies = useSelector(getMovies);
   const genre = useSelector(getGenres);
 
@@ -34,9 +33,5 @@ function SimilarMovies(props) {
     </section>
   );
 }
-
-SimilarMovies.propTypes = {
-  currentMovie: moviePropTypes,
-};
 
 export default SimilarMovies;
