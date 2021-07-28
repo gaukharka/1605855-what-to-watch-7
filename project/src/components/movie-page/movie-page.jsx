@@ -16,7 +16,7 @@ import { getMovie } from '../../store/movie-data/selectors';
 import { fetchMovie } from '../../store/api-actions';
 
 function MoviePage({id}) {
-  const currentMovie = useSelector(getMovie);
+  const movie = useSelector(getMovie);
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function MoviePage({id}) {
       <section className="film-card film-card--full">
         <div className="film-card__hero" data-testid="film-card-hero">
           <div className="film-card__bg">
-            <img src={currentMovie.backgroundImage} alt={currentMovie.name} />
+            <img src={movie.backgroundImage} alt={movie.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -46,17 +46,17 @@ function MoviePage({id}) {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{currentMovie.name}</h2>
+              <h2 className="film-card__title">{movie.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{currentMovie.genre}</span>
-                <span className="film-card__year">{currentMovie.released}</span>
+                <span className="film-card__genre">{movie.genre}</span>
+                <span className="film-card__year">{movie.released}</span>
               </p>
 
               <div className="film-card__buttons">
                 <PlayButton
                   onClick={handlePlayButtonClick}
                 />
-                <MyListButton movie={currentMovie} />
+                <MyListButton movie={movie}/>
                 <Link
                   to={isAuth}
                   className="btn film-card__button"
@@ -70,18 +70,14 @@ function MoviePage({id}) {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={currentMovie.previewImage} alt={currentMovie.name} width="218" height="327" />
+              <img src={movie.previewImage} alt={movie.name} width="218" height="327" />
             </div>
-            <Tabs
-              currentMovie={currentMovie}
-            />
+            <Tabs/>
           </div>
         </div>
       </section>
       <div className="page-content">
-        <SimilarMovies
-          currentMovie={currentMovie}
-        />
+        <SimilarMovies/>
         <Footer />
       </div>
     </>

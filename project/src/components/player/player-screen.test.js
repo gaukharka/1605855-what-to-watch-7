@@ -4,11 +4,12 @@ import {Router, Switch, Route} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
+import { Provider} from 'react-redux';
 import userEvent from '@testing-library/user-event';
 import PlayerScreen from './player-screen';
 
 const initialState = {
+  id: 2,
   MOVIE: {
     movie:
       {
@@ -56,7 +57,6 @@ describe('Component: PlayerScreen', () => {
     expect(screen.getByText(/Exit/i)).toBeInTheDocument();
     expect(screen.getByText(/Toggler/i)).toBeInTheDocument();
     expect(screen.getByText(movie.name)).toBeInTheDocument();
-    expect(screen.getByTestId('player')).toBeInTheDocument();
     expect(document.querySelector('.player__play')).toBeInTheDocument();
     expect(document.querySelector('.player__exit')).toBeInTheDocument();
     expect(document.querySelector('.player__video')).toBeInTheDocument();

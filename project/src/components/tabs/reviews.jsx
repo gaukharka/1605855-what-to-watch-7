@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchReviewList } from '../../store/api-actions';
 import { getReviews } from '../../store/review/selectors.js';
-
 import Review from './review';
 
 function Reviews({id}) {
@@ -12,7 +11,7 @@ function Reviews({id}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchReviewList(id));
+    (async () => dispatch(fetchReviewList(id)))();
   }, []);
 
   return (

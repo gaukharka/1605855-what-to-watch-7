@@ -1,11 +1,12 @@
 import React, {  useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getMovie } from '../../store/movie-data/selectors';
 import List from './list.jsx';
 import Details from './details.jsx';
 import Reviews from './reviews.jsx';
-import { moviePropTypes } from '../../prop-types/movie-prop-types';
 
-function Tabs(props){
-  const {currentMovie} = props;
+function Tabs(){
+  const currentMovie = useSelector(getMovie);
 
   const [activeNav, setActiveNav] = useState(1);
 
@@ -49,15 +50,11 @@ function Tabs(props){
           </li>
         </ul>
       </nav>
-      {activeNav === 1 ? <List movie={currentMovie}/> : ''}
+      {activeNav === 1 ? <List /> : ''}
       {activeNav === 2 ? <Details movie={currentMovie}/> : ''}
-      {activeNav === 3 ? <Reviews id={currentMovie.id} /> : ''}
+      {activeNav === 3 ? <Reviews id={currentMovie.id}/> : ''}
     </div>
   );
 }
-
-Tabs.propTypes = {
-  currentMovie: moviePropTypes,
-};
 
 export default Tabs;

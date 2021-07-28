@@ -1,21 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getMovie } from '../../store/movie-data/selectors';
 import { timeFormating } from '../../utils/utils';
 import { seconds } from '../../consts';
-import { fetchMovie } from '../../store/api-actions';
-
 
 function PlayerScreen({id}) {
   const currentMovie = useSelector(getMovie);
   const history = useHistory();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchMovie(id));
-  }, []);
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [currentVideoTime, setCurrentVideoTime] = useState(0);
@@ -123,7 +116,7 @@ function PlayerScreen({id}) {
 }
 
 PlayerScreen.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
 };
 
 export default PlayerScreen;
