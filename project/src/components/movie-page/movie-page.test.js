@@ -6,6 +6,7 @@ import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { AuthorizationStatus } from '../../consts';
+import { createAPI } from '../../services/api';
 import MoviePage from './movie-page';
 
 const initialState = {
@@ -42,7 +43,8 @@ const initialState = {
   },
 };
 
-const mockStore = configureStore([thunk]);
+const api = createAPI(() => {});
+const mockStore = configureStore([thunk.withExtraArgument(api)]);
 const id = 2;
 
 describe('Component: MoviePage', () => {

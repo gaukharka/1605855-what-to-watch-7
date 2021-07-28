@@ -7,8 +7,10 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { AuthorizationStatus } from '../../consts';
 import MyList from './my-list';
+import { createAPI } from '../../services/api';
 
 const initialState = {
+  id: 2,
   USER: {
     authorizationStatus: AuthorizationStatus.AUTH,
     authInfo: {
@@ -62,7 +64,8 @@ const initialState = {
   },
 };
 
-const mockStore = configureStore([thunk]);
+const api = createAPI(() => {});
+const mockStore = configureStore([thunk.withExtraArgument(api)]);
 
 describe('Component: MyList', () => {
   it('should render correctly', () => {

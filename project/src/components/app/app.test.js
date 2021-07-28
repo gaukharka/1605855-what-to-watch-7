@@ -6,20 +6,22 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { AuthorizationStatus, AppRoutes} from '../../consts';
+import { createAPI } from '../../services/api';
 import App from './app';
 
 let history = null;
 let store = null;
 let fakeApp = null;
+const api = createAPI(() => {});
 
 describe('Application Routing', () => {
   beforeAll(() => {
     history = createMemoryHistory();
 
-    const createFakeStore = configureStore([thunk]);
+    const createFakeStore = configureStore([thunk.withExtraArgument(api)]);
     store = {
       USER: {
-        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        authorizationStatus: AuthorizationStatus.AUTH,
         authInfo: {
           'id': 14,
           'name': 'Corey',
@@ -146,7 +148,7 @@ describe('Application Routing', () => {
             isFavorite: false,
           },
         ],
-        isFetching: true,
+        isFetching: false,
         error: '',
       },
       REVIEW: [
@@ -223,8 +225,8 @@ describe('Application Routing', () => {
     render(fakeApp);
 
     expect(screen.getByText(/Add review/i)).toBeInTheDocument();
-    expect(screen.getByTestId('user-block')).toBeInTheDocument();
-    expect(screen.getByTestId('add-review-form')).toBeInTheDocument();
+    expect(screen.getByTestId('app-user-block')).toBeInTheDocument();
+    expect(screen.getByTestId('add-review-form-id')).toBeInTheDocument();
   });
 
   it('should render "PlayerScreen" when user navigate to "/player/:id"', () => {
@@ -233,7 +235,6 @@ describe('Application Routing', () => {
 
     expect(screen.getByText(/Exit/i)).toBeInTheDocument();
     expect(screen.getByText(/Toggler/i)).toBeInTheDocument();
-    expect(screen.getByTestId('player')).toBeInTheDocument();
   });
 
   it('should render "NotFoundScreen" when user navigate to non-existent route', () => {
@@ -245,7 +246,7 @@ describe('Application Routing', () => {
   });
 
   it('should render "Login" when user navigate to "/login"', () => {
-    const createFakeStore = configureStore([thunk]);
+    const createFakeStore = configureStore([thunk.withExtraArgument(api)]);
 
     store = createFakeStore({
       USER: {
@@ -253,7 +254,7 @@ describe('Application Routing', () => {
         authInfo: {},
       },
       MOVIE: {
-        isFetching: true,
+        isFetching: false,
       },
     });
 
