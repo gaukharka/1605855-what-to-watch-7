@@ -15,9 +15,7 @@ function Logo(props) {
       <Link
         to={AppRoutes.ROOT}
         className={`logo__link ${isFooter ? 'logo__link--light' : ''}`}
-        onClick={() => async() => {
-          await dispatch(resetGenreToInitial());
-        }}
+        onClick={() => dispatch(resetGenreToInitial())}
       >
         <span className="logo__letter logo__letter--1">W</span>
         <span className="logo__letter logo__letter--2">T</span>
